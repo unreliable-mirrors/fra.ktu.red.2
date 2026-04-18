@@ -1,5 +1,6 @@
 import jsx from "texsaur";
-import { KTUComponent } from "fra.ktu.red-component";
+import { AVAILABLE_LAYERS, KTUComponent } from "fra.ktu.red-component";
+import { AddLayerButtonComponent } from "./add_layer_button";
 
 class LayersPanel extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -10,6 +11,14 @@ class LayersPanel extends KTUComponent {
     return (
       <div class="panel right">
         <h3>Layers/Tools</h3>
+        <div>
+          <div className="layerIcons">
+            {AVAILABLE_LAYERS.map((layerType) =>
+              AddLayerButtonComponent(layerType),
+            )}
+          </div>
+          <div className="layersList"></div>
+        </div>
       </div>
     );
   }

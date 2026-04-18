@@ -46,6 +46,9 @@ body {
   overflow: hidden;
   display: grid;
   place-items: center;
+
+  color: #66ff66;
+  background-color: black;
 }
 
 h3 {
@@ -64,6 +67,43 @@ h4 {
   margin-top: 10px;
   margin-bottom: 0;
   font-size: 14px;
+}
+
+button {
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+input {
+  accent-color: #66ff66;
+}
+select {
+  width: 20px;
+}
+.hidden {
+  display: none !important;
+}
+.separator {
+  padding-bottom: 10px;
+  display: block;
+}
+.button,
+button {
+  color: #66ff66;
+  background-color: #112211;
+  border-style: solid;
+  border-color: #66ff66;
+  border-radius: 5px;
+  border-width: 2px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  padding-block-end: 1px;
+  padding-block-start: 1px;
+  padding-inline-end: 6px;
+  padding-inline-start: 6px;
+  margin-bottom: 2px;
 }
 
 .container {
