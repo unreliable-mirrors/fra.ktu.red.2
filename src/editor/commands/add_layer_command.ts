@@ -5,7 +5,6 @@ import {
   SceneState,
 } from "fra.ktu.red-component";
 import { ICommand } from "./icommand";
-import { EventDispatcher } from "fra.ktu.red-component";
 
 export class AddLayerCommand implements ICommand {
   id!: number;
@@ -23,21 +22,13 @@ export class AddLayerCommand implements ICommand {
     scene.layers.push(layerState);
     this.id = layerState.id;
 
-    EventDispatcher.getInstance().dispatchEvent(
-      "editorScene.layers",
-      "update",
-      [],
-    );
+    DataStore.getInstance().touch("editorScene.layers");
   }
 
   revert(): void {
     const scene: SceneState = DataStore.getInstance().getStore("editorScene");
     scene.layers = scene.layers.filter((layer) => layer.id !== this.id);
 
-    EventDispatcher.getInstance().dispatchEvent(
-      "editorScene.layers",
-      "update",
-      [],
-    );
+    DataStore.getInstance().touch("editorScene.layers");
   }
 }

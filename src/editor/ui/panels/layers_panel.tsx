@@ -1,6 +1,7 @@
 import jsx from "texsaur";
 import { AVAILABLE_LAYERS, KTUComponent } from "fra.ktu.red-component";
 import { AddLayerButtonComponent } from "./add_layer_button";
+import { LayerItemComponent } from "./layer_item";
 
 class LayersPanel extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -17,7 +18,11 @@ class LayersPanel extends KTUComponent {
               AddLayerButtonComponent(layerType),
             )}
           </div>
-          <div className="layersList"></div>
+          <div className="layersList">
+            {this.bindingData["editorScene.layers"].map((layer: any) => (
+              <LayerItemComponent binding={`editorScene.layers.!${layer.id}`} />
+            ))}
+          </div>
         </div>
       </div>
     );
