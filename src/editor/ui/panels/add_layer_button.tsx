@@ -22,8 +22,7 @@ class AddLayerButton extends KTUComponent {
   }
 
   handleClick() {
-    const command = new AddLayerCommand(this.layerType);
-    executeCommand(command);
+    executeCommand(new AddLayerCommand(this.layerType));
   }
 }
 

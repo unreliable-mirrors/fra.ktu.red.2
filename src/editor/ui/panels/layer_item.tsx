@@ -9,6 +9,8 @@ import {
   IconUp,
   IconVisible,
 } from "../../../ktu/helpers/icons";
+import { RemoveLayerCommand } from "../../commands/remove_layer_command";
+import { executeCommand } from "../../../ktu/helpers/commands_manager";
 
 class LayerItem extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -76,7 +78,10 @@ class LayerItem extends KTUComponent {
 
   handleDuplicateClick() {}
 
-  handleCloseClick() {}
+  handleCloseClick() {
+    const state: LayerState = this.bindingData[this.bindingKeys[0]];
+    executeCommand(new RemoveLayerCommand(state));
+  }
 }
 
 export function LayerItemComponent(props: { binding?: string }): Element {
