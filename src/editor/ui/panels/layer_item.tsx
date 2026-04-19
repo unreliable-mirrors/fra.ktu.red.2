@@ -11,6 +11,7 @@ import {
 } from "../../../ktu/helpers/icons";
 import { RemoveLayerCommand } from "../../commands/remove_layer_command";
 import { executeCommand } from "../../../ktu/helpers/commands_manager";
+import { DuplicateLayerCommand } from "../../commands/duplicate_layer_command";
 
 class LayerItem extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -76,7 +77,10 @@ class LayerItem extends KTUComponent {
 
   handleVisibleClick() {}
 
-  handleDuplicateClick() {}
+  handleDuplicateClick() {
+    const state: LayerState = this.bindingData[this.bindingKeys[0]];
+    executeCommand(new DuplicateLayerCommand(state.id));
+  }
 
   handleCloseClick() {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
