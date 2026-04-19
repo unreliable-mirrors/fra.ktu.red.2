@@ -32,6 +32,7 @@ export class FrakturedEditor {
       width: 603,
       height: 1072,
       layers: [BackgroundLayer.getDefaultState()],
+      assets: {},
     };
   }
 }

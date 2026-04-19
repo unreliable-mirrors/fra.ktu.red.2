@@ -3,6 +3,7 @@ import {
   DataStore,
   LayerState,
   SceneState,
+  VideoLayer,
 } from "fra.ktu.red-component";
 import { ICommand } from "../icommand";
 
@@ -18,7 +19,16 @@ export class AddLayerCommand implements ICommand {
   execute(): void {
     const scene: SceneState = DataStore.getInstance().getStore("editorScene");
     let layerState: LayerState;
-    layerState = BackgroundLayer.getDefaultState();
+    switch (this.layerType) {
+      case "background":
+        layerState = BackgroundLayer.getDefaultState();
+        break;
+      case "video":
+        layerState = VideoLayer.getDefaultState();
+        break;
+      default:
+        layerState = BackgroundLayer.getDefaultState();
+    }
 
     scene.layers.push(layerState);
     this.id = layerState.id;

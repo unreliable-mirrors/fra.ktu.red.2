@@ -17,6 +17,7 @@ import { MoveLayerDownCommand } from "../../commands/layers/move_layer_down_comm
 import { MoveLayerUpCommand } from "../../commands/layers/move_layer_up_command";
 import { ActivateLayerCommand } from "../../commands/layers/activate_layer_command";
 import { LAYER_SETTINGS } from "../../settings/isetting";
+import { resolveInputType } from "../input_resolver";
 
 class LayerItem extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -79,31 +80,9 @@ class LayerItem extends KTUComponent {
         </div>
         <div className="settings">
           {LAYER_SETTINGS[state.type].map((setting) => (
-            <div className="setting">
-              <label>{setting.field}</label>
-              {setting.type === "color" ? (
-                <input
-                  type="color"
-                  value={(state as any)[setting.field]}
-                  onchange={(e) =>
-                    setting.onchange(
-                      state.id,
-                      (e.target as HTMLInputElement).value,
-                    )
-                  }
-                />
-              ) : (
-                <input
-                  type="text"
-                  value={(state as any)[setting.field]}
-                  onchange={(e) =>
-                    setting.onchange(
-                      state.id,
-                      (e.target as HTMLInputElement).value,
-                    )
-                  }
-                />
-              )}
+            <div>
+              <span>{setting.field}: </span>
+              {resolveInputType(state, setting)}
             </div>
           ))}
         </div>
