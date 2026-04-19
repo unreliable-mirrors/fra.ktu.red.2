@@ -1,5 +1,5 @@
 import { DataStore, LayerState } from "fra.ktu.red-component";
-import { ICommand } from "./icommand";
+import { ICommand } from "../icommand";
 
 export class RemoveLayerCommand implements ICommand {
   state: LayerState;

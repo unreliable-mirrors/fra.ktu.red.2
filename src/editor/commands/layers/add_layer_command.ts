@@ -4,7 +4,7 @@ import {
   LayerState,
   SceneState,
 } from "fra.ktu.red-component";
-import { ICommand } from "./icommand";
+import { ICommand } from "../icommand";
 
 export class AddLayerCommand implements ICommand {
   id!: number;

@@ -2,7 +2,7 @@ import jsx from "texsaur";
 import { KTUComponent } from "fra.ktu.red-component";
 import { getIcon, IconPlus } from "../../../ktu/helpers/icons";
 import { executeCommand } from "../../../ktu/helpers/commands_manager";
-import { AddLayerCommand } from "../../commands/add_layer_command";
+import { AddLayerCommand } from "../../commands/layers/add_layer_command";
 
 class AddLayerButton extends KTUComponent {
   layerType: string;

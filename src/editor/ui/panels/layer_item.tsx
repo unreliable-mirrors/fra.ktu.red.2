@@ -9,9 +9,10 @@ import {
   IconUp,
   IconVisible,
 } from "../../../ktu/helpers/icons";
-import { RemoveLayerCommand } from "../../commands/remove_layer_command";
+import { RemoveLayerCommand } from "../../commands/layers/remove_layer_command";
 import { executeCommand } from "../../../ktu/helpers/commands_manager";
-import { DuplicateLayerCommand } from "../../commands/duplicate_layer_command";
+import { DuplicateLayerCommand } from "../../commands/layers/duplicate_layer_command";
+import { ToggleLayerCommand } from "../../commands/layers/toggle_layer_command";
 
 class LayerItem extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -75,7 +76,10 @@ class LayerItem extends KTUComponent {
 
   handleDownClick(e: Event) {}
 
-  handleVisibleClick() {}
+  handleVisibleClick() {
+    const state: LayerState = this.bindingData[this.bindingKeys[0]];
+    executeCommand(new ToggleLayerCommand(state.id));
+  }
 
   handleDuplicateClick() {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
