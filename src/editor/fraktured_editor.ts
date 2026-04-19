@@ -12,15 +12,11 @@ export class FrakturedEditor {
   public constructor(canvasContainer: HTMLElement, uiContainer: HTMLElement) {
     this.canvasContainer = canvasContainer;
     this.uiContainer = uiContainer;
-    DataStore.getInstance().setStore(
-      "editorScene",
-      this.buildDefaultSceneState(),
-    );
+    const state = this.buildDefaultSceneState();
+    DataStore.getInstance().setStore("editorScene", state);
 
-    this.canvasContainer.style.width =
-      this.buildDefaultSceneState().width + "px";
-    this.canvasContainer.style.height =
-      this.buildDefaultSceneState().height + "px";
+    this.canvasContainer.style.width = state.width + "px";
+    this.canvasContainer.style.height = state.height + "px";
 
     this.canvasContainer.appendChild(
       RedViewerComponent({

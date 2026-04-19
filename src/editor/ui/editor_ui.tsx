@@ -10,7 +10,7 @@ class EditorUI extends KTUComponent {
   render(): Element {
     return (
       <div class="editor-ui">
-        <div class="panel-container top-right">
+        <div class="panel-container right-ui">
           <LayersPanelComponent binding="editorScene.layers" />
         </div>
       </div>

@@ -121,9 +121,20 @@ button {
   position: absolute;
 }
 
-.top-right {
+.left-ui {
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: left;
+  z-index: 2;
+}
+.right-ui {
+  position: fixed;
   top: 0;
   right: 0;
+  text-align: right;
+  z-index: 2;
+  max-width: 340px;
 }
 
 .panel {
@@ -136,4 +147,36 @@ button {
 }
 .panel.right {
   border-radius: 10px 0 0 10px;
+}
+
+.layerItem,
+.shaderItem,
+.modulatorItem {
+  background-color: #11111122;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #66ff6666;
+  padding: 5px;
+}
+.layerItem.active,
+.shaderItem.active,
+.modulatorItem.active {
+  background-color: #ffffff22;
+  color: #66ff66;
+  border-color: #66ff66;
+}
+
+.layerItem .title,
+.shaderItem .title,
+.modulatorItem .title {
+  font-family: "Orbitron", serif;
+  display: inline-block;
+  line-height: 24px;
+  float: left;
+}
+.layerItem .icons,
+.shaderItem .icons,
+.modulatorItem .icons {
+  display: inline-block;
+  margin-left: 5px;
 }

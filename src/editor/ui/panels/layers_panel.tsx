@@ -19,9 +19,13 @@ class LayersPanel extends KTUComponent {
             )}
           </div>
           <div className="layersList">
-            {this.bindingData["editorScene.layers"].map((layer: any) => (
-              <LayerItemComponent binding={`editorScene.layers.!${layer.id}`} />
-            ))}
+            {[...this.bindingData["editorScene.layers"]]
+              .reverse()
+              .map((layer: any) => (
+                <LayerItemComponent
+                  binding={`editorScene.layers.!${layer.id}`}
+                />
+              ))}
           </div>
         </div>
       </div>
