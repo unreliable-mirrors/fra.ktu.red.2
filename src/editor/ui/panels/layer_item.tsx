@@ -13,6 +13,10 @@ import { RemoveLayerCommand } from "../../commands/layers/remove_layer_command";
 import { executeCommand } from "../../../ktu/helpers/commands_manager";
 import { DuplicateLayerCommand } from "../../commands/layers/duplicate_layer_command";
 import { ToggleLayerCommand } from "../../commands/layers/toggle_layer_command";
+import { MoveLayerDownCommand } from "../../commands/layers/move_layer_down_command";
+import { MoveLayerUpCommand } from "../../commands/layers/move_layer_up_command";
+import { ActivateLayerCommand } from "../../commands/layers/activate_layer_command";
+import { LAYER_SETTINGS } from "../../settings/isetting";
 
 class LayerItem extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -22,7 +26,16 @@ class LayerItem extends KTUComponent {
   render(): Element {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
     //TODO: IMPLEMENT THIS PROPERLY
-    const active = false;
+    const active =
+      state.id === DataStore.getInstance().getStore("activeLayerId")
+        ? "active"
+        : "";
+    console.log(
+      "rendering layer item",
+      state.name,
+      active,
+      this.bindingData["activeLayerId"],
+    );
     return (
       <div className={`layerItem ${active}`}>
         <div className="header">
@@ -64,17 +77,55 @@ class LayerItem extends KTUComponent {
             <span onclick={() => this.handleCloseClick()}>{IconClose()}</span>
           </div>
         </div>
+        <div className="settings">
+          {LAYER_SETTINGS[state.type].map((setting) => (
+            <div className="setting">
+              <label>{setting.field}</label>
+              {setting.type === "color" ? (
+                <input
+                  type="color"
+                  value={(state as any)[setting.field]}
+                  onchange={(e) =>
+                    setting.onchange(
+                      state.id,
+                      (e.target as HTMLInputElement).value,
+                    )
+                  }
+                />
+              ) : (
+                <input
+                  type="text"
+                  value={(state as any)[setting.field]}
+                  onchange={(e) =>
+                    setting.onchange(
+                      state.id,
+                      (e.target as HTMLInputElement).value,
+                    )
+                  }
+                />
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
 
   handleClick() {
-    //DataStore.getInstance().setStore("editorActiveLayer", this.layer);
+    console.log("click");
+    const state: LayerState = this.bindingData[this.bindingKeys[0]];
+    executeCommand(new ActivateLayerCommand(state.id));
   }
 
-  handleUpClick(e: Event) {}
+  handleUpClick(e: Event) {
+    const state: LayerState = this.bindingData[this.bindingKeys[0]];
+    executeCommand(new MoveLayerUpCommand(state.id));
+  }
 
-  handleDownClick(e: Event) {}
+  handleDownClick(e: Event) {
+    const state: LayerState = this.bindingData[this.bindingKeys[0]];
+    executeCommand(new MoveLayerDownCommand(state.id));
+  }
 
   handleVisibleClick() {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];

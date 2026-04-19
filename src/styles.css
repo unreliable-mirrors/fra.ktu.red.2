@@ -48,7 +48,6 @@ body {
   place-items: center;
 
   color: #66ff66;
-  background-color: black;
 }
 
 h3 {
@@ -172,11 +171,18 @@ button {
   font-family: "Orbitron", serif;
   display: inline-block;
   line-height: 24px;
-  float: left;
 }
 .layerItem .icons,
 .shaderItem .icons,
 .modulatorItem .icons {
   display: inline-block;
   margin-left: 5px;
+}
+
+.layerItem .settings {
+  display: none;
+}
+
+.layerItem.active .settings {
+  display: block;
 }
