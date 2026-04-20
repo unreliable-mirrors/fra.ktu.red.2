@@ -1,5 +1,6 @@
 import {
   DataStore,
+  DisplayLayerState,
   PixelateShader,
   ShaderLayerState,
 } from "fra.ktu.red-component";
@@ -8,13 +9,12 @@ import { ICommand } from "../icommand";
 export class AddShaderCommand implements ICommand {
   id!: number;
   shaderType: string;
-  constructor(shaderType: string) {
+  destinationLayerId?: number;
+  constructor(shaderType: string, destinationLayerId?: number) {
     this.shaderType = shaderType;
+    this.destinationLayerId = destinationLayerId;
   }
   execute(): void {
-    const shaders: ShaderLayerState[] = DataStore.getInstance().getStore(
-      "editorScene.shaders",
-    );
     let shaderState: ShaderLayerState;
     switch (this.shaderType) {
       case "pixelate":
@@ -23,18 +23,53 @@ export class AddShaderCommand implements ICommand {
       default:
         shaderState = PixelateShader.getDefaultState();
     }
-    shaders.push(shaderState);
+
+    if (this.destinationLayerId !== undefined) {
+      const layer = (
+        DataStore.getInstance().getStore(
+          "editorScene.layers",
+        ) as DisplayLayerState[]
+      ).find((layer) => layer.id === this.destinationLayerId);
+      if (layer) {
+        layer.shaders.push(shaderState);
+        console.log("SHADERS", layer.shaders);
+        DataStore.getInstance().touch("editorScene.layers.!" + layer.id);
+      }
+    } else {
+      const shaders: ShaderLayerState[] = DataStore.getInstance().getStore(
+        "editorScene.shaders",
+      );
+
+      shaders.push(shaderState);
+      DataStore.getInstance().touch("editorScene.shaders");
+    }
     this.id = shaderState.id;
-    DataStore.getInstance().touch("editorScene.shaders");
   }
   revert(): void {
-    const shaders: ShaderLayerState[] = DataStore.getInstance().getStore(
-      "editorScene.shaders",
-    );
-    const index = shaders.findIndex((shader) => shader.id === this.id);
-    if (index !== -1) {
-      shaders.splice(index, 1);
-      DataStore.getInstance().touch("editorScene.shaders");
+    if (this.destinationLayerId !== undefined) {
+      const layer = (
+        DataStore.getInstance().getStore(
+          "editorScene.layers",
+        ) as DisplayLayerState[]
+      ).find((layer) => layer.id === this.destinationLayerId);
+      if (layer) {
+        const index = layer.shaders.findIndex(
+          (shader) => shader.id === this.id,
+        );
+        if (index !== -1) {
+          layer.shaders.splice(index, 1);
+          DataStore.getInstance().touch("editorScene.layers.!" + layer.id);
+        }
+      }
+    } else {
+      const shaders: ShaderLayerState[] = DataStore.getInstance().getStore(
+        "editorScene.shaders",
+      );
+      const index = shaders.findIndex((shader) => shader.id === this.id);
+      if (index !== -1) {
+        shaders.splice(index, 1);
+        DataStore.getInstance().touch("editorScene.shaders");
+      }
     }
   }
 }

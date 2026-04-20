@@ -1,5 +1,10 @@
 import jsx from "texsaur";
-import { KTUComponent, LayerState } from "fra.ktu.red-component";
+import {
+  AVAILABLE_SHADERS,
+  DisplayLayerState,
+  KTUComponent,
+  LayerState,
+} from "fra.ktu.red-component";
 import { DataStore } from "fra.ktu.red-component";
 import {
   IconClose,
@@ -18,6 +23,8 @@ import { MoveLayerUpCommand } from "../../../commands/layers/move_layer_up_comma
 import { ActivateLayerCommand } from "../../../commands/layers/activate_layer_command";
 import { LAYER_SETTINGS } from "../../../settings/isetting";
 import { resolveInputType } from "../../input_resolver";
+import { AddShaderButtonComponent } from "./add_shader_button";
+import { ShaderItemComponent } from "./shader_item";
 
 class LayerItem extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -25,7 +32,7 @@ class LayerItem extends KTUComponent {
   }
 
   render(): Element {
-    const state: LayerState = this.bindingData[this.bindingKeys[0]];
+    const state: DisplayLayerState = this.bindingData[this.bindingKeys[0]];
     //TODO: IMPLEMENT THIS PROPERLY
     const active =
       state.id === DataStore.getInstance().getStore("activeLayerId")
@@ -84,6 +91,17 @@ class LayerItem extends KTUComponent {
               <span>{setting.field}: </span>
               {resolveInputType(state, setting)}
             </div>
+          ))}
+        </div>
+        <h4>Shaders</h4>
+        {AVAILABLE_SHADERS.map((layerType) =>
+          AddShaderButtonComponent(layerType, state.id),
+        )}
+        <div className="shadersList">
+          {[...state.shaders].reverse().map((layer: any) => (
+            <ShaderItemComponent
+              binding={`editorScene.layers.!${state.id}.shaders.!${layer.id}`}
+            />
           ))}
         </div>
       </div>
