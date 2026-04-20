@@ -51,21 +51,31 @@ export const VIDEO_LAYER_SETTINGS: ISetting[] = [
     field: "timeFrom",
     type: "bigfloat",
     onchange: (id: number, value: string | number | boolean) => {
-      executeCommand(new SetLayerFieldCommand(id, "timeFrom", value));
+      executeCommand(
+        new SetLayerFieldCommand(id, "timeFrom", parseFloat(value.toString())),
+      );
     },
   },
   {
     field: "timeLength",
     type: "bigfloat",
     onchange: (id: number, value: string | number | boolean) => {
-      executeCommand(new SetLayerFieldCommand(id, "timeLength", value));
+      executeCommand(
+        new SetLayerFieldCommand(
+          id,
+          "timeLength",
+          parseFloat(value.toString()),
+        ),
+      );
     },
   },
   {
     field: "speed",
     type: "float",
     onchange: (id: number, value: string | number | boolean) => {
-      executeCommand(new SetLayerFieldCommand(id, "speed", value));
+      executeCommand(
+        new SetLayerFieldCommand(id, "speed", parseFloat(value.toString())),
+      );
     },
   },
 ];
