@@ -1,4 +1,4 @@
-import { DataStore, getStartingName, resetCount } from "fra.ktu.red-component";
+import { DataStore, getStartingName } from "fra.ktu.red-component";
 import { ICommand } from "./icommand";
 import { clearCommands } from "../../ktu/helpers/commands_manager";
 import { SceneState } from "fra.ktu.red-component";
@@ -18,7 +18,6 @@ export class NewStateCommand implements ICommand {
     };
     clearCommands();
     DataStore.getInstance().setStore("editorScene", state);
-    resetCount(state.counter);
   }
   revert(): void {}
 }

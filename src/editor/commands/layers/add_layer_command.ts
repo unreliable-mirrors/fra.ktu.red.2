@@ -1,7 +1,7 @@
 import {
   BackgroundLayer,
   DataStore,
-  LayerState,
+  DisplayLayerState,
   SceneState,
   VideoLayer,
 } from "fra.ktu.red-component";
@@ -18,16 +18,16 @@ export class AddLayerCommand implements ICommand {
 
   execute(): void {
     const scene: SceneState = DataStore.getInstance().getStore("editorScene");
-    let layerState: LayerState;
+    let layerState: DisplayLayerState;
     switch (this.layerType) {
       case "background":
-        layerState = BackgroundLayer.getDefaultState();
+        layerState = BackgroundLayer.getDefaultState("editorScene");
         break;
       case "video":
-        layerState = VideoLayer.getDefaultState();
+        layerState = VideoLayer.getDefaultState("editorScene");
         break;
       default:
-        layerState = BackgroundLayer.getDefaultState();
+        layerState = BackgroundLayer.getDefaultState("editorScene");
     }
 
     scene.layers.push(layerState);

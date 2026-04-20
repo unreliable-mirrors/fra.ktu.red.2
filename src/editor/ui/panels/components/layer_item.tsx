@@ -56,7 +56,7 @@ class LayerItem extends KTUComponent {
             {state.name}
           </div>
           <div className="icons">
-            <span onclick={(e) => this.handleUpClick(e)}>
+            <span onclick={() => this.handleUpClick()}>
               {DataStore.getInstance()
                 .getStore("editorScene.layers")
                 .indexOf(state) +
@@ -67,7 +67,7 @@ class LayerItem extends KTUComponent {
                 <></>
               )}
             </span>
-            <span onclick={(e) => this.handleDownClick(e)}>
+            <span onclick={() => this.handleDownClick()}>
               {DataStore.getInstance()
                 .getStore("editorScene.layers")
                 .indexOf(state) != 0 ? (
@@ -114,12 +114,12 @@ class LayerItem extends KTUComponent {
     executeCommand(new ActivateLayerCommand(state.id));
   }
 
-  handleUpClick(e: Event) {
+  handleUpClick() {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
     executeCommand(new MoveLayerUpCommand(state.id));
   }
 
-  handleDownClick(e: Event) {
+  handleDownClick() {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
     executeCommand(new MoveLayerDownCommand(state.id));
   }

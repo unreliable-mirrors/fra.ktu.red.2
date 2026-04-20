@@ -18,10 +18,10 @@ export class AddShaderCommand implements ICommand {
     let shaderState: ShaderLayerState;
     switch (this.shaderType) {
       case "pixelate":
-        shaderState = PixelateShader.getDefaultState();
+        shaderState = PixelateShader.getDefaultState("editorScene");
         break;
       default:
-        shaderState = PixelateShader.getDefaultState();
+        shaderState = PixelateShader.getDefaultState("editorScene");
     }
 
     if (this.destinationLayerId !== undefined) {
