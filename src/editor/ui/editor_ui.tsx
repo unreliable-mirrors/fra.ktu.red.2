@@ -3,6 +3,7 @@ import { KTUComponent } from "fra.ktu.red-component";
 import { LayersPanelComponent } from "./panels/layers_panel";
 import { ShadersPanelComponent } from "./panels/shaders_panel";
 import { FilePanelComponent } from "./panels/file_panel";
+import { FileInfoPanelComponent } from "./panels/file_info_panel";
 
 class EditorUI extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -14,6 +15,7 @@ class EditorUI extends KTUComponent {
       <div class="editor-ui">
         <div class="panel-container left-ui">
           <FilePanelComponent />
+          <FileInfoPanelComponent binding="editorScene" />
         </div>
         <div class="panel-container right-ui">
           <LayersPanelComponent binding="editorScene.layers" />

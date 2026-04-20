@@ -1,4 +1,4 @@
-import { DataStore, resetCount } from "fra.ktu.red-component";
+import { DataStore, getStartingName, resetCount } from "fra.ktu.red-component";
 import { ICommand } from "./icommand";
 import { clearCommands } from "../../ktu/helpers/commands_manager";
 import { SceneState } from "fra.ktu.red-component";
@@ -7,6 +7,7 @@ export class NewStateCommand implements ICommand {
   constructor() {}
   execute(): void {
     const state: SceneState = {
+      name: getStartingName(),
       width: 603,
       height: 1072,
       layers: [],
