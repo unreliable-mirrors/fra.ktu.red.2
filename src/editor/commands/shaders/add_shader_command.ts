@@ -3,7 +3,7 @@ import {
   PixelateShader,
   ShaderLayerState,
 } from "fra.ktu.red-component";
-import { ICommand } from "./icommand";
+import { ICommand } from "../icommand";
 
 export class AddShaderCommand implements ICommand {
   id!: number;

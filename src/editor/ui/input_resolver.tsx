@@ -96,6 +96,18 @@ export const resolveInputType = (
           }}
         />
       );
+    case "integer":
+      return (
+        <input
+          type="number"
+          step="1"
+          min="0"
+          value={(state as any)[setting.field]}
+          oninput={(e: Event) => {
+            setting.onchange?.(state.id, (e.target as HTMLInputElement).value);
+          }}
+        />
+      );
     default:
       return (
         <input

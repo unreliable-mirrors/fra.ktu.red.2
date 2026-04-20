@@ -15,9 +15,9 @@ import { DuplicateLayerCommand } from "../../commands/layers/duplicate_layer_com
 import { ToggleLayerCommand } from "../../commands/layers/toggle_layer_command";
 import { MoveLayerDownCommand } from "../../commands/layers/move_layer_down_command";
 import { MoveLayerUpCommand } from "../../commands/layers/move_layer_up_command";
-import { ActivateLayerCommand } from "../../commands/layers/activate_layer_command";
-import { LAYER_SETTINGS } from "../../settings/isetting";
+import { SHADER_SETTINGS } from "../../settings/isetting";
 import { resolveInputType } from "../input_resolver";
+import { ActivateShaderCommand } from "../../commands/shaders/activate_shader_command";
 
 class ShaderItem extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -28,15 +28,9 @@ class ShaderItem extends KTUComponent {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
     //TODO: IMPLEMENT THIS PROPERLY
     const active =
-      state.id === DataStore.getInstance().getStore("activeLayerId")
+      state.id === DataStore.getInstance().getStore("activeShaderId")
         ? "active"
         : "";
-    console.log(
-      "rendering layer item",
-      state.name,
-      active,
-      this.bindingData["activeLayerId"],
-    );
     return (
       <div className={`layerItem ${active}`}>
         <div className="header">
@@ -51,10 +45,10 @@ class ShaderItem extends KTUComponent {
           <div className="icons">
             <span onclick={(e) => this.handleUpClick(e)}>
               {DataStore.getInstance()
-                .getStore("editorScene.layers")
+                .getStore("editorScene.shaders")
                 .indexOf(state) +
                 1 !=
-              DataStore.getInstance().getStore("editorScene.layers").length ? (
+              DataStore.getInstance().getStore("editorScene.shaders").length ? (
                 IconUp()
               ) : (
                 <></>
@@ -62,7 +56,7 @@ class ShaderItem extends KTUComponent {
             </span>
             <span onclick={(e) => this.handleDownClick(e)}>
               {DataStore.getInstance()
-                .getStore("editorScene.layers")
+                .getStore("editorScene.shaders")
                 .indexOf(state) != 0 ? (
                 IconDown()
               ) : (
@@ -78,6 +72,14 @@ class ShaderItem extends KTUComponent {
             <span onclick={() => this.handleCloseClick()}>{IconClose()}</span>
           </div>
         </div>
+        <div className="settings">
+          {SHADER_SETTINGS[state.type].map((setting) => (
+            <div>
+              <span>{setting.field}: </span>
+              {resolveInputType(state, setting)}
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
@@ -85,7 +87,7 @@ class ShaderItem extends KTUComponent {
   handleClick() {
     console.log("click");
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new ActivateLayerCommand(state.id));
+    executeCommand(new ActivateShaderCommand(state.id));
   }
 
   handleUpClick(e: Event) {

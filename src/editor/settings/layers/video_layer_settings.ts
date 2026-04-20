@@ -1,7 +1,7 @@
-import { executeCommand } from "../../ktu/helpers/commands_manager";
-import { SetLayerFieldCommand } from "../commands/layers/set_layer_field_command";
-import { LoadFileCommand } from "../commands/load_file_command";
-import { ISetting } from "./isetting";
+import { executeCommand } from "../../../ktu/helpers/commands_manager";
+import { SetLayerFieldCommand } from "../../commands/layers/set_layer_field_command";
+import { LoadFileCommand } from "../../commands/load_file_command";
+import { ISetting } from "../isetting";
 
 export const VIDEO_LAYER_SETTINGS: ISetting[] = [
   {
