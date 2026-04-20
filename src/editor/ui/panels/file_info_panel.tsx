@@ -1,6 +1,7 @@
 import jsx from "texsaur";
 import { DataStore, KTUComponent } from "fra.ktu.red-component";
 import { SceneState } from "fra.ktu.red-component";
+import { PlaybackControlsComponent } from "./components/playback_controls";
 
 class FileInfoPanel extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -21,12 +22,30 @@ class FileInfoPanel extends KTUComponent {
             }}
           ></input>
         </div>
+        <div>
+          <span>Duration: </span>
+          <input
+            type="number"
+            min="0.1"
+            step="0.1"
+            value={(this.bindingData["editorScene"] as SceneState).duration}
+            oninput={(e) => {
+              this.onDurationChange((e.target as HTMLInputElement).value);
+            }}
+          ></input>
+        </div>
+        <h3>Playback</h3>
+        <PlaybackControlsComponent binding="playing" />
       </div>
     );
   }
 
   onNameChange(value: string) {
     DataStore.getInstance().setStore("editorScene.name", value);
+  }
+
+  onDurationChange(value: string) {
+    DataStore.getInstance().setStore("editorScene.duration", parseFloat(value));
   }
 }
 

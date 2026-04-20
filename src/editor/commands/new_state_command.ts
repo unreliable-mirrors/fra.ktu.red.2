@@ -10,6 +10,7 @@ export class NewStateCommand implements ICommand {
       name: getStartingName(),
       width: 603,
       height: 1072,
+      duration: 5,
       layers: [],
       shaders: [],
       assets: {},
