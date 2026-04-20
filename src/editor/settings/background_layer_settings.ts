@@ -6,7 +6,7 @@ export const BACKGROUND_LAYER_SETTINGS: ISetting[] = [
   {
     field: "color",
     type: "color",
-    onchange: (id: number, value: string) => {
+    onchange: (id: number, value: string | number | boolean) => {
       executeCommand(new SetLayerFieldCommand(id, "color", value));
     },
   },

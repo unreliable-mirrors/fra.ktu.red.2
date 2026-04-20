@@ -169,8 +169,8 @@ button {
 .shaderItem .title,
 .modulatorItem .title {
   font-family: "Orbitron", serif;
-  display: inline-block;
   line-height: 24px;
+  float: left;
 }
 .layerItem .icons,
 .shaderItem .icons,
