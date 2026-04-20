@@ -2,9 +2,10 @@ import {
   DataStore,
   SceneState,
   RedViewerComponent,
-  BackgroundLayer,
 } from "fra.ktu.red-component";
 import { EditorUIComponent } from "./ui/editor_ui";
+import { executeCommand } from "../ktu/helpers/commands_manager";
+import { NewStateCommand } from "./commands/new_state_command";
 
 export class FrakturedEditor {
   canvasContainer: HTMLElement;
@@ -12,9 +13,9 @@ export class FrakturedEditor {
   public constructor(canvasContainer: HTMLElement, uiContainer: HTMLElement) {
     this.canvasContainer = canvasContainer;
     this.uiContainer = uiContainer;
-    const state = this.buildDefaultSceneState();
-    DataStore.getInstance().setStore("editorScene", state);
+    executeCommand(new NewStateCommand());
 
+    const state = DataStore.getInstance().getStore("editorScene") as SceneState;
     this.canvasContainer.style.width = state.width + "px";
     this.canvasContainer.style.height = state.height + "px";
 
@@ -25,15 +26,5 @@ export class FrakturedEditor {
       }),
     );
     this.uiContainer.appendChild(EditorUIComponent({}));
-  }
-
-  buildDefaultSceneState(): SceneState {
-    return {
-      width: 603,
-      height: 1072,
-      layers: [BackgroundLayer.getDefaultState()],
-      shaders: [],
-      assets: {},
-    };
   }
 }

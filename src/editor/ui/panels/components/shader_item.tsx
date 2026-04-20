@@ -8,18 +8,18 @@ import {
   IconHidden,
   IconUp,
   IconVisible,
-} from "../../../ktu/helpers/icons";
-import { RemoveLayerCommand } from "../../commands/layers/remove_layer_command";
-import { executeCommand } from "../../../ktu/helpers/commands_manager";
-import { DuplicateLayerCommand } from "../../commands/layers/duplicate_layer_command";
-import { ToggleLayerCommand } from "../../commands/layers/toggle_layer_command";
-import { MoveLayerDownCommand } from "../../commands/layers/move_layer_down_command";
-import { MoveLayerUpCommand } from "../../commands/layers/move_layer_up_command";
-import { ActivateLayerCommand } from "../../commands/layers/activate_layer_command";
-import { LAYER_SETTINGS } from "../../settings/isetting";
-import { resolveInputType } from "../input_resolver";
+} from "../../../../ktu/helpers/icons";
+import { RemoveLayerCommand } from "../../../commands/layers/remove_layer_command";
+import { executeCommand } from "../../../../ktu/helpers/commands_manager";
+import { DuplicateLayerCommand } from "../../../commands/layers/duplicate_layer_command";
+import { ToggleLayerCommand } from "../../../commands/layers/toggle_layer_command";
+import { MoveLayerDownCommand } from "../../../commands/layers/move_layer_down_command";
+import { MoveLayerUpCommand } from "../../../commands/layers/move_layer_up_command";
+import { SHADER_SETTINGS } from "../../../settings/isetting";
+import { resolveInputType } from "../../input_resolver";
+import { ActivateShaderCommand } from "../../../commands/shaders/activate_shader_command";
 
-class LayerItem extends KTUComponent {
+class ShaderItem extends KTUComponent {
   constructor(props: { binding?: string }) {
     super(props);
   }
@@ -28,15 +28,9 @@ class LayerItem extends KTUComponent {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
     //TODO: IMPLEMENT THIS PROPERLY
     const active =
-      state.id === DataStore.getInstance().getStore("activeLayerId")
+      state.id === DataStore.getInstance().getStore("activeShaderId")
         ? "active"
         : "";
-    console.log(
-      "rendering layer item",
-      state.name,
-      active,
-      this.bindingData["activeLayerId"],
-    );
     return (
       <div className={`layerItem ${active}`}>
         <div className="header">
@@ -51,10 +45,10 @@ class LayerItem extends KTUComponent {
           <div className="icons">
             <span onclick={(e) => this.handleUpClick(e)}>
               {DataStore.getInstance()
-                .getStore("editorScene.layers")
+                .getStore("editorScene.shaders")
                 .indexOf(state) +
                 1 !=
-              DataStore.getInstance().getStore("editorScene.layers").length ? (
+              DataStore.getInstance().getStore("editorScene.shaders").length ? (
                 IconUp()
               ) : (
                 <></>
@@ -62,7 +56,7 @@ class LayerItem extends KTUComponent {
             </span>
             <span onclick={(e) => this.handleDownClick(e)}>
               {DataStore.getInstance()
-                .getStore("editorScene.layers")
+                .getStore("editorScene.shaders")
                 .indexOf(state) != 0 ? (
                 IconDown()
               ) : (
@@ -79,7 +73,7 @@ class LayerItem extends KTUComponent {
           </div>
         </div>
         <div className="settings">
-          {LAYER_SETTINGS[state.type].map((setting) => (
+          {SHADER_SETTINGS[state.type].map((setting) => (
             <div>
               <span>{setting.field}: </span>
               {resolveInputType(state, setting)}
@@ -93,7 +87,7 @@ class LayerItem extends KTUComponent {
   handleClick() {
     console.log("click");
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new ActivateLayerCommand(state.id));
+    executeCommand(new ActivateShaderCommand(state.id));
   }
 
   handleUpClick(e: Event) {
@@ -122,7 +116,7 @@ class LayerItem extends KTUComponent {
   }
 }
 
-export function LayerItemComponent(props: { binding?: string }): Element {
-  return new LayerItem(props);
+export function ShaderItemComponent(props: { binding?: string }): Element {
+  return new ShaderItem(props);
 }
-customElements.define("layer-item", LayerItem);
+customElements.define("shader-item", ShaderItem);

@@ -13,3 +13,7 @@ export function undoCommand() {
     command.revert();
   }
 }
+
+export function clearCommands() {
+  commandsQueue.length = 0;
+}
