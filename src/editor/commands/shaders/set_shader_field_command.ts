@@ -10,25 +10,34 @@ export class SetShaderFieldCommand implements ICommand {
   field: string;
   value: string | boolean | number;
   oldValue!: string | boolean | number;
+  owner: string;
 
-  constructor(id: number, field: string, value: string | boolean | number) {
+  constructor(
+    id: number,
+    field: string,
+    value: string | boolean | number,
+    owner: string,
+  ) {
     this.id = id;
     this.field = field;
     this.value = value;
+    this.owner = owner;
   }
   execute(): void {
+    console.log("EXECUTE", this.id, this.field, this.value, this.owner);
     const shaders: ShaderLayerState[] = DataStore.getInstance().getStore(
-      "editorScene.shaders",
+      this.owner,
     );
     const shader = shaders.find((shader) => shader.id === this.id);
+    console.log("SHADER", shader);
     if (shader) {
       this.oldValue = (shader as any)[this.field];
       (shader as any)[this.field] = this.value;
       if (this.field === "visible") {
-        DataStore.getInstance().touch(`editorScene.shaders.!${this.id}`);
+        DataStore.getInstance().touch(`${this.owner}.!${this.id}`);
       } else {
         EventDispatcher.getInstance().dispatchEvent(
-          "editorScene.shaders.!" + this.id,
+          `${this.owner}.!` + this.id,
           "change",
           {
             field: this.field,
@@ -40,16 +49,16 @@ export class SetShaderFieldCommand implements ICommand {
   }
   revert(): void {
     const shaders: ShaderLayerState[] = DataStore.getInstance().getStore(
-      "editorScene.shaders",
+      this.owner,
     );
     const shader = shaders.find((shader) => shader.id === this.id);
     if (shader) {
       (shader as any)[this.field] = this.oldValue;
       if (this.field === "visible") {
-        DataStore.getInstance().touch(`editorScene.shaders.!${this.id}`);
+        DataStore.getInstance().touch(`${this.owner}.!${this.id}`);
       } else {
         EventDispatcher.getInstance().dispatchEvent(
-          "editorScene.shaders.!" + this.id,
+          `${this.owner}.!` + this.id,
           "change",
           {
             field: this.field,

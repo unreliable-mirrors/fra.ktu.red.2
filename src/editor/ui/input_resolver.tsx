@@ -5,6 +5,7 @@ import { LayerState } from "fra.ktu.red-component";
 export const resolveInputType = (
   state: LayerState,
   setting: ISetting,
+  owner: string,
 ): Element => {
   switch (setting.type) {
     case "color":
@@ -13,7 +14,11 @@ export const resolveInputType = (
           type="color"
           value={(state as any)[setting.field]}
           onChange={(e: Event) =>
-            setting.onchange?.(state.id, (e.target as HTMLInputElement).value)
+            setting.onchange?.(
+              state.id,
+              (e.target as HTMLInputElement).value,
+              owner,
+            )
           }
         />
       );
@@ -33,7 +38,7 @@ export const resolveInputType = (
                 id="imageLoadInput"
                 accept="image/*,video/*"
                 onchange={() => {
-                  loadFile(state, setting);
+                  loadFile(state, setting, owner);
                 }}
               />
             </fieldset>
@@ -54,7 +59,11 @@ export const resolveInputType = (
           max="1"
           value={(state as any)[setting.field]}
           oninput={(e: Event) => {
-            setting.onchange?.(state.id, (e.target as HTMLInputElement).value);
+            setting.onchange?.(
+              state.id,
+              (e.target as HTMLInputElement).value,
+              owner,
+            );
           }}
         />
       );
@@ -67,7 +76,11 @@ export const resolveInputType = (
           max="10"
           value={(state as any)[setting.field]}
           oninput={(e: Event) => {
-            setting.onchange?.(state.id, (e.target as HTMLInputElement).value);
+            setting.onchange?.(
+              state.id,
+              (e.target as HTMLInputElement).value,
+              owner,
+            );
           }}
         />
       );
@@ -80,6 +93,7 @@ export const resolveInputType = (
             setting.onchange?.(
               state.id,
               (e.target as HTMLInputElement).checked,
+              owner,
             );
           }}
         />
@@ -92,7 +106,11 @@ export const resolveInputType = (
           min="0"
           value={(state as any)[setting.field]}
           oninput={(e: Event) => {
-            setting.onchange?.(state.id, (e.target as HTMLInputElement).value);
+            setting.onchange?.(
+              state.id,
+              (e.target as HTMLInputElement).value,
+              owner,
+            );
           }}
         />
       );
@@ -104,7 +122,11 @@ export const resolveInputType = (
           min="0"
           value={(state as any)[setting.field]}
           oninput={(e: Event) => {
-            setting.onchange?.(state.id, (e.target as HTMLInputElement).value);
+            setting.onchange?.(
+              state.id,
+              (e.target as HTMLInputElement).value,
+              owner,
+            );
           }}
         />
       );
@@ -114,14 +136,18 @@ export const resolveInputType = (
           type="text"
           value={(state as any)[setting.field]}
           oninput={(e: Event) =>
-            setting.onchange?.(state.id, (e.target as HTMLInputElement).value)
+            setting.onchange?.(
+              state.id,
+              (e.target as HTMLInputElement).value,
+              owner,
+            )
           }
         />
       );
   }
 };
 
-const loadFile = (state: LayerState, setting: ISetting) => {
+const loadFile = (state: LayerState, setting: ISetting, owner: string) => {
   let input: HTMLInputElement;
   let file, fr;
 
@@ -133,7 +159,7 @@ const loadFile = (state: LayerState, setting: ISetting) => {
     file = input.files[0];
     fr = new FileReader();
     fr.onload = (e) => {
-      receivedText(e, state, setting);
+      receivedText(e, state, setting, owner);
     };
     if (file.size < 104857600) {
       fr.readAsDataURL(file);
@@ -149,8 +175,9 @@ const receivedText = (
   e: ProgressEvent<FileReader>,
   state: LayerState,
   setting: ISetting,
+  owner: string,
 ) => {
   const payload: string = e.target!.result as string;
   console.log("RECEIVE", typeof e.target!.result, payload.length);
-  setting.onchange?.(state.id, payload);
+  setting.onchange?.(state.id, payload, owner);
 };

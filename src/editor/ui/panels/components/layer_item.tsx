@@ -38,12 +38,6 @@ class LayerItem extends KTUComponent {
       state.id === DataStore.getInstance().getStore("activeLayerId")
         ? "active"
         : "";
-    console.log(
-      "rendering layer item",
-      state.name,
-      active,
-      this.bindingData["activeLayerId"],
-    );
     return (
       <div className={`layerItem ${active}`}>
         <div className="header">
@@ -85,25 +79,32 @@ class LayerItem extends KTUComponent {
             <span onclick={() => this.handleCloseClick()}>{IconClose()}</span>
           </div>
         </div>
-        <div className="settings">
-          {LAYER_SETTINGS[state.type].map((setting) => (
-            <div>
-              <span>{setting.field}: </span>
-              {resolveInputType(state, setting)}
+        {active === "active" ? (
+          <>
+            <div className="settings">
+              {LAYER_SETTINGS[state.type].map((setting) => (
+                <div>
+                  <span>{setting.field}: </span>
+                  {resolveInputType(state, setting, "editorScene.layers")}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <h4>Shaders</h4>
-        {AVAILABLE_SHADERS.map((layerType) =>
-          AddShaderButtonComponent(layerType, state.id),
+            <h4>Shaders</h4>
+            {AVAILABLE_SHADERS.map((layerType) =>
+              AddShaderButtonComponent(layerType, state.id),
+            )}
+            <div className="shadersList">
+              {[...state.shaders].reverse().map((layer: any) => (
+                <ShaderItemComponent
+                  binding={`editorScene.layers.!${state.id}.shaders.!${layer.id}`}
+                  owner={`editorScene.layers.!${state.id}.shaders`}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <></>
         )}
-        <div className="shadersList">
-          {[...state.shaders].reverse().map((layer: any) => (
-            <ShaderItemComponent
-              binding={`editorScene.layers.!${state.id}.shaders.!${layer.id}`}
-            />
-          ))}
-        </div>
       </div>
     );
   }

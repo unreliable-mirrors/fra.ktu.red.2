@@ -20,13 +20,14 @@ import { resolveInputType } from "../../input_resolver";
 import { ActivateShaderCommand } from "../../../commands/shaders/activate_shader_command";
 
 class ShaderItem extends KTUComponent {
-  constructor(props: { binding?: string }) {
+  owner: string;
+  constructor(props: { binding?: string; owner: string }) {
     super(props);
+    this.owner = props.owner;
   }
 
   render(): Element {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
-    //TODO: IMPLEMENT THIS PROPERLY
     const active =
       state.id === DataStore.getInstance().getStore("activeShaderId")
         ? "active"
@@ -43,21 +44,18 @@ class ShaderItem extends KTUComponent {
             {state.name}
           </div>
           <div className="icons">
-            <span onclick={(e) => this.handleUpClick(e)}>
-              {DataStore.getInstance()
-                .getStore("editorScene.shaders")
-                .indexOf(state) +
+            <span onclick={() => this.handleUpClick()}>
+              {DataStore.getInstance().getStore(this.owner).indexOf(state) +
                 1 !=
-              DataStore.getInstance().getStore("editorScene.shaders").length ? (
+              DataStore.getInstance().getStore(this.owner).length ? (
                 IconUp()
               ) : (
                 <></>
               )}
             </span>
-            <span onclick={(e) => this.handleDownClick(e)}>
-              {DataStore.getInstance()
-                .getStore("editorScene.shaders")
-                .indexOf(state) != 0 ? (
+            <span onclick={() => this.handleDownClick()}>
+              {DataStore.getInstance().getStore(this.owner).indexOf(state) !=
+              0 ? (
                 IconDown()
               ) : (
                 <></>
@@ -72,14 +70,20 @@ class ShaderItem extends KTUComponent {
             <span onclick={() => this.handleCloseClick()}>{IconClose()}</span>
           </div>
         </div>
-        <div className="settings">
-          {SHADER_SETTINGS[state.type].map((setting) => (
-            <div>
-              <span>{setting.field}: </span>
-              {resolveInputType(state, setting)}
+        {active === "active" ? (
+          <>
+            <div className="settings">
+              {SHADER_SETTINGS[state.type].map((setting) => (
+                <div>
+                  <span>{setting.field}: </span>
+                  {resolveInputType(state, setting, this.owner)}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     );
   }
@@ -90,12 +94,12 @@ class ShaderItem extends KTUComponent {
     executeCommand(new ActivateShaderCommand(state.id));
   }
 
-  handleUpClick(e: Event) {
+  handleUpClick() {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
     executeCommand(new MoveLayerUpCommand(state.id));
   }
 
-  handleDownClick(e: Event) {
+  handleDownClick() {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
     executeCommand(new MoveLayerDownCommand(state.id));
   }
@@ -116,7 +120,10 @@ class ShaderItem extends KTUComponent {
   }
 }
 
-export function ShaderItemComponent(props: { binding?: string }): Element {
+export function ShaderItemComponent(props: {
+  binding?: string;
+  owner: string;
+}): Element {
   return new ShaderItem(props);
 }
 customElements.define("shader-item", ShaderItem);

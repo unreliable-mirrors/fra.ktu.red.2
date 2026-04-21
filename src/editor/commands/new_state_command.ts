@@ -13,6 +13,7 @@ export class NewStateCommand implements ICommand {
       duration: 5,
       layers: [],
       shaders: [],
+      modulators: [],
       assets: {},
       counter: 0,
     };

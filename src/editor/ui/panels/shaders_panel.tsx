@@ -24,6 +24,7 @@ class ShadersPanel extends KTUComponent {
               .map((layer: any) => (
                 <ShaderItemComponent
                   binding={`editorScene.shaders.!${layer.id}`}
+                  owner="editorScene.shaders"
                 />
               ))}
           </div>
