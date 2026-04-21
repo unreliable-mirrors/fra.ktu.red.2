@@ -8,11 +8,7 @@ export const LFO_SETTINGS: ISetting[] = [
     type: "bigfloat",
     onchange: (id: number, value: string | number | boolean) => {
       executeCommand(
-        new SetModulatorFieldCommand(
-          id,
-          "frequency",
-          parseFloat(value.toString()),
-        ),
+        new SetModulatorFieldCommand(id, "hz", parseFloat(value.toString())),
       );
     },
     signalizable: true,
