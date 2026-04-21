@@ -2,6 +2,8 @@ import jsx from "texsaur";
 import { DataStore, KTUComponent } from "fra.ktu.red-component";
 import { SceneState } from "fra.ktu.red-component";
 import { PlaybackControlsComponent } from "./components/playback_controls";
+import { executeCommand } from "../../../ktu/helpers/commands_manager";
+import { ResizeCanvasCommand } from "../../commands/resize_canvas_command";
 
 class FileInfoPanel extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -19,6 +21,26 @@ class FileInfoPanel extends KTUComponent {
             value={(this.bindingData["editorScene"] as SceneState).name}
             oninput={(e) => {
               this.onNameChange((e.target as HTMLInputElement).value);
+            }}
+          ></input>
+        </div>
+        <div>
+          <span>Width: </span>
+          <input
+            type="text"
+            value={(this.bindingData["editorScene"] as SceneState).width}
+            oninput={(e) => {
+              this.onWidthChange((e.target as HTMLInputElement).value);
+            }}
+          ></input>
+        </div>
+        <div>
+          <span>Height: </span>
+          <input
+            type="text"
+            value={(this.bindingData["editorScene"] as SceneState).height}
+            oninput={(e) => {
+              this.onHeightChange((e.target as HTMLInputElement).value);
             }}
           ></input>
         </div>
@@ -42,6 +64,24 @@ class FileInfoPanel extends KTUComponent {
 
   onNameChange(value: string) {
     DataStore.getInstance().setStore("editorScene.name", value);
+  }
+
+  onWidthChange(value: string) {
+    executeCommand(
+      new ResizeCanvasCommand(
+        parseInt(value),
+        DataStore.getInstance().getStore("editorScene.height"),
+      ),
+    );
+  }
+
+  onHeightChange(value: string) {
+    executeCommand(
+      new ResizeCanvasCommand(
+        DataStore.getInstance().getStore("editorScene.width"),
+        parseInt(value),
+      ),
+    );
   }
 
   onDurationChange(value: string) {
