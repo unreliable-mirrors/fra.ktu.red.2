@@ -7,7 +7,7 @@ import {
 } from "fra.ktu.red-component";
 import { executeCommand } from "../../../../ktu/helpers/commands_manager";
 import { ISetting } from "../../../settings/isetting";
-import { AssignSignalCommand } from "../../../commands/assign_signal_command";
+import { AssignSignalCommand } from "../../../commands/modulators/assign_signal_command";
 
 class BindModulatorButton extends KTUComponent {
   state: LayerState;

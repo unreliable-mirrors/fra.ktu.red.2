@@ -2,6 +2,7 @@ import jsx from "texsaur";
 import { ISetting } from "../settings/isetting";
 import { LayerState } from "fra.ktu.red-component";
 import { BindModulatorButtonComponent } from "./panels/components/bind_modulator_button";
+import { SignalHintComponent } from "./panels/components/signal_hint";
 
 export const resolveInputType = (
   state: LayerState,
@@ -54,20 +55,26 @@ export const resolveInputType = (
     case "float":
       return (
         <>
-          <input
-            type="number"
-            step="0.01"
-            min="0"
-            max="1"
-            value={(state as any)[setting.field]}
-            oninput={(e: Event) => {
-              setting.onchange?.(
-                state.id,
-                (e.target as HTMLInputElement).value,
-                owner,
-              );
-            }}
-          />
+          {!state.signaledFields[setting.field] ? (
+            <input
+              type="number"
+              step="0.01"
+              min="0"
+              max="1"
+              value={(state as any)[setting.field]}
+              oninput={(e: Event) => {
+                setting.onchange?.(
+                  state.id,
+                  (e.target as HTMLInputElement).value,
+                  owner,
+                );
+              }}
+            />
+          ) : (
+            <SignalHintComponent
+              signalName={state.signaledFields[setting.field]!}
+            />
+          )}
           <BindModulatorButtonComponent
             state={state}
             setting={setting}
@@ -78,20 +85,26 @@ export const resolveInputType = (
     case "float10":
       return (
         <>
-          <input
-            type="number"
-            step="0.01"
-            min="-10"
-            max="10"
-            value={(state as any)[setting.field]}
-            oninput={(e: Event) => {
-              setting.onchange?.(
-                state.id,
-                (e.target as HTMLInputElement).value,
-                owner,
-              );
-            }}
-          />
+          {!state.signaledFields[setting.field] ? (
+            <input
+              type="number"
+              step="0.01"
+              min="-10"
+              max="10"
+              value={(state as any)[setting.field]}
+              oninput={(e: Event) => {
+                setting.onchange?.(
+                  state.id,
+                  (e.target as HTMLInputElement).value,
+                  owner,
+                );
+              }}
+            />
+          ) : (
+            <SignalHintComponent
+              signalName={state.signaledFields[setting.field]!}
+            />
+          )}
           <BindModulatorButtonComponent
             state={state}
             setting={setting}
@@ -102,17 +115,23 @@ export const resolveInputType = (
     case "boolean":
       return (
         <>
-          <input
-            type="checkbox"
-            checked={(state as any)[setting.field]}
-            oninput={(e: Event) => {
-              setting.onchange?.(
-                state.id,
-                (e.target as HTMLInputElement).checked,
-                owner,
-              );
-            }}
-          />
+          {!state.signaledFields[setting.field] ? (
+            <input
+              type="checkbox"
+              checked={(state as any)[setting.field]}
+              oninput={(e: Event) => {
+                setting.onchange?.(
+                  state.id,
+                  (e.target as HTMLInputElement).checked,
+                  owner,
+                );
+              }}
+            />
+          ) : (
+            <SignalHintComponent
+              signalName={state.signaledFields[setting.field]!}
+            />
+          )}
           <BindModulatorButtonComponent
             state={state}
             setting={setting}
@@ -123,19 +142,25 @@ export const resolveInputType = (
     case "bigfloat":
       return (
         <>
-          <input
-            type="number"
-            step="0.01"
-            min="0"
-            value={(state as any)[setting.field]}
-            oninput={(e: Event) => {
-              setting.onchange?.(
-                state.id,
-                (e.target as HTMLInputElement).value,
-                owner,
-              );
-            }}
-          />
+          {!state.signaledFields[setting.field] ? (
+            <input
+              type="number"
+              step="0.01"
+              min="0"
+              value={(state as any)[setting.field]}
+              oninput={(e: Event) => {
+                setting.onchange?.(
+                  state.id,
+                  (e.target as HTMLInputElement).value,
+                  owner,
+                );
+              }}
+            />
+          ) : (
+            <SignalHintComponent
+              signalName={state.signaledFields[setting.field]!}
+            />
+          )}
           <BindModulatorButtonComponent
             state={state}
             setting={setting}
@@ -146,19 +171,25 @@ export const resolveInputType = (
     case "integer":
       return (
         <>
-          <input
-            type="number"
-            step="1"
-            min="0"
-            value={(state as any)[setting.field]}
-            oninput={(e: Event) => {
-              setting.onchange?.(
-                state.id,
-                (e.target as HTMLInputElement).value,
-                owner,
-              );
-            }}
-          />
+          {!state.signaledFields[setting.field] ? (
+            <input
+              type="number"
+              step="1"
+              min="0"
+              value={(state as any)[setting.field]}
+              oninput={(e: Event) => {
+                setting.onchange?.(
+                  state.id,
+                  (e.target as HTMLInputElement).value,
+                  owner,
+                );
+              }}
+            />
+          ) : (
+            <SignalHintComponent
+              signalName={state.signaledFields[setting.field]!}
+            />
+          )}
           <BindModulatorButtonComponent
             state={state}
             setting={setting}

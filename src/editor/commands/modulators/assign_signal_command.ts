@@ -1,5 +1,5 @@
 import { DataStore, LayerState } from "fra.ktu.red-component";
-import { ICommand } from "./icommand";
+import { ICommand } from "../icommand";
 
 export class AssignSignalCommand implements ICommand {
   id: number;
@@ -33,6 +33,7 @@ export class AssignSignalCommand implements ICommand {
     } else {
       delete state.signaledFields[this.field];
     }
+    DataStore.getInstance().touch(this.owner + ".!" + this.id);
   }
   revert(): void {
     const state: LayerState = DataStore.getInstance().getStore(
@@ -46,5 +47,6 @@ export class AssignSignalCommand implements ICommand {
     } else {
       delete state.signaledFields[this.field];
     }
+    DataStore.getInstance().touch(this.owner + ".!" + this.id);
   }
 }
