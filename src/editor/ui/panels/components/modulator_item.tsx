@@ -60,7 +60,7 @@ class ModulatorItem extends KTUComponent {
         ? "active"
         : "";
 
-    this.valueRenderer = <div>{modulator.getValue()}</div>;
+    this.valueRenderer = <div>{modulator.value.toFixed(2)}</div>;
     return (
       <div className={`modulatorItem ${active}`}>
         <div className="header">

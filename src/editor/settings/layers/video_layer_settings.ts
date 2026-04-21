@@ -11,6 +11,7 @@ export const VIDEO_LAYER_SETTINGS: ISetting[] = [
       console.log("Loading file:", value);
       executeCommand(new LoadFileCommand("editorScene", id, value.toString()));
     },
+    signalizable: false,
   },
   {
     field: "panX",
@@ -18,6 +19,7 @@ export const VIDEO_LAYER_SETTINGS: ISetting[] = [
     onchange: (id: number, value: string | number | boolean) => {
       executeCommand(new SetLayerFieldCommand(id, "panX", value));
     },
+    signalizable: true,
   },
   {
     field: "panY",
@@ -25,6 +27,7 @@ export const VIDEO_LAYER_SETTINGS: ISetting[] = [
     onchange: (id: number, value: string | number | boolean) => {
       executeCommand(new SetLayerFieldCommand(id, "panY", value));
     },
+    signalizable: true,
   },
   {
     field: "scale",
@@ -32,6 +35,7 @@ export const VIDEO_LAYER_SETTINGS: ISetting[] = [
     onchange: (id: number, value: string | number | boolean) => {
       executeCommand(new SetLayerFieldCommand(id, "scale", value));
     },
+    signalizable: true,
   },
   {
     field: "vFlip",
@@ -39,6 +43,7 @@ export const VIDEO_LAYER_SETTINGS: ISetting[] = [
     onchange: (id: number, value: string | number | boolean) => {
       executeCommand(new SetLayerFieldCommand(id, "vFlip", value));
     },
+    signalizable: true,
   },
   {
     field: "hFlip",
@@ -46,6 +51,7 @@ export const VIDEO_LAYER_SETTINGS: ISetting[] = [
     onchange: (id: number, value: string | number | boolean) => {
       executeCommand(new SetLayerFieldCommand(id, "hFlip", value));
     },
+    signalizable: true,
   },
   {
     field: "timeFrom",
@@ -55,6 +61,7 @@ export const VIDEO_LAYER_SETTINGS: ISetting[] = [
         new SetLayerFieldCommand(id, "timeFrom", parseFloat(value.toString())),
       );
     },
+    signalizable: true,
   },
   {
     field: "timeLength",
@@ -68,6 +75,7 @@ export const VIDEO_LAYER_SETTINGS: ISetting[] = [
         ),
       );
     },
+    signalizable: true,
   },
   {
     field: "speed",
@@ -77,5 +85,6 @@ export const VIDEO_LAYER_SETTINGS: ISetting[] = [
         new SetLayerFieldCommand(id, "speed", parseFloat(value.toString())),
       );
     },
+    signalizable: true,
   },
 ];

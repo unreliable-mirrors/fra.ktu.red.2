@@ -1,6 +1,7 @@
 import jsx from "texsaur";
 import { ISetting } from "../settings/isetting";
 import { LayerState } from "fra.ktu.red-component";
+import { BindModulatorButtonComponent } from "./panels/components/bind_modulator_button";
 
 export const resolveInputType = (
   state: LayerState,
@@ -52,83 +53,118 @@ export const resolveInputType = (
       );
     case "float":
       return (
-        <input
-          type="number"
-          step="0.01"
-          min="0"
-          max="1"
-          value={(state as any)[setting.field]}
-          oninput={(e: Event) => {
-            setting.onchange?.(
-              state.id,
-              (e.target as HTMLInputElement).value,
-              owner,
-            );
-          }}
-        />
+        <>
+          <input
+            type="number"
+            step="0.01"
+            min="0"
+            max="1"
+            value={(state as any)[setting.field]}
+            oninput={(e: Event) => {
+              setting.onchange?.(
+                state.id,
+                (e.target as HTMLInputElement).value,
+                owner,
+              );
+            }}
+          />
+          <BindModulatorButtonComponent
+            state={state}
+            setting={setting}
+            owner={owner}
+          />
+        </>
       );
     case "float10":
       return (
-        <input
-          type="number"
-          step="0.01"
-          min="-10"
-          max="10"
-          value={(state as any)[setting.field]}
-          oninput={(e: Event) => {
-            setting.onchange?.(
-              state.id,
-              (e.target as HTMLInputElement).value,
-              owner,
-            );
-          }}
-        />
+        <>
+          <input
+            type="number"
+            step="0.01"
+            min="-10"
+            max="10"
+            value={(state as any)[setting.field]}
+            oninput={(e: Event) => {
+              setting.onchange?.(
+                state.id,
+                (e.target as HTMLInputElement).value,
+                owner,
+              );
+            }}
+          />
+          <BindModulatorButtonComponent
+            state={state}
+            setting={setting}
+            owner={owner}
+          />
+        </>
       );
     case "boolean":
       return (
-        <input
-          type="checkbox"
-          checked={(state as any)[setting.field]}
-          oninput={(e: Event) => {
-            setting.onchange?.(
-              state.id,
-              (e.target as HTMLInputElement).checked,
-              owner,
-            );
-          }}
-        />
+        <>
+          <input
+            type="checkbox"
+            checked={(state as any)[setting.field]}
+            oninput={(e: Event) => {
+              setting.onchange?.(
+                state.id,
+                (e.target as HTMLInputElement).checked,
+                owner,
+              );
+            }}
+          />
+          <BindModulatorButtonComponent
+            state={state}
+            setting={setting}
+            owner={owner}
+          />
+        </>
       );
     case "bigfloat":
       return (
-        <input
-          type="number"
-          step="0.01"
-          min="0"
-          value={(state as any)[setting.field]}
-          oninput={(e: Event) => {
-            setting.onchange?.(
-              state.id,
-              (e.target as HTMLInputElement).value,
-              owner,
-            );
-          }}
-        />
+        <>
+          <input
+            type="number"
+            step="0.01"
+            min="0"
+            value={(state as any)[setting.field]}
+            oninput={(e: Event) => {
+              setting.onchange?.(
+                state.id,
+                (e.target as HTMLInputElement).value,
+                owner,
+              );
+            }}
+          />
+          <BindModulatorButtonComponent
+            state={state}
+            setting={setting}
+            owner={owner}
+          />
+        </>
       );
     case "integer":
       return (
-        <input
-          type="number"
-          step="1"
-          min="0"
-          value={(state as any)[setting.field]}
-          oninput={(e: Event) => {
-            setting.onchange?.(
-              state.id,
-              (e.target as HTMLInputElement).value,
-              owner,
-            );
-          }}
-        />
+        <>
+          <input
+            type="number"
+            step="1"
+            min="0"
+            value={(state as any)[setting.field]}
+            oninput={(e: Event) => {
+              setting.onchange?.(
+                state.id,
+                (e.target as HTMLInputElement).value,
+                owner,
+              );
+            }}
+          />
+          <BindModulatorButtonComponent
+            state={state}
+            setting={setting}
+            owner={owner}
+          />
+        </>
       );
     default:
       return (

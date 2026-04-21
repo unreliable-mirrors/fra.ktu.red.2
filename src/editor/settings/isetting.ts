@@ -12,6 +12,7 @@ export interface ISetting {
     value: string | boolean | number,
     owner: string,
   ) => void;
+  signalizable: boolean;
 }
 
 export const LAYER_SETTINGS: { [key: string]: ISetting[] } = {

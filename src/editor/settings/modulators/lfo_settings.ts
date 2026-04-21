@@ -7,29 +7,53 @@ export const LFO_SETTINGS: ISetting[] = [
     field: "hz",
     type: "bigfloat",
     onchange: (id: number, value: string | number | boolean) => {
-      executeCommand(new SetModulatorFieldCommand(id, "frequency", value));
+      executeCommand(
+        new SetModulatorFieldCommand(
+          id,
+          "frequency",
+          parseFloat(value.toString()),
+        ),
+      );
     },
+    signalizable: true,
   },
   {
     field: "phase",
     type: "bigfloat",
     onchange: (id: number, value: string | number | boolean) => {
-      executeCommand(new SetModulatorFieldCommand(id, "phase", value));
+      executeCommand(
+        new SetModulatorFieldCommand(id, "phase", parseFloat(value.toString())),
+      );
     },
+    signalizable: true,
   },
   {
     field: "factor",
     type: "bigfloat",
     onchange: (id: number, value: string | number | boolean) => {
-      executeCommand(new SetModulatorFieldCommand(id, "factor", value));
+      executeCommand(
+        new SetModulatorFieldCommand(
+          id,
+          "factor",
+          parseFloat(value.toString()),
+        ),
+      );
     },
+    signalizable: true,
   },
   {
     field: "offset",
     type: "bigfloat",
     onchange: (id: number, value: string | number | boolean) => {
-      executeCommand(new SetModulatorFieldCommand(id, "offset", value));
+      executeCommand(
+        new SetModulatorFieldCommand(
+          id,
+          "offset",
+          parseFloat(value.toString()),
+        ),
+      );
     },
+    signalizable: true,
   },
   {
     field: "waveform",
@@ -38,5 +62,6 @@ export const LFO_SETTINGS: ISetting[] = [
     onchange: (id: number, value: string | number | boolean) => {
       executeCommand(new SetModulatorFieldCommand(id, "waveform", value));
     },
+    signalizable: false,
   },
 ];

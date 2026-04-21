@@ -9,5 +9,6 @@ export const PIXELATE_SHADER_SETTINGS: ISetting[] = [
     onchange: (id: number, value: string | number | boolean, owner: string) => {
       executeCommand(new SetShaderFieldCommand(id, "pixelSize", value, owner));
     },
+    signalizable: true,
   },
 ];

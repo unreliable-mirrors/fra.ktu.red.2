@@ -9,5 +9,6 @@ export const BACKGROUND_LAYER_SETTINGS: ISetting[] = [
     onchange: (id: number, value: string | number | boolean) => {
       executeCommand(new SetLayerFieldCommand(id, "color", value));
     },
+    signalizable: false,
   },
 ];
