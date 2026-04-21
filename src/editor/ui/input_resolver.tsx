@@ -197,6 +197,27 @@ export const resolveInputType = (
           />
         </>
       );
+    case "options":
+      console.log(
+        "VALUES",
+        setting.values,
+        setting.field,
+        state,
+        (state as any)[setting.field],
+      );
+      return (
+        <>
+          {setting.values!.map((e) => (
+            <button
+              onclick={() => setting.onchange?.(state.id, e, owner)}
+              className={(state as any)[setting.field] === e ? "selected" : ""}
+            >
+              {e}
+            </button>
+          ))}
+        </>
+      );
+
     default:
       return (
         <input

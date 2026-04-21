@@ -203,3 +203,6 @@ button {
 .chartContainer {
   min-height: 154px;
 }
+.selected {
+  color: #ff66ff;
+}

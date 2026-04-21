@@ -53,7 +53,7 @@ export const LFO_SETTINGS: ISetting[] = [
   },
   {
     field: "waveform",
-    type: "select",
+    type: "options",
     values: ["sine", "square", "triangle", "sawtooth"],
     onchange: (id: number, value: string | number | boolean) => {
       executeCommand(new SetModulatorFieldCommand(id, "waveform", value));
