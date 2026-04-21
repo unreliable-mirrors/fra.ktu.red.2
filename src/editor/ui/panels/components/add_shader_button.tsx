@@ -26,11 +26,11 @@ class AddShaderButton extends KTUComponent {
   }
 }
 
-export function AddShaderButtonComponent(
-  shaderName: string,
-  destinationLayerId?: number,
-): Element {
-  return new AddShaderButton(shaderName, destinationLayerId);
+export function AddShaderButtonComponent(props: {
+  shaderType: string;
+  destinationLayerId?: number;
+}): Element {
+  return new AddShaderButton(props.shaderType, props.destinationLayerId);
 }
 
 customElements.define("add-shader-button", AddShaderButton);

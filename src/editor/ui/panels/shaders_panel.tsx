@@ -1,5 +1,5 @@
 import jsx from "texsaur";
-import { AVAILABLE_SHADERS, KTUComponent } from "fra.ktu.red-component";
+import { CATEGORIZED_SHADERS, KTUComponent } from "fra.ktu.red-component";
 import { AddShaderButtonComponent } from "./components/add_shader_button";
 import { ShaderItemComponent } from "./components/shader_item";
 
@@ -14,9 +14,14 @@ class ShadersPanel extends KTUComponent {
         <h3>Global Shaders</h3>
         <div>
           <div className="layerIcons">
-            {AVAILABLE_SHADERS.map((layerType) =>
-              AddShaderButtonComponent(layerType),
-            )}
+            {Object.keys(CATEGORIZED_SHADERS).map((category) => (
+              <div>
+                <span>{category}</span>
+                {CATEGORIZED_SHADERS[category].map((shaderType) => (
+                  <AddShaderButtonComponent shaderType={shaderType} />
+                ))}
+              </div>
+            ))}
           </div>
           <div className="shadersList">
             {[...this.bindingData["editorScene.shaders"]]

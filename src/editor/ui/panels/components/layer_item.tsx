@@ -1,6 +1,6 @@
 import jsx from "texsaur";
 import {
-  AVAILABLE_SHADERS,
+  CATEGORIZED_SHADERS,
   DisplayLayerState,
   KTUComponent,
   LayerState,
@@ -90,9 +90,14 @@ class LayerItem extends KTUComponent {
               ))}
             </div>
             <h4>Shaders</h4>
-            {AVAILABLE_SHADERS.map((layerType) =>
-              AddShaderButtonComponent(layerType, state.id),
-            )}
+            {Object.keys(CATEGORIZED_SHADERS).map((category) => (
+              <div>
+                <span>{category}</span>
+                {CATEGORIZED_SHADERS[category].map((shaderType) => (
+                  <AddShaderButtonComponent shaderType={shaderType} />
+                ))}
+              </div>
+            ))}
             <div className="shadersList">
               {[...state.shaders].reverse().map((layer: any) => (
                 <ShaderItemComponent
