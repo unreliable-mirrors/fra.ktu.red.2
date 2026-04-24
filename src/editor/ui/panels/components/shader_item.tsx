@@ -91,7 +91,7 @@ class ShaderItem extends KTUComponent {
   handleClick() {
     console.log("click");
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new ActivateShaderCommand(state.id));
+    executeCommand(new ActivateShaderCommand(state.id, this.owner));
   }
 
   handleUpClick() {

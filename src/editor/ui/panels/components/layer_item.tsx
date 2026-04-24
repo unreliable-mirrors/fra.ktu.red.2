@@ -94,7 +94,10 @@ class LayerItem extends KTUComponent {
               <div>
                 <span>{category}</span>
                 {CATEGORIZED_SHADERS[category].map((shaderType) => (
-                  <AddShaderButtonComponent shaderType={shaderType} />
+                  <AddShaderButtonComponent
+                    shaderType={shaderType}
+                    destinationLayerId={state.id}
+                  />
                 ))}
               </div>
             ))}
@@ -115,7 +118,6 @@ class LayerItem extends KTUComponent {
   }
 
   handleClick() {
-    console.log("click");
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
     executeCommand(new ActivateLayerCommand(state.id));
   }
