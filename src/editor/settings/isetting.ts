@@ -1,6 +1,7 @@
 import { BACKGROUND_LAYER_SETTINGS } from "./layers/background_layer_settings";
 import { VIDEO_LAYER_SETTINGS } from "./layers/video_layer_settings";
 import { LFO_SETTINGS } from "./modulators/lfo_settings";
+import { RANDOM_SETTINGS } from "./modulators/random_settings";
 import { PIXELATE_SHADER_SETTINGS } from "./shaders/pixelate_shader_settings";
 
 export interface ISetting {
@@ -26,4 +27,5 @@ export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
 
 export const MODULATOR_SETTINGS: { [key: string]: ISetting[] } = {
   lfo: LFO_SETTINGS,
+  random: RANDOM_SETTINGS,
 };

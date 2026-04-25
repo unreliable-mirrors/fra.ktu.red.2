@@ -24,7 +24,14 @@ export class SetModulatorFieldCommand implements ICommand {
     if (modulator) {
       this.oldValue = (modulator as any)[this.field];
       (modulator as any)[this.field] = this.value;
-      DataStore.getInstance().touch(`editorScene.modulators.!${this.id}`);
+      EventDispatcher.getInstance().dispatchEvent(
+        "editorScene.modulators.!" + this.id,
+        "change",
+        {
+          field: this.field,
+          value: this.value,
+        },
+      );
     }
   }
   revert(): void {
@@ -34,7 +41,14 @@ export class SetModulatorFieldCommand implements ICommand {
     const modulator = modulators.find((modulator) => modulator.id === this.id);
     if (modulator) {
       (modulator as any)[this.field] = this.oldValue;
-      DataStore.getInstance().touch(`editorScene.modulators.!${this.id}`);
+      EventDispatcher.getInstance().dispatchEvent(
+        "editorScene.modulators.!" + this.id,
+        "change",
+        {
+          field: this.field,
+          value: this.oldValue,
+        },
+      );
     }
   }
 }

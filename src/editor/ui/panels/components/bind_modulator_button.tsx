@@ -22,7 +22,7 @@ class BindModulatorButton extends KTUComponent {
   }
 
   render(): Element {
-    return (
+    return this.setting.signalizable ? (
       <select
         onchange={(e) => {
           this.selectSignal(e);
@@ -42,6 +42,8 @@ class BindModulatorButton extends KTUComponent {
           );
         })}
       </select>
+    ) : (
+      <> </>
     );
   }
 

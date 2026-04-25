@@ -1,4 +1,9 @@
-import { DataStore, LfoModulator, ModulatorState } from "fra.ktu.red-component";
+import {
+  DataStore,
+  LfoModulator,
+  ModulatorState,
+  RandomModulator,
+} from "fra.ktu.red-component";
 import { ICommand } from "../icommand";
 import { SceneState } from "fra.ktu.red-component";
 
@@ -14,6 +19,9 @@ export class AddModulatorCommand implements ICommand {
     switch (this.modulatorType) {
       case "lfo":
         modulatorState = LfoModulator.getDefaultState("editorScene");
+        break;
+      case "random":
+        modulatorState = RandomModulator.getDefaultState("editorScene");
         break;
       default:
         modulatorState = LfoModulator.getDefaultState("editorScene");

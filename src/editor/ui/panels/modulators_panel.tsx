@@ -18,7 +18,7 @@ class ModulatorsPanel extends KTUComponent {
               AddModulatorButtonComponent(layerType),
             )}
           </div>
-          <div className="shadersList">
+          <div className="modulatorsList">
             {[...this.bindingData["instances.editorScene.modulators"]]
               .reverse()
               .map((modulator: any) => (
