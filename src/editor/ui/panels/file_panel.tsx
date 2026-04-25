@@ -3,6 +3,7 @@ import { KTUComponent } from "fra.ktu.red-component";
 import { NewStateButtonComponent } from "./components/new_state_button";
 import { SaveStateButtonComponent } from "./components/save_state_button";
 import { ExportFrameButtonComponent } from "./components/export_frame_button";
+import { ExportSequenceButtonComponent } from "./components/export_sequence_button";
 
 class FilePanel extends KTUComponent {
   constructor() {
@@ -18,6 +19,7 @@ class FilePanel extends KTUComponent {
           <SaveStateButtonComponent />
           <span class="separator"></span>
           <ExportFrameButtonComponent />
+          <ExportSequenceButtonComponent />
         </div>
       </div>
     );

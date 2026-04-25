@@ -1,6 +1,6 @@
 import jsx from "texsaur";
 import { AVAILABLE_MODULATORS, KTUComponent } from "fra.ktu.red-component";
-import { AddModulatorButtonComponent } from "./components/add_modulator_button";
+import { AddModulatorButtonComponent } from "./components/modulators/add_modulator_button";
 import { ModulatorItemComponent } from "./components/modulator_item";
 
 class ModulatorsPanel extends KTUComponent {
