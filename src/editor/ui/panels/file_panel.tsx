@@ -2,6 +2,7 @@ import jsx from "texsaur";
 import { KTUComponent } from "fra.ktu.red-component";
 import { NewStateButtonComponent } from "./components/new_state_button";
 import { SaveStateButtonComponent } from "./components/save_state_button";
+import { ExportFrameButtonComponent } from "./components/export_frame_button";
 
 class FilePanel extends KTUComponent {
   constructor() {
@@ -15,6 +16,8 @@ class FilePanel extends KTUComponent {
         <div>
           <NewStateButtonComponent />
           <SaveStateButtonComponent />
+          <span class="separator"></span>
+          <ExportFrameButtonComponent />
         </div>
       </div>
     );

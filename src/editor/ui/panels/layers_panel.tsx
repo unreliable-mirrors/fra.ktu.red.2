@@ -1,7 +1,7 @@
 import jsx from "texsaur";
 import { AVAILABLE_LAYERS, KTUComponent } from "fra.ktu.red-component";
-import { AddLayerButtonComponent } from "./components/add_layer_button";
-import { LayerItemComponent } from "./components/layer_item";
+import { AddLayerButtonComponent } from "./components/layers/add_layer_button";
+import { LayerItemComponent } from "./components/layers/layer_item";
 
 class LayersPanel extends KTUComponent {
   constructor(props: { binding?: string }) {

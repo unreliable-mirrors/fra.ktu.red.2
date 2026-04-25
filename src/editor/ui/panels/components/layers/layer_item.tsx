@@ -13,18 +13,18 @@ import {
   IconHidden,
   IconUp,
   IconVisible,
-} from "../../../../ktu/helpers/icons";
-import { RemoveLayerCommand } from "../../../commands/layers/remove_layer_command";
-import { executeCommand } from "../../../../ktu/helpers/commands_manager";
-import { DuplicateLayerCommand } from "../../../commands/layers/duplicate_layer_command";
-import { ToggleLayerCommand } from "../../../commands/layers/toggle_layer_command";
-import { MoveLayerDownCommand } from "../../../commands/layers/move_layer_down_command";
-import { MoveLayerUpCommand } from "../../../commands/layers/move_layer_up_command";
-import { ActivateLayerCommand } from "../../../commands/layers/activate_layer_command";
-import { LAYER_SETTINGS } from "../../../settings/isetting";
-import { resolveInputType } from "../../input_resolver";
-import { AddShaderButtonComponent } from "./add_shader_button";
-import { ShaderItemComponent } from "./shader_item";
+} from "../../../../../ktu/helpers/icons";
+import { RemoveLayerCommand } from "../../../../commands/layers/remove_layer_command";
+import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
+import { DuplicateLayerCommand } from "../../../../commands/layers/duplicate_layer_command";
+import { ToggleLayerCommand } from "../../../../commands/layers/toggle_layer_command";
+import { MoveLayerDownCommand } from "../../../../commands/layers/move_layer_down_command";
+import { MoveLayerUpCommand } from "../../../../commands/layers/move_layer_up_command";
+import { ActivateLayerCommand } from "../../../../commands/layers/activate_layer_command";
+import { LAYER_SETTINGS } from "../../../../settings/isetting";
+import { resolveInputType } from "../../../input_resolver";
+import { AddShaderButtonComponent } from "../add_shader_button";
+import { ShaderItemComponent } from "../shader_item";
 
 class LayerItem extends KTUComponent {
   constructor(props: { binding?: string }) {
