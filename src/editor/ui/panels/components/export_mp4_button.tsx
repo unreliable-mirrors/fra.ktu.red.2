@@ -3,7 +3,7 @@ import { KTUComponent } from "fra.ktu.red-component";
 import { executeCommand } from "../../../../ktu/helpers/commands_manager";
 import { ExportSequenceCommand } from "../../../commands/export_sequence_command";
 
-class ExportSequenceButton extends KTUComponent {
+class ExportMp4Button extends KTUComponent {
   constructor() {
     super();
   }
@@ -11,18 +11,18 @@ class ExportSequenceButton extends KTUComponent {
   render(): Element {
     return (
       <div>
-        <button onclick={() => this.handleClick()}>Export Sequence</button>
+        <button onclick={() => this.handleClick()}>Export Video</button>
       </div>
     );
   }
 
   handleClick() {
-    executeCommand(new ExportSequenceCommand("zip"));
+    executeCommand(new ExportSequenceCommand("mp4"));
   }
 }
 
-export function ExportSequenceButtonComponent(): Element {
-  return new ExportSequenceButton();
+export function ExportMp4ButtonComponent(): Element {
+  return new ExportMp4Button();
 }
 
-customElements.define("export-sequence-button", ExportSequenceButton);
+customElements.define("export-mp4-button", ExportMp4Button);
