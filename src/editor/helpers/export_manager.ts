@@ -47,6 +47,12 @@ const waitForAnimationFrame = (): Promise<void> => {
   });
 };
 
+const waitForMs = (ms: number): Promise<void> => {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+};
+
 const waitForElapsedTimeLoop = (): Promise<void> => {
   return new Promise((resolve) => {
     let sawProgress = false;
@@ -285,6 +291,7 @@ const runExport = async (
           console.log(
             `[export] ${sceneStateId} zip frame ${frameIndex + 1}/${totalFrames} finished`,
           );
+          await waitForMs(500);
         }
         await saveFramesZip(sceneStateId, frames);
       }
