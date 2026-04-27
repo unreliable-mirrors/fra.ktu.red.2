@@ -1,4 +1,8 @@
-import { DataStore, type SceneState } from "fra.ktu.red-component";
+import {
+  DataStore,
+  EventDispatcher,
+  type SceneState,
+} from "fra.ktu.red-component";
 import JSZip from "jszip";
 
 type ExportFormat = "zip" | "mp4";
@@ -43,9 +47,30 @@ const waitForAnimationFrame = (): Promise<void> => {
   });
 };
 
-const waitForMs = (ms: number): Promise<void> => {
+const waitForElapsedTimeLoop = (): Promise<void> => {
   return new Promise((resolve) => {
-    window.setTimeout(resolve, ms);
+    let sawProgress = false;
+    let previousElapsedTime =
+      (DataStore.getInstance().getStore("elapsedTime") as number | null) ?? 0;
+
+    const observe = () => {
+      const elapsedTime =
+        (DataStore.getInstance().getStore("elapsedTime") as number | null) ?? 0;
+
+      if (elapsedTime > 0) {
+        sawProgress = true;
+      }
+
+      if (sawProgress && elapsedTime < previousElapsedTime) {
+        resolve();
+        return;
+      }
+
+      previousElapsedTime = elapsedTime;
+      requestAnimationFrame(observe);
+    };
+
+    requestAnimationFrame(observe);
   });
 };
 
@@ -162,7 +187,6 @@ const saveVideo = async (
     throw new Error("Canvas stream capture is not supported in this browser.");
   }
 
-  const totalFrames = Math.max(1, Math.round(state.duration * FRAME_RATE));
   const stream = canvas.captureStream(FRAME_RATE);
   const { mimeType, extension } = resolveVideoMimeType();
   const chunks: Blob[] = [];
@@ -180,13 +204,18 @@ const saveVideo = async (
       reject((event as ErrorEvent).error ?? new Error("MediaRecorder error"));
   });
 
+  EventDispatcher.getInstance().dispatchEvent(
+    "actions.editorScene",
+    "resetTime",
+    0,
+  );
+  DataStore.getInstance().setStore("playing", true);
+
   recorder.start();
 
   try {
-    for (let frameIndex = 0; frameIndex < totalFrames; frameIndex++) {
-      await updateExportFrame(sceneStateId, application, frameIndex);
-      await waitForMs(1000 / FRAME_RATE);
-    }
+    await waitForElapsedTimeLoop();
+    console.log(`[export] ${sceneStateId} video loop finished`);
   } finally {
     recorder.stop();
     stream.getTracks().forEach((track) => track.stop());
@@ -219,7 +248,9 @@ const runExport = async (
       (DataStore.getInstance().getStore("elapsedTime") as number | null) ?? 0;
     const totalFrames = Math.max(1, Math.round(state.duration * FRAME_RATE));
 
-    DataStore.getInstance().setStore("playing", false);
+    if (format !== "mp4") {
+      DataStore.getInstance().setStore("playing", false);
+    }
     DataStore.getInstance().setStore(
       `instances.${sceneStateId}.exporting`,
       true,
@@ -250,6 +281,9 @@ const runExport = async (
               application,
               `frame_${(frameIndex + 1).toString().padStart(4, "0")}.png`,
             ),
+          );
+          console.log(
+            `[export] ${sceneStateId} zip frame ${frameIndex + 1}/${totalFrames} finished`,
           );
         }
         await saveFramesZip(sceneStateId, frames);
@@ -295,6 +329,7 @@ export const exportFrame = async (sceneStateId: string): Promise<void> => {
       `${state.name}.png`,
     );
     downloadUrl(frame.filename, frame.content);
+    console.log(`[export] ${sceneStateId} single frame finished`);
   } finally {
     DataStore.getInstance().setStore(
       `instances.${sceneStateId}.exportNext`,
