@@ -1,4 +1,4 @@
-import { DataStore } from "fra.ktu.red-component";
+import { exportSequence } from "../helpers/export_manager";
 import { ICommand } from "./icommand";
 
 export class ExportSequenceCommand implements ICommand {
@@ -7,13 +7,9 @@ export class ExportSequenceCommand implements ICommand {
     this.format = format;
   }
   execute(): void {
-    DataStore.getInstance().setStore("playing", false);
-    DataStore.getInstance().setStore("instances.editorScene.exporting", true);
-    DataStore.getInstance().setStore("instances.editorScene.exportNext", true);
-    DataStore.getInstance().setStore(
-      "instances.editorScene.exportFormat",
-      this.format,
-    );
+    if (this.format === "zip" || this.format === "mp4") {
+      void exportSequence("editorScene", this.format);
+    }
   }
   revert(): void {}
 }

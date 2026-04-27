@@ -8,7 +8,7 @@ export class NewStateCommand implements ICommand {
   execute(): void {
     const state: SceneState = {
       name: getStartingName(),
-      width: 603,
+      width: 604,
       height: 1072,
       duration: 5,
       layers: [],

@@ -1,10 +1,10 @@
-import { saveBase64Frame } from "fra.ktu.red-component";
+import { exportFrame } from "../helpers/export_manager";
 import { ICommand } from "./icommand";
 
 export class ExportFrameCommand implements ICommand {
   constructor() {}
   execute(): void {
-    saveBase64Frame("editorScene");
+    void exportFrame("editorScene");
   }
   revert(): void {}
 }
