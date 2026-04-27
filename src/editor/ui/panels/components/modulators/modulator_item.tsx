@@ -5,17 +5,17 @@ import {
   IconDuplicate,
   IconPause,
   IconPlay,
-} from "../../../../ktu/helpers/icons";
-import { RemoveLayerCommand } from "../../../commands/layers/remove_layer_command";
-import { executeCommand } from "../../../../ktu/helpers/commands_manager";
-import { DuplicateLayerCommand } from "../../../commands/layers/duplicate_layer_command";
-import { ToggleLayerCommand } from "../../../commands/layers/toggle_layer_command";
-import { MODULATOR_SETTINGS } from "../../../settings/isetting";
-import { resolveInputType } from "../../input_resolver";
+} from "../../../../../ktu/helpers/icons";
+import { RemoveLayerCommand } from "../../../../commands/layers/remove_layer_command";
+import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
+import { DuplicateLayerCommand } from "../../../../commands/layers/duplicate_layer_command";
+import { ToggleLayerCommand } from "../../../../commands/layers/toggle_layer_command";
+import { MODULATOR_SETTINGS } from "../../../../settings/isetting";
+import { resolveInputType } from "../../../input_resolver";
 import { ModulatorState } from "fra.ktu.red-component";
 import { LineChart } from "chartist";
 import { IModulator } from "fra.ktu.red-component/dist/modulators/imodulator";
-import { ActivateModulatorCommand } from "../../../commands/modulators/activate_modulator_command";
+import { ActivateModulatorCommand } from "../../../../commands/modulators/activate_modulator_command";
 
 class ModulatorItem extends KTUComponent {
   valueRenderer?: Element;

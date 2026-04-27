@@ -1,7 +1,7 @@
 import jsx from "texsaur";
 import { KTUComponent } from "fra.ktu.red-component";
-import { executeCommand } from "../../../../ktu/helpers/commands_manager";
-import { ExportSequenceCommand } from "../../../commands/export_sequence_command";
+import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
+import { ExportSequenceCommand } from "../../../../commands/export_sequence_command";
 
 class ExportMp4Button extends KTUComponent {
   constructor() {

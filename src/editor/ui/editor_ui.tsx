@@ -6,6 +6,7 @@ import { FilePanelComponent } from "./panels/file_panel";
 import { FileInfoPanelComponent } from "./panels/file_info_panel";
 import { SignalsPanelComponent } from "./panels/signals_panel";
 import { ModulatorsPanelComponent } from "./panels/modulators_panel";
+import { ExportOverlayComponent } from "./panels/components/export/export_overlay";
 
 class EditorUI extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -25,6 +26,7 @@ class EditorUI extends KTUComponent {
           <ShadersPanelComponent binding="editorScene.shaders" />
           <ModulatorsPanelComponent binding="instances.editorScene.modulators" />
         </div>
+        <ExportOverlayComponent binding="instances.editorScene.exporting" />
       </div>
     );
   }

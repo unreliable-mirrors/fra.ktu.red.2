@@ -1,7 +1,7 @@
 import jsx from "texsaur";
 import { KTUComponent } from "fra.ktu.red-component";
-import { executeCommand } from "../../../../ktu/helpers/commands_manager";
-import { ExportFrameCommand } from "../../../commands/export_frame_command";
+import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
+import { ExportFrameCommand } from "../../../../commands/export_frame_command";
 
 class ExportFrameButton extends KTUComponent {
   constructor() {

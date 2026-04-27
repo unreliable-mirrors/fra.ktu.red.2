@@ -2,9 +2,9 @@ import jsx from "texsaur";
 import { KTUComponent } from "fra.ktu.red-component";
 import { NewStateButtonComponent } from "./components/new_state_button";
 import { SaveStateButtonComponent } from "./components/save_state_button";
-import { ExportFrameButtonComponent } from "./components/export_frame_button";
-import { ExportSequenceButtonComponent } from "./components/export_sequence_button";
-import { ExportMp4ButtonComponent } from "./components/export_mp4_button";
+import { ExportFrameButtonComponent } from "./components/export/export_frame_button";
+import { ExportSequenceButtonComponent } from "./components/export/export_sequence_button";
+import { ExportMp4ButtonComponent } from "./components/export/export_mp4_button";
 
 class FilePanel extends KTUComponent {
   constructor() {

@@ -145,6 +145,64 @@ button {
   max-width: 340px;
 }
 
+.export-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #000000cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+}
+
+.export-overlay-content {
+  background-color: #111111ee;
+  border: 2px solid #66ff66;
+  border-radius: 10px;
+  padding: 16px 24px;
+  font-family: "Orbitron", serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 0 30px #66ff6655;
+}
+
+.export-overlay-title {
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.export-overlay-subtitle {
+  text-align: center;
+  font-family: "Montserrat", serif;
+  font-size: 12px;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.export-progress-track {
+  width: 260px;
+  height: 10px;
+  border: 1px solid #66ff66;
+  border-radius: 999px;
+  background-color: #0b1c0bcc;
+  overflow: hidden;
+}
+
+.export-progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #2be52b, #66ff66);
+  transition: width 0.2s ease;
+}
+
+.export-overlay-percent {
+  margin-top: 6px;
+  text-align: center;
+  font-size: 12px;
+}
+
 .panel {
   background-color: #111111cc;
   margin-top: 10px;

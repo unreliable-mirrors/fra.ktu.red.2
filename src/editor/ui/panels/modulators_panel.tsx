@@ -1,7 +1,7 @@
 import jsx from "texsaur";
 import { AVAILABLE_MODULATORS, KTUComponent } from "fra.ktu.red-component";
 import { AddModulatorButtonComponent } from "./components/modulators/add_modulator_button";
-import { ModulatorItemComponent } from "./components/modulator_item";
+import { ModulatorItemComponent } from "./components/modulators/modulator_item";
 
 class ModulatorsPanel extends KTUComponent {
   constructor(props: { binding?: string }) {
