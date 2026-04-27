@@ -201,6 +201,9 @@ const saveVideo = async (
   recorder.ondataavailable = (event) => {
     if (event.data.size > 0) {
       chunks.push(event.data);
+      console.log(
+        `[export] ${sceneStateId} captured video chunk, size: ${event.data.size} bytes`,
+      );
     }
   };
 
@@ -210,14 +213,17 @@ const saveVideo = async (
       reject((event as ErrorEvent).error ?? new Error("MediaRecorder error"));
   });
 
+  DataStore.getInstance().setStore("playing", false);
   EventDispatcher.getInstance().dispatchEvent(
     "actions.editorScene",
     "resetTime",
     0,
   );
-  DataStore.getInstance().setStore("playing", true);
+
+  await waitForMs(100);
 
   recorder.start();
+  DataStore.getInstance().setStore("playing", true);
 
   try {
     await waitForElapsedTimeLoop();
