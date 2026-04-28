@@ -4,6 +4,7 @@ import { ICommand } from "../icommand";
 export class ActivateLayerCommand implements ICommand {
   id: number;
   oldId!: number;
+  undoable?: boolean | undefined = false;
   constructor(id: number) {
     this.id = id;
   }

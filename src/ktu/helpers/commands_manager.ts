@@ -40,7 +40,11 @@ export function undoCommand(untilCommand?: ICommand) {
     getRedoQueue().push(command!);
   }
   console.log("Undoing command:", command, "until:", untilCommand);
-  while (untilCommand && command !== untilCommand) {
+  while (
+    untilCommand &&
+    command !== untilCommand &&
+    getCommandsQueue().length > 0
+  ) {
     command = getCommandsQueue().pop();
     if (command) {
       command.revert();
@@ -54,12 +58,18 @@ export function undoCommand(untilCommand?: ICommand) {
 export function redoCommand(untilCommand?: ICommand) {
   let command = getRedoQueue().pop();
   if (command) {
+    console.log("Redoing command:", command, "until:", untilCommand);
     command.execute();
     getCommandsQueue().push(command!);
   }
-  while (untilCommand && command !== untilCommand) {
+  while (
+    untilCommand &&
+    command !== untilCommand &&
+    getRedoQueue().length > 0
+  ) {
     command = getRedoQueue().pop();
     if (command) {
+      console.log("Redoing command:", command, "until:", untilCommand);
       command.execute();
       getCommandsQueue().push(command!);
     }

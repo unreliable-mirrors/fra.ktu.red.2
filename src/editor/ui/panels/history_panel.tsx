@@ -17,6 +17,7 @@ class HistoryPanel extends KTUComponent {
     console.log(
       "Rendering HistoryPanel with commandsQueue:",
       this.bindingData["commandsQueue"],
+      this.bindingData["redoQueue"],
     );
     return (
       <div class="panel left">

@@ -5,6 +5,7 @@ export class ActivateShaderCommand implements ICommand {
   id: number;
   owner: string;
   oldId!: number;
+  undoable?: boolean | undefined = false;
   constructor(id: number, owner: string) {
     this.id = id;
     this.owner = owner;

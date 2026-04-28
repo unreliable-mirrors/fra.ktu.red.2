@@ -10,18 +10,24 @@ export class AddShaderCommand implements ICommand {
   id!: number;
   shaderType: string;
   destinationLayerId?: number;
+  createdShaderState?: ShaderLayerState;
   constructor(shaderType: string, destinationLayerId?: number) {
     this.shaderType = shaderType;
     this.destinationLayerId = destinationLayerId;
   }
   execute(): void {
     let shaderState: ShaderLayerState;
-    switch (this.shaderType) {
-      case "pixelate":
-        shaderState = PixelateShader.getDefaultState("editorScene");
-        break;
-      default:
-        shaderState = PixelateShader.getDefaultState("editorScene");
+    if (!this.createdShaderState) {
+      switch (this.shaderType) {
+        case "pixelate":
+          shaderState = PixelateShader.getDefaultState("editorScene");
+          break;
+        default:
+          shaderState = PixelateShader.getDefaultState("editorScene");
+      }
+      this.createdShaderState = shaderState;
+    } else {
+      shaderState = this.createdShaderState;
     }
 
     if (this.destinationLayerId !== undefined) {

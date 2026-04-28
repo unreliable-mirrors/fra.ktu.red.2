@@ -10,21 +10,27 @@ import { SceneState } from "fra.ktu.red-component";
 export class AddModulatorCommand implements ICommand {
   id!: number;
   modulatorType: string;
+  createdModulatorState?: ModulatorState;
   constructor(modulatorType: string) {
     this.modulatorType = modulatorType;
   }
   execute(): void {
     const scene: SceneState = DataStore.getInstance().getStore("editorScene");
     let modulatorState: ModulatorState;
-    switch (this.modulatorType) {
-      case "lfo":
-        modulatorState = LfoModulator.getDefaultState("editorScene");
-        break;
-      case "random":
-        modulatorState = RandomModulator.getDefaultState("editorScene");
-        break;
-      default:
-        modulatorState = LfoModulator.getDefaultState("editorScene");
+    if (!this.createdModulatorState) {
+      switch (this.modulatorType) {
+        case "lfo":
+          modulatorState = LfoModulator.getDefaultState("editorScene");
+          break;
+        case "random":
+          modulatorState = RandomModulator.getDefaultState("editorScene");
+          break;
+        default:
+          modulatorState = LfoModulator.getDefaultState("editorScene");
+      }
+      this.createdModulatorState = modulatorState;
+    } else {
+      modulatorState = this.createdModulatorState;
     }
 
     scene.modulators.push(modulatorState);

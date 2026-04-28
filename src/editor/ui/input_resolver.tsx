@@ -15,13 +15,17 @@ export const resolveInputType = (
         <input
           type="color"
           value={(state as any)[setting.field]}
-          onChange={(e: Event) =>
+          onchange={(e: Event) => {
+            console.log(
+              "Changing background color to:",
+              (e.target as HTMLInputElement).value,
+            );
             setting.onchange?.(
               state.id,
               (e.target as HTMLInputElement).value,
               owner,
-            )
-          }
+            );
+          }}
         />
       );
     case "file":

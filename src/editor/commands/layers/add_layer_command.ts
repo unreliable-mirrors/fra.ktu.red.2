@@ -11,6 +11,7 @@ export class AddLayerCommand implements ICommand {
   id!: number;
   oldId!: number;
   layerType: string;
+  createdLayerState?: DisplayLayerState;
 
   constructor(layerType: string) {
     this.layerType = layerType;
@@ -19,15 +20,21 @@ export class AddLayerCommand implements ICommand {
   execute(): void {
     const scene: SceneState = DataStore.getInstance().getStore("editorScene");
     let layerState: DisplayLayerState;
-    switch (this.layerType) {
-      case "background":
-        layerState = BackgroundLayer.getDefaultState("editorScene");
-        break;
-      case "video":
-        layerState = VideoLayer.getDefaultState("editorScene");
-        break;
-      default:
-        layerState = BackgroundLayer.getDefaultState("editorScene");
+
+    if (!this.createdLayerState) {
+      switch (this.layerType) {
+        case "background":
+          layerState = BackgroundLayer.getDefaultState("editorScene");
+          break;
+        case "video":
+          layerState = VideoLayer.getDefaultState("editorScene");
+          break;
+        default:
+          layerState = BackgroundLayer.getDefaultState("editorScene");
+      }
+      this.createdLayerState = layerState;
+    } else {
+      layerState = this.createdLayerState;
     }
 
     scene.layers.push(layerState);
