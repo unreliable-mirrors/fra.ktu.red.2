@@ -1,9 +1,10 @@
 import { DataStore, getStartingName } from "fra.ktu.red-component";
 import { ICommand } from "./icommand";
-import { clearCommands } from "../../ktu/helpers/commands_manager";
+import { clearCommands, clearRedo } from "../../ktu/helpers/commands_manager";
 import { SceneState } from "fra.ktu.red-component";
 
 export class NewStateCommand implements ICommand {
+  undoable?: boolean | undefined = false;
   constructor() {}
   execute(): void {
     const state: SceneState = {
@@ -18,6 +19,7 @@ export class NewStateCommand implements ICommand {
       counter: 0,
     };
     clearCommands();
+    clearRedo();
     DataStore.getInstance().setStore("editorScene", state);
   }
   revert(): void {}

@@ -2,7 +2,7 @@ import jsx from "texsaur";
 import { ISetting } from "../settings/isetting";
 import { LayerState } from "fra.ktu.red-component";
 import { BindModulatorButtonComponent } from "./panels/components/modulators/bind_modulator_button";
-import { SignalHintComponent } from "./panels/components/signal_hint";
+import { SignalHintComponent } from "./panels/components/modulators/signal_hint";
 
 export const resolveInputType = (
   state: LayerState,

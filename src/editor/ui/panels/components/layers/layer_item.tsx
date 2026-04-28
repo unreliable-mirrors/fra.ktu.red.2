@@ -24,7 +24,7 @@ import { ActivateLayerCommand } from "../../../../commands/layers/activate_layer
 import { LAYER_SETTINGS } from "../../../../settings/isetting";
 import { resolveInputType } from "../../../input_resolver";
 import { AddShaderButtonComponent } from "../shaders/add_shader_button";
-import { ShaderItemComponent } from "../shader_item";
+import { ShaderItemComponent } from "../shaders/shader_item";
 
 class LayerItem extends KTUComponent {
   constructor(props: { binding?: string }) {

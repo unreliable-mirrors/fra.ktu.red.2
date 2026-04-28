@@ -1,7 +1,7 @@
 import jsx from "texsaur";
 import { CATEGORIZED_SHADERS, KTUComponent } from "fra.ktu.red-component";
 import { AddShaderButtonComponent } from "./components/shaders/add_shader_button";
-import { ShaderItemComponent } from "./components/shader_item";
+import { ShaderItemComponent } from "./components/shaders/shader_item";
 
 class ShadersPanel extends KTUComponent {
   constructor(props: { binding?: string }) {

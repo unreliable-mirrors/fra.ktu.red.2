@@ -92,6 +92,10 @@ select {
 .hidden {
   display: none !important;
 }
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
 .separator {
   padding-bottom: 10px;
   display: block;
@@ -263,5 +267,11 @@ button {
   min-height: 154px;
 }
 .selected {
+  color: #ff66ff;
+}
+.history-item.undo {
+  color: #66ff66;
+}
+.history-item.redo {
   color: #ff66ff;
 }
