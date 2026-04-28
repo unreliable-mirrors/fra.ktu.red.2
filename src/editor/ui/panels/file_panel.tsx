@@ -5,6 +5,7 @@ import { SaveStateButtonComponent } from "./components/save_state_button";
 import { ExportFrameButtonComponent } from "./components/export/export_frame_button";
 import { ExportSequenceButtonComponent } from "./components/export/export_sequence_button";
 import { ExportMp4ButtonComponent } from "./components/export/export_mp4_button";
+import { ExportGifButtonComponent } from "./components/export/export_gif_button";
 
 class FilePanel extends KTUComponent {
   constructor() {
@@ -22,6 +23,7 @@ class FilePanel extends KTUComponent {
           <ExportFrameButtonComponent />
           <ExportSequenceButtonComponent />
           <ExportMp4ButtonComponent />
+          <ExportGifButtonComponent />
         </div>
       </div>
     );

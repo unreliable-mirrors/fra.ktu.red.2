@@ -12,6 +12,7 @@ class ExportProgressBar extends KTUComponent {
     const format = this.bindingData["instances.editorScene.exportFormat"] as
       | "zip"
       | "mp4"
+      | "gif"
       | undefined;
     const currentExportFrame =
       (this.bindingData[

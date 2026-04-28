@@ -7,7 +7,11 @@ export class ExportSequenceCommand implements ICommand {
     this.format = format;
   }
   execute(): void {
-    if (this.format === "zip" || this.format === "mp4") {
+    if (
+      this.format === "zip" ||
+      this.format === "mp4" ||
+      this.format === "gif"
+    ) {
       void exportSequence("editorScene", this.format);
     }
   }

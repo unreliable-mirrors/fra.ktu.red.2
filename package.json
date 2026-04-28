@@ -12,8 +12,10 @@
   "dependencies": {
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-opener": "^2",
+    "@types/gif.js": "^0.2.5",
     "chartist": "^1.5.0",
     "fra.ktu.red-component": "file:../fra.ktu.red-component",
+    "gif.js": "^0.2.0",
     "jszip": "^3.10.1"
   },
   "devDependencies": {

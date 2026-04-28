@@ -4,8 +4,14 @@ import {
   type SceneState,
 } from "fra.ktu.red-component";
 import JSZip from "jszip";
+import GIF from "gif.js";
 
-type ExportFormat = "zip" | "mp4";
+const gifWorkerUrl = new URL(
+  "../../assets/gif.worker.js",
+  import.meta.url,
+).toString();
+
+type ExportFormat = "zip" | "mp4" | "gif";
 
 type ExportedFrame = {
   filename: string;
@@ -244,6 +250,48 @@ const saveVideo = async (
   }
 };
 
+const saveGif = async (
+  sceneStateId: string,
+  application: PixiApp,
+  totalFrames: number,
+): Promise<void> => {
+  const { state } = getSceneExportContext(sceneStateId);
+  const canvas = application.canvas as HTMLCanvasElement;
+
+  const gif = new GIF({
+    workers: 2,
+    quality: 10,
+    width: state.width,
+    height: state.height,
+    workerScript: gifWorkerUrl,
+  });
+
+  for (let frameIndex = 0; frameIndex < totalFrames; frameIndex++) {
+    await updateExportFrame(sceneStateId, application, frameIndex);
+    gif.addFrame(canvas, {
+      copy: true,
+      delay: 1000 / FRAME_RATE,
+    });
+    console.log(
+      `[export] ${sceneStateId} gif frame ${frameIndex + 1}/${totalFrames} finished`,
+    );
+    await waitForMs(500);
+  }
+
+  const gifBlob = await new Promise<Blob>((resolve, reject) => {
+    gif.on("finished", (blob: Blob) => resolve(blob));
+    gif.on("abort", () => reject(new Error("GIF rendering was aborted")));
+    gif.render();
+  });
+
+  const url = URL.createObjectURL(gifBlob);
+  try {
+    downloadUrl(`${state.name}.gif`, url);
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+};
+
 const runExport = async (
   sceneStateId: string,
   format: ExportFormat,
@@ -283,6 +331,8 @@ const runExport = async (
     try {
       if (format === "mp4") {
         await saveVideo(sceneStateId, application);
+      } else if (format === "gif") {
+        await saveGif(sceneStateId, application, totalFrames);
       } else {
         const frames: ExportedFrame[] = [];
         for (let frameIndex = 0; frameIndex < totalFrames; frameIndex++) {
