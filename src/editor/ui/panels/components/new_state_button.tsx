@@ -12,11 +12,45 @@ class NewStateButton extends KTUComponent {
     return (
       <div>
         <button onclick={() => this.handleClick()}>New File</button>
+
+        <div class="confirm-modal-overlay hidden">
+          <div
+            class="confirm-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="new-file-modal-title"
+          >
+            <h3 id="new-file-modal-title">Create New File</h3>
+            <p>
+              Starting a new file will discard any unsaved changes in the
+              current scene.
+            </p>
+            <div class="confirm-modal-actions">
+              <button onclick={() => this.hideConfirmModal()}>Cancel</button>
+              <button onclick={() => this.confirmCreateNewFile()}>
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 
   handleClick() {
+    this.showConfirmModal();
+  }
+
+  showConfirmModal() {
+    this.querySelector(".confirm-modal-overlay")?.classList.remove("hidden");
+  }
+
+  hideConfirmModal() {
+    this.querySelector(".confirm-modal-overlay")?.classList.add("hidden");
+  }
+
+  confirmCreateNewFile() {
+    this.hideConfirmModal();
     executeCommand(new NewStateCommand());
   }
 }

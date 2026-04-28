@@ -29,9 +29,32 @@ class OpenStateButton extends KTUComponent {
               />
             </fieldset>
           </form>
-          <label for="fileOpenInput" className="button">
+          <button
+            className="button"
+            type="button"
+            onclick={() => this.handleClick()}
+          >
             Open File
-          </label>
+          </button>
+
+          <div class="confirm-modal-overlay hidden">
+            <div
+              class="confirm-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="open-file-modal-title"
+            >
+              <h3 id="open-file-modal-title">Open File</h3>
+              <p>
+                Opening a file will discard any unsaved changes in the current
+                scene.
+              </p>
+              <div class="confirm-modal-actions">
+                <button onclick={() => this.hideConfirmModal()}>Cancel</button>
+                <button onclick={() => this.confirmOpenFile()}>Continue</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -60,7 +83,20 @@ class OpenStateButton extends KTUComponent {
   }
 
   handleClick() {
-    document.getElementById("btnLoad")?.click();
+    this.showConfirmModal();
+  }
+
+  showConfirmModal() {
+    this.querySelector(".confirm-modal-overlay")?.classList.remove("hidden");
+  }
+
+  hideConfirmModal() {
+    this.querySelector(".confirm-modal-overlay")?.classList.add("hidden");
+  }
+
+  confirmOpenFile() {
+    this.hideConfirmModal();
+    document.getElementById("fileOpenInput")?.click();
   }
 }
 
