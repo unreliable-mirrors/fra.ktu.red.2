@@ -207,6 +207,154 @@ button {
   font-size: 12px;
 }
 
+/* ── Keyboard Shortcuts Overlay ───────────────────────────── */
+
+.shortcuts-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shortcuts-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, #0a1f0a99 0%, #000000cc 70%);
+  cursor: pointer;
+}
+
+.shortcuts-modal {
+  position: relative;
+  width: min(94vw, 520px);
+  background-color: #080e08;
+  border: 2px solid #66ff66;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 1px #1a331a inset,
+    0 0 40px #2fe12f55,
+    0 0 80px #0d1f0d;
+  overflow: hidden;
+}
+
+.shortcuts-modal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 50%,
+    #66ff660a 50%,
+    #66ff660a 100%
+  );
+  background-size: 100% 4px;
+  opacity: 0.5;
+}
+
+.shortcuts-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid #66ff6633;
+}
+
+.shortcuts-modal-header h3 {
+  margin: 0;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px #66ff6688;
+}
+
+.shortcuts-close-btn {
+  background: transparent;
+  border: 1px solid #66ff6644;
+  color: #66ff66;
+  border-radius: 6px;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.shortcuts-close-btn:hover {
+  background: #66ff6622;
+  border-color: #66ff66;
+}
+
+.shortcuts-modal-body {
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: background 0.1s;
+}
+
+.shortcut-row:hover {
+  background: #66ff6611;
+}
+
+.shortcut-description {
+  font-family: "Montserrat", serif;
+  font-size: 13px;
+  color: #aaeeaa;
+}
+
+.shortcut-chord {
+  font-family: "Orbitron", serif;
+  font-size: 11px;
+  color: #66ff66;
+  background: #0f280f;
+  border: 1px solid #66ff6666;
+  border-radius: 6px;
+  padding: 3px 8px;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 8px #66ff6622;
+}
+
+.shortcuts-modal-footer {
+  padding: 10px 16px 14px;
+  border-top: 1px solid #66ff6633;
+  font-size: 11px;
+  color: #66ff6688;
+  text-align: center;
+  font-family: "Montserrat", serif;
+}
+
+.shortcuts-modal-footer kbd {
+  font-family: "Orbitron", serif;
+  font-size: 10px;
+  color: #66ff66;
+  background: #0f280f;
+  border: 1px solid #66ff6644;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+/* ── Confirmation Modal ────────────────────────────────────── */
+
 .confirm-modal-overlay {
   position: fixed;
   inset: 0;
