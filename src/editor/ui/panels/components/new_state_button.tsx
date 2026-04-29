@@ -2,10 +2,17 @@ import jsx from "texsaur";
 import { KTUComponent } from "fra.ktu.red-component";
 import { executeCommand } from "../../../../ktu/helpers/commands_manager";
 import { NewStateCommand } from "../../../commands/new_state_command";
+import { keyboardShortcuts } from "../../../../ktu/helpers/keyboard_shortcuts";
 
 class NewStateButton extends KTUComponent {
   constructor() {
     super();
+    keyboardShortcuts.register({
+      key: "n",
+      ctrl: true,
+      action: () => this.showConfirmModal(),
+      description: "New File",
+    });
   }
 
   render(): Element {
