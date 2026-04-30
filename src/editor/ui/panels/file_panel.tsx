@@ -26,6 +26,11 @@ class FilePanel extends KTUComponent {
           <ExportSequenceButtonComponent />
           <ExportMp4ButtonComponent />
           <ExportGifButtonComponent />
+          <span class="separator"></span>
+
+          <div class="shortcuts-hint">
+            Shortcuts: <kbd>Shift + ?</kbd>
+          </div>
         </div>
       </div>
     );

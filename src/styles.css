@@ -100,6 +100,25 @@ select {
   padding-bottom: 10px;
   display: block;
 }
+
+.shortcuts-hint {
+  margin-top: -6px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  color: #66ff6699;
+  letter-spacing: 0.03em;
+}
+
+.shortcuts-hint kbd {
+  font-family: "Orbitron", serif;
+  font-size: 10px;
+  color: #66ff66;
+  background: #0f280f;
+  border: 1px solid #66ff6644;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
 .button,
 button {
   color: #66ff66;

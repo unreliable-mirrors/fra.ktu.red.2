@@ -8,9 +8,12 @@ export interface ShortcutEntry {
   description?: string;
 }
 
+const isMacOS = () => /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+
 class KeyboardShortcutsManager {
   private static _instance: KeyboardShortcutsManager;
   private shortcuts: ShortcutEntry[] = [];
+  private isMac = isMacOS();
 
   private constructor() {
     window.addEventListener("keydown", (e) => this.handle(e));
@@ -27,8 +30,15 @@ class KeyboardShortcutsManager {
     this.shortcuts.push(shortcut);
   }
 
-  unregister(action: ShortcutEntry["action"]): void {
-    this.shortcuts = this.shortcuts.filter((s) => s.action !== action);
+  unregister({ key, ctrl, shift, alt }: Partial<ShortcutEntry>): void {
+    this.shortcuts = this.shortcuts.filter((s) => {
+      return !(
+        s.key === key &&
+        s.ctrl === ctrl &&
+        s.shift === shift &&
+        s.alt === alt
+      );
+    });
   }
 
   getAll(): Readonly<ShortcutEntry[]> {
@@ -46,10 +56,22 @@ class KeyboardShortcutsManager {
       return;
     }
 
+    console.log(
+      "Key pressed:",
+      e.key,
+      "Ctrl:",
+      e.ctrlKey,
+      "Shift:",
+      e.shiftKey,
+      "Alt:",
+      e.altKey,
+    );
+
     for (const s of this.shortcuts) {
+      const ctrlPressed = this.isMac ? e.metaKey : e.ctrlKey;
       if (
         e.key.toLowerCase() === s.key.toLowerCase() &&
-        !!e.ctrlKey === !!s.ctrl &&
+        !!ctrlPressed === !!s.ctrl &&
         !!e.shiftKey === !!s.shift &&
         !!e.altKey === !!s.alt
       ) {
@@ -62,3 +84,4 @@ class KeyboardShortcutsManager {
 }
 
 export const keyboardShortcuts = KeyboardShortcutsManager.getInstance();
+export { isMacOS };

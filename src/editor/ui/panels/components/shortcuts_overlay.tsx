@@ -3,14 +3,18 @@ import { KTUComponent } from "fra.ktu.red-component";
 import {
   keyboardShortcuts,
   ShortcutEntry,
+  isMacOS,
 } from "../../../../ktu/helpers/keyboard_shortcuts";
 
 function formatChord(s: ShortcutEntry): string {
   const parts: string[] = [];
-  if (s.ctrl) parts.push("Ctrl");
-  if (s.alt) parts.push("Alt");
+  if (s.ctrl) parts.push(isMacOS() ? "Cmd" : "Ctrl");
+  if (s.alt) parts.push(isMacOS() ? "Opt" : "Alt");
   if (s.shift) parts.push("Shift");
-  parts.push(s.key.toUpperCase());
+
+  const displayKey = s.key === " " ? "Space" : s.key.toUpperCase();
+  parts.push(displayKey);
+
   return parts.join(" + ");
 }
 

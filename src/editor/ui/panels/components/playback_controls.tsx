@@ -8,10 +8,23 @@ import {
   IconStop,
 } from "../../../../ktu/helpers/icons";
 import { TimeRendererComponent } from "./time_renderer";
+import { keyboardShortcuts } from "../../../../ktu/helpers/keyboard_shortcuts";
 
 class PlaybackControls extends KTUComponent {
   constructor(props: { binding?: string }) {
     super(props);
+    keyboardShortcuts.register({
+      key: " ",
+      action: () => this.handlePause(),
+      description: "Toggle Play/Pause",
+    });
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    keyboardShortcuts.unregister({
+      key: " ",
+    });
   }
 
   render(): Element {
@@ -33,7 +46,7 @@ class PlaybackControls extends KTUComponent {
           <button
             id="play-pause"
             class="play-pause-button"
-            onclick={() => this.handleClick()}
+            onclick={() => this.handlePause()}
           >
             {this.bindingData["playing"] ? IconPause() : IconPlay()}
           </button>
@@ -65,7 +78,7 @@ class PlaybackControls extends KTUComponent {
     );
   }
 
-  handleClick() {
+  handlePause() {
     DataStore.getInstance().setStore("playing", !this.bindingData["playing"]);
   }
 }
