@@ -226,7 +226,7 @@ const saveVideo = async (
       reject((event as ErrorEvent).error ?? new Error("MediaRecorder error"));
   });
 
-  DataStore.getInstance().setStore("playing", false);
+  DataStore.getInstance().setStore("instances.editorScene.playing", false);
   EventDispatcher.getInstance().dispatchEvent(
     "actions.editorScene",
     "resetTime",
@@ -236,7 +236,7 @@ const saveVideo = async (
   await waitForMs(100);
 
   recorder.start();
-  DataStore.getInstance().setStore("playing", true);
+  DataStore.getInstance().setStore("instances.editorScene.playing", true);
 
   try {
     await waitForElapsedTimeLoop();
@@ -310,7 +310,9 @@ const runExport = async (
   activeExport = (async () => {
     const { state, application } = getSceneExportContext(sceneStateId);
     const previousPlaying =
-      (DataStore.getInstance().getStore("playing") as boolean | null) ?? false;
+      (DataStore.getInstance().getStore("instances.editorScene.playing") as
+        | boolean
+        | null) ?? false;
     const previousElapsedTime =
       (DataStore.getInstance().getStore("instances.editorScene.elapsedTime") as
         | number
@@ -318,7 +320,7 @@ const runExport = async (
     const totalFrames = Math.max(1, Math.round(state.duration * FRAME_RATE));
 
     if (format !== "mp4") {
-      DataStore.getInstance().setStore("playing", false);
+      DataStore.getInstance().setStore("instances.editorScene.playing", false);
     }
     DataStore.getInstance().setStore(
       `instances.${sceneStateId}.exporting`,
@@ -377,7 +379,10 @@ const runExport = async (
         "instances.editorScene.elapsedTime",
         previousElapsedTime,
       );
-      DataStore.getInstance().setStore("playing", previousPlaying);
+      DataStore.getInstance().setStore(
+        "instances.editorScene.playing",
+        previousPlaying,
+      );
       application.render();
       activeExport = null;
     }

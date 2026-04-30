@@ -28,6 +28,11 @@ class PlaybackControls extends KTUComponent {
       action: () => this.handleForward(),
       description: "Step Forward",
     });
+    keyboardShortcuts.register({
+      key: "k",
+      action: () => this.handleStop(),
+      description: "Stop",
+    });
   }
 
   disconnectedCallback(): void {
@@ -40,6 +45,9 @@ class PlaybackControls extends KTUComponent {
     });
     keyboardShortcuts.unregister({
       key: ".",
+    });
+    keyboardShortcuts.unregister({
+      key: "k",
     });
   }
 
