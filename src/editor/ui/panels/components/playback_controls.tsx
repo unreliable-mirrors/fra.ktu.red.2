@@ -49,7 +49,7 @@ class PlaybackControls extends KTUComponent {
         <div class="controls">
           <button
             id="skip-previous"
-            class={`skip-previous-button ${this.bindingData["playing"] ? "disabled" : ""}`}
+            class={`skip-previous-button ${this.bindingData["instances.editorScene.playing"] ? "disabled" : ""}`}
             onclick={() => {
               this.handleBack();
             }}
@@ -61,7 +61,9 @@ class PlaybackControls extends KTUComponent {
             class="play-pause-button"
             onclick={() => this.handlePause()}
           >
-            {this.bindingData["playing"] ? IconPause() : IconPlay()}
+            {this.bindingData["instances.editorScene.playing"]
+              ? IconPause()
+              : IconPlay()}
           </button>
           <button
             id="stop"
@@ -74,39 +76,44 @@ class PlaybackControls extends KTUComponent {
           </button>
           <button
             id="skip-next"
-            class={`skip-next-button ${this.bindingData["playing"] ? "disabled" : ""}`}
+            class={`skip-next-button ${this.bindingData["instances.editorScene.playing"] ? "disabled" : ""}`}
             onclick={() => {
               this.handleForward();
             }}
           >
             {IconSkipNext()}
           </button>
-          <TimeRendererComponent binding="elapsedTime" />
+          <TimeRendererComponent binding="instances.editorScene.elapsedTime" />
         </div>
       </div>
     );
   }
 
   handlePause() {
-    DataStore.getInstance().setStore("playing", !this.bindingData["playing"]);
+    DataStore.getInstance().setStore(
+      "instances.editorScene.playing",
+      !this.bindingData["instances.editorScene.playing"],
+    );
   }
   handleBack() {
-    if (this.bindingData["playing"]) return;
+    if (this.bindingData["instances.editorScene.playing"]) return;
     DataStore.getInstance().setStore(
-      "elapsedTime",
-      DataStore.getInstance().getStore("elapsedTime") - 1000 / 30,
+      "instances.editorScene.elapsedTime",
+      DataStore.getInstance().getStore("instances.editorScene.elapsedTime") -
+        1000 / 30,
     );
   }
   handleForward() {
-    if (this.bindingData["playing"]) return;
+    if (this.bindingData["instances.editorScene.playing"]) return;
     DataStore.getInstance().setStore(
-      "elapsedTime",
-      DataStore.getInstance().getStore("elapsedTime") + 1000 / 30,
+      "instances.editorScene.elapsedTime",
+      DataStore.getInstance().getStore("instances.editorScene.elapsedTime") +
+        1000 / 30,
     );
   }
   handleStop() {
-    DataStore.getInstance().setStore("playing", false);
-    DataStore.getInstance().setStore("elapsedTime", 0);
+    DataStore.getInstance().setStore("instances.editorScene.playing", false);
+    DataStore.getInstance().setStore("instances.editorScene.elapsedTime", 0);
   }
 }
 

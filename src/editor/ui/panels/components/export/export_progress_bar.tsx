@@ -19,7 +19,8 @@ class ExportProgressBar extends KTUComponent {
         "instances.editorScene.currentExportFrame"
       ] as number) ?? 0;
     const elapsedTime =
-      ((this.bindingData["elapsedTime"] as number) ?? 0) / 1000;
+      ((this.bindingData["instances.editorScene.elapsedTime"] as number) ?? 0) /
+      1000;
     const duration = (this.bindingData["editorScene.duration"] as number) ?? 0;
 
     const totalFrames = Math.max(1, Math.round(duration * FRAME_RATE));

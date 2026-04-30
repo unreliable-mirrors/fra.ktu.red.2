@@ -57,7 +57,7 @@ class FileInfoPanel extends KTUComponent {
           ></input>
         </div>
         <h3>Playback</h3>
-        <PlaybackControlsComponent binding="playing" />
+        <PlaybackControlsComponent binding="instances.editorScene.playing" />
       </div>
     );
   }

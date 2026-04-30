@@ -9,7 +9,10 @@ class TimeRenderer extends KTUComponent {
   render(): Element {
     return (
       <span class="time">
-        {(this.bindingData["elapsedTime"] / 1000).toFixed(2)}s
+        {(this.bindingData["instances.editorScene.elapsedTime"] / 1000).toFixed(
+          2,
+        )}
+        s
       </span>
     );
   }

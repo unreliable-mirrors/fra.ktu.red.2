@@ -63,11 +63,15 @@ const waitForElapsedTimeLoop = (): Promise<void> => {
   return new Promise((resolve) => {
     let sawProgress = false;
     let previousElapsedTime =
-      (DataStore.getInstance().getStore("elapsedTime") as number | null) ?? 0;
+      (DataStore.getInstance().getStore("instances.editorScene.elapsedTime") as
+        | number
+        | null) ?? 0;
 
     const observe = () => {
       const elapsedTime =
-        (DataStore.getInstance().getStore("elapsedTime") as number | null) ?? 0;
+        (DataStore.getInstance().getStore(
+          "instances.editorScene.elapsedTime",
+        ) as number | null) ?? 0;
 
       if (elapsedTime > 0) {
         sawProgress = true;
@@ -113,7 +117,10 @@ const updateExportFrame = async (
     `instances.${sceneStateId}.currentExportFrame`,
     frameIndex + 1,
   );
-  DataStore.getInstance().setStore("elapsedTime", elapsedTime);
+  DataStore.getInstance().setStore(
+    "instances.editorScene.elapsedTime",
+    elapsedTime,
+  );
   application.render();
   await waitForAnimationFrame();
 };
@@ -305,7 +312,9 @@ const runExport = async (
     const previousPlaying =
       (DataStore.getInstance().getStore("playing") as boolean | null) ?? false;
     const previousElapsedTime =
-      (DataStore.getInstance().getStore("elapsedTime") as number | null) ?? 0;
+      (DataStore.getInstance().getStore("instances.editorScene.elapsedTime") as
+        | number
+        | null) ?? 0;
     const totalFrames = Math.max(1, Math.round(state.duration * FRAME_RATE));
 
     if (format !== "mp4") {
@@ -364,7 +373,10 @@ const runExport = async (
         `instances.${sceneStateId}.currentExportFrame`,
         0,
       );
-      DataStore.getInstance().setStore("elapsedTime", previousElapsedTime);
+      DataStore.getInstance().setStore(
+        "instances.editorScene.elapsedTime",
+        previousElapsedTime,
+      );
       DataStore.getInstance().setStore("playing", previousPlaying);
       application.render();
       activeExport = null;
