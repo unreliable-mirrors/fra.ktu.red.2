@@ -18,12 +18,28 @@ class PlaybackControls extends KTUComponent {
       action: () => this.handlePause(),
       description: "Toggle Play/Pause",
     });
+    keyboardShortcuts.register({
+      key: ",",
+      action: () => this.handleBack(),
+      description: "Step Back",
+    });
+    keyboardShortcuts.register({
+      key: ".",
+      action: () => this.handleForward(),
+      description: "Step Forward",
+    });
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
     keyboardShortcuts.unregister({
       key: " ",
+    });
+    keyboardShortcuts.unregister({
+      key: ",",
+    });
+    keyboardShortcuts.unregister({
+      key: ".",
     });
   }
 
@@ -35,10 +51,7 @@ class PlaybackControls extends KTUComponent {
             id="skip-previous"
             class={`skip-previous-button ${this.bindingData["playing"] ? "disabled" : ""}`}
             onclick={() => {
-              DataStore.getInstance().setStore(
-                "elapsedTime",
-                DataStore.getInstance().getStore("elapsedTime") - 1000 / 30,
-              );
+              this.handleBack();
             }}
           >
             {IconSkipPrevious()}
@@ -54,8 +67,7 @@ class PlaybackControls extends KTUComponent {
             id="stop"
             class="stop-button"
             onclick={() => {
-              DataStore.getInstance().setStore("playing", false);
-              DataStore.getInstance().setStore("elapsedTime", 0);
+              this.handleStop();
             }}
           >
             {IconStop()}
@@ -64,10 +76,7 @@ class PlaybackControls extends KTUComponent {
             id="skip-next"
             class={`skip-next-button ${this.bindingData["playing"] ? "disabled" : ""}`}
             onclick={() => {
-              DataStore.getInstance().setStore(
-                "elapsedTime",
-                DataStore.getInstance().getStore("elapsedTime") + 1000 / 30,
-              );
+              this.handleForward();
             }}
           >
             {IconSkipNext()}
@@ -80,6 +89,24 @@ class PlaybackControls extends KTUComponent {
 
   handlePause() {
     DataStore.getInstance().setStore("playing", !this.bindingData["playing"]);
+  }
+  handleBack() {
+    if (this.bindingData["playing"]) return;
+    DataStore.getInstance().setStore(
+      "elapsedTime",
+      DataStore.getInstance().getStore("elapsedTime") - 1000 / 30,
+    );
+  }
+  handleForward() {
+    if (this.bindingData["playing"]) return;
+    DataStore.getInstance().setStore(
+      "elapsedTime",
+      DataStore.getInstance().getStore("elapsedTime") + 1000 / 30,
+    );
+  }
+  handleStop() {
+    DataStore.getInstance().setStore("playing", false);
+    DataStore.getInstance().setStore("elapsedTime", 0);
   }
 }
 

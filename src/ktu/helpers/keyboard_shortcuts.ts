@@ -8,7 +8,9 @@ export interface ShortcutEntry {
   description?: string;
 }
 
-const isMacOS = () => /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+const isMacOS = () =>
+  (navigator as any).userAgentData?.platform === "macOS" ||
+  /Mac|iPhone|iPad|iPod/.test(navigator.userAgent);
 
 class KeyboardShortcutsManager {
   private static _instance: KeyboardShortcutsManager;
