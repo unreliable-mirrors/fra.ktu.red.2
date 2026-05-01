@@ -15,6 +15,7 @@ export class NewStateCommand implements ICommand {
       layers: [],
       shaders: [],
       modulators: [],
+      signals: [],
       assets: {},
       counter: 0,
     };

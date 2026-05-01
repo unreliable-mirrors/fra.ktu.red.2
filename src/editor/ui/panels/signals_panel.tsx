@@ -1,5 +1,6 @@
 import jsx from "texsaur";
 import { getAvailableSignals, KTUComponent } from "fra.ktu.red-component";
+import { AddSignalButtonComponent } from "./components/signals/add_signal_button";
 
 class SignalsPanel extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -10,9 +11,10 @@ class SignalsPanel extends KTUComponent {
     return (
       <div class="panel left">
         <h3>Signals</h3>
-        <div>
+        {AddSignalButtonComponent()}
+        <div class="signals-list">
           {getAvailableSignals("editorScene").map((signal) => (
-            <div>{signal.name}</div>
+            <div class="signal-item">{signal.name}</div>
           ))}
         </div>
       </div>

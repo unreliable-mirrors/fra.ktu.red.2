@@ -505,3 +505,33 @@ button {
 .history-item.redo {
   color: #ff66ff;
 }
+
+/* ── Signals Panel ────────────────────────────────────── */
+
+.signal-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  margin-bottom: 8px;
+  background-color: #1a1a1a;
+  border: 1px solid #66ff66;
+  border-radius: 4px;
+  color: #66ff66;
+  font-family: "Montserrat", serif;
+  font-size: 14px;
+}
+
+.signal-input::placeholder {
+  color: #66ff6666;
+}
+
+.signal-input:focus {
+  outline: none;
+  box-shadow: 0 0 8px #66ff6655;
+}
+
+.signals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

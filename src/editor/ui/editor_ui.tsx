@@ -21,7 +21,7 @@ class EditorUI extends KTUComponent {
         <div class="panel-container left-ui">
           <FilePanelComponent />
           <FileInfoPanelComponent binding="editorScene" />
-          <SignalsPanelComponent binding="instances.editorScene.modulators" />
+          <SignalsPanelComponent binding="instances.editorScene.modulators,editorScene.signals" />
           <HistoryPanelComponent binding="commandsQueue,redoQueue" />
         </div>
         <div class="panel-container right-ui">
