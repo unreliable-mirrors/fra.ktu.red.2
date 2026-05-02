@@ -489,7 +489,11 @@ button {
 .shaderItem .icons,
 .modulatorItem .icons,
 .signalItem .icons {
+  display: inline-block;
   margin-left: 5px;
+}
+
+.signalItem .icons {
   float: right;
 }
 

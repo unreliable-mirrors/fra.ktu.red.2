@@ -11,7 +11,7 @@ class SignalsPanel extends KTUComponent {
     super(props);
 
     keyboardShortcuts.register({
-      key: "s",
+      key: "d",
       action: () => this.onClick(),
       description: "Show/Hide Signals Panel",
     });
@@ -20,7 +20,7 @@ class SignalsPanel extends KTUComponent {
   render(): Element {
     return (
       <div class="panel left" id="signals-panel">
-        <h3 onclick={() => this.onClick()}>Signals (S)</h3>
+        <h3 onclick={() => this.onClick()}>Signals (D)</h3>
         {AddSignalButtonComponent()}
         <div class="signals-list">
           {getAvailableSignals("editorScene").map((signal) => (
