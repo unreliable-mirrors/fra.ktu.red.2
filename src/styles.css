@@ -460,7 +460,8 @@ button {
 
 .layerItem,
 .shaderItem,
-.modulatorItem {
+.modulatorItem,
+.signalItem {
   background-color: #11111122;
   border-style: solid;
   border-width: 1px;
@@ -469,7 +470,8 @@ button {
 }
 .layerItem.active,
 .shaderItem.active,
-.modulatorItem.active {
+.modulatorItem.active,
+.signalItem.active {
   background-color: #ffffff22;
   color: #66ff66;
   border-color: #66ff66;
@@ -477,16 +479,18 @@ button {
 
 .layerItem .title,
 .shaderItem .title,
-.modulatorItem .title {
+.modulatorItem .title,
+.signalItem .title {
   font-family: "Orbitron", serif;
   line-height: 24px;
   float: left;
 }
 .layerItem .icons,
 .shaderItem .icons,
-.modulatorItem .icons {
-  display: inline-block;
+.modulatorItem .icons,
+.signalItem .icons {
   margin-left: 5px;
+  float: right;
 }
 
 .layerItem .settings {

@@ -1,5 +1,7 @@
 import jsx from "texsaur";
-import { KTUComponent, DataStore, SceneState } from "fra.ktu.red-component";
+import { KTUComponent } from "fra.ktu.red-component";
+import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
+import { AddSignalCommand } from "../../../../commands/add_signal_command";
 
 class AddSignalButton extends KTUComponent {
   constructor() {
@@ -51,13 +53,7 @@ class AddSignalButton extends KTUComponent {
       return;
     }
 
-    // SceneState.signals is string[], so store only raw signal names.
-    const scene = DataStore.getInstance().getStore("editorScene") as SceneState;
-    if (scene && Array.isArray(scene.signals)) {
-      scene.signals.push(normalizedName);
-      // Touch the signals array to trigger reactive updates
-      DataStore.getInstance().touch("editorScene.signals");
-    }
+    executeCommand(new AddSignalCommand(normalizedName));
   }
 }
 
