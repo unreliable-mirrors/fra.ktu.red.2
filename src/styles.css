@@ -448,6 +448,15 @@ button {
 .panel.right {
   border-radius: 10px 0 0 10px;
 }
+.panel.collapsed {
+  height: 2em;
+  overflow: hidden;
+}
+
+.panel h3 {
+  cursor: pointer;
+  user-select: none;
+}
 
 .layerItem,
 .shaderItem,

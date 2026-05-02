@@ -4,16 +4,24 @@ import { SceneState } from "fra.ktu.red-component";
 import { PlaybackControlsComponent } from "./components/playback_controls";
 import { executeCommand } from "../../../ktu/helpers/commands_manager";
 import { ResizeCanvasCommand } from "../../commands/resize_canvas_command";
+import { keyboardShortcuts } from "../../../ktu/helpers/keyboard_shortcuts";
 
 class FileInfoPanel extends KTUComponent {
   constructor(props: { binding?: string }) {
     super(props);
+
+    keyboardShortcuts.register({
+      key: "i",
+      ctrl: false,
+      action: () => this.onClick(),
+      description: "Show/Hide File Info Panel",
+    });
   }
 
   render(): Element {
     return (
-      <div class="panel left">
-        <h3>File Info</h3>
+      <div class="panel left" id="file-info-panel">
+        <h3 onclick={() => this.onClick()}>File Info (I)</h3>
         <div>
           <span>Name: </span>
           <input
@@ -60,6 +68,10 @@ class FileInfoPanel extends KTUComponent {
         <PlaybackControlsComponent binding="instances.editorScene.playing" />
       </div>
     );
+  }
+
+  onClick() {
+    document.getElementById("file-info-panel")?.classList.toggle("collapsed");
   }
 
   onNameChange(value: string) {
