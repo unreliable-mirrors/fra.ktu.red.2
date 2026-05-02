@@ -7,10 +7,31 @@ import {
   undoCommand,
 } from "../../../ktu/helpers/commands_manager";
 import { HistoryItemComponent } from "./components/history_item";
+import { keyboardShortcuts } from "../../../ktu/helpers/keyboard_shortcuts";
 
 class HistoryPanel extends KTUComponent {
   constructor(props: { binding?: string }) {
     super(props);
+
+    keyboardShortcuts.register({
+      key: "z",
+      ctrl: true,
+      action: () => this.undo(),
+      description: "Undo",
+    });
+
+    keyboardShortcuts.register({
+      key: "y",
+      ctrl: true,
+      action: () => this.redo(),
+      description: "Redo",
+    });
+
+    keyboardShortcuts.register({
+      key: "h",
+      action: () => this.onClick(),
+      description: "Show/Hide History Panel",
+    });
   }
 
   render(): Element {
@@ -20,8 +41,8 @@ class HistoryPanel extends KTUComponent {
       this.bindingData["redoQueue"],
     );
     return (
-      <div class="panel left">
-        <h3>History</h3>
+      <div class="panel left" id="history-panel">
+        <h3 onclick={() => this.onClick()}>History (H)</h3>
         <div class="history-controls">
           <button
             class={canUndo() ? "enabled" : "disabled"}
@@ -63,6 +84,10 @@ class HistoryPanel extends KTUComponent {
       commandsQueue: [],
       redoQueue: [],
     };
+  }
+
+  onClick() {
+    document.getElementById("history-panel")?.classList.toggle("collapsed");
   }
 
   undo() {

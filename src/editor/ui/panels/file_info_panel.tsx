@@ -12,7 +12,6 @@ class FileInfoPanel extends KTUComponent {
 
     keyboardShortcuts.register({
       key: "i",
-      ctrl: false,
       action: () => this.onClick(),
       description: "Show/Hide File Info Panel",
     });
