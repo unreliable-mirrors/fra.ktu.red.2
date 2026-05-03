@@ -23,7 +23,7 @@ class LayersPanel extends KTUComponent {
               .reverse()
               .map((layer: any) => (
                 <LayerItemComponent
-                  binding={`editorScene.layers.!${layer.id}`}
+                  binding={`editorScene.layers.!${layer.id},editorScene.layers.!${layer.id}.shaders`}
                 />
               ))}
           </div>

@@ -13,7 +13,6 @@ import {
   IconUp,
   IconVisible,
 } from "../../../../../ktu/helpers/icons";
-import { RemoveLayerCommand } from "../../../../commands/layers/remove_layer_command";
 import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
 import { DuplicateLayerCommand } from "../../../../commands/layers/duplicate_layer_command";
 import { MoveLayerDownCommand } from "../../../../commands/layers/move_layer_down_command";
@@ -22,6 +21,7 @@ import { MoveLayerUpCommand } from "../../../../commands/layers/move_layer_up_co
 import { SHADER_SETTINGS } from "../../../../settings/isetting";
 import { resolveInputType } from "../../../input_resolver";
 import { ActivateShaderCommand } from "../../../../commands/shaders/activate_shader_command";
+import { RemoveShaderCommand } from "../../../../commands/shaders/remove_shader_command";
 
 class ShaderItem extends KTUComponent {
   owner: string;
@@ -114,13 +114,13 @@ class ShaderItem extends KTUComponent {
   }
 
   handleDuplicateClick() {
-    const state: LayerState = this.bindingData[this.bindingKeys[0]];
+    const state: ShaderLayerState = this.bindingData[this.bindingKeys[0]];
     executeCommand(new DuplicateLayerCommand(state.id));
   }
 
   handleCloseClick() {
-    const state: LayerState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new RemoveLayerCommand(state));
+    const state: ShaderLayerState = this.bindingData[this.bindingKeys[0]];
+    executeCommand(new RemoveShaderCommand(state, this.owner));
   }
 }
 
