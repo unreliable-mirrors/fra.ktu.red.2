@@ -7,16 +7,22 @@ import { ExportSequenceButtonComponent } from "./components/export/export_sequen
 import { ExportMp4ButtonComponent } from "./components/export/export_mp4_button";
 import { ExportGifButtonComponent } from "./components/export/export_gif_button";
 import { OpenStateButtonComponent } from "./components/open_state_button";
+import { keyboardShortcuts } from "../../../ktu/helpers/keyboard_shortcuts";
 
 class FilePanel extends KTUComponent {
   constructor() {
     super();
+    keyboardShortcuts.register({
+      key: "f",
+      action: () => this.onClick(),
+      description: "Show/Hide File Panel",
+    });
   }
 
   render(): Element {
     return (
-      <div class="panel left">
-        <h3>Open/Save</h3>
+      <div class="panel left" id="file-panel">
+        <h3 onclick={() => this.onClick()}>Open/Save (F)</h3>
         <div>
           <NewStateButtonComponent />
           <OpenStateButtonComponent />
@@ -34,6 +40,10 @@ class FilePanel extends KTUComponent {
         </div>
       </div>
     );
+  }
+
+  onClick() {
+    document.getElementById("file-panel")?.classList.toggle("collapsed");
   }
 }
 

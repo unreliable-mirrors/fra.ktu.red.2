@@ -59,7 +59,7 @@ class ExportProgressBar extends KTUComponent {
       "instances.editorScene.currentExportFrame": 0,
       "instances.editorScene.exportFormat": "zip",
       "editorScene.duration": 0,
-      elapsedTime: 0,
+      "instances.editorScene.elapsedTime": 0,
     };
   }
 }

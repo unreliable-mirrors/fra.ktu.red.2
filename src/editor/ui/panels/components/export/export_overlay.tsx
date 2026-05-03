@@ -20,7 +20,7 @@ class ExportOverlay extends KTUComponent {
         <div class="export-overlay-content">
           <div class="export-overlay-title">Exporting scene...</div>
 
-          <ExportProgressBarComponent binding="instances.editorScene.currentExportFrame,instances.editorScene.exportFormat,editorScene.duration,elapsedTime" />
+          <ExportProgressBarComponent binding="instances.editorScene.currentExportFrame,instances.editorScene.exportFormat,editorScene.duration,instances.editorScene.elapsedTime" />
         </div>
       </div>
     );
