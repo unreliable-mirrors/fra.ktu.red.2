@@ -3,6 +3,7 @@ import { KTUComponent, Signal } from "fra.ktu.red-component";
 import { IconClose } from "../../../../../ktu/helpers/icons";
 import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
 import { RemoveSignalCommand } from "../../../../commands/remove_signal_command";
+import { BindEmulatorButtonComponent } from "../modulators/bind_emulator_button";
 
 class SignalItem extends KTUComponent {
   signal: Signal;
@@ -17,13 +18,21 @@ class SignalItem extends KTUComponent {
         <div class="title">{this.signal.name}</div>
         <div class="icons">
           {this.signal.name.startsWith("signal.") ? (
-            <span
-              onclick={() =>
-                this.handleCloseClick(this.signal.name.replace("signal.", ""))
-              }
-            >
-              {IconClose()}
-            </span>
+            <>
+              <BindEmulatorButtonComponent
+                binding={
+                  "signals." + this.signal.name + ",editorScene.modulators"
+                }
+                signalName={this.signal.name}
+              />
+              <span
+                onclick={() =>
+                  this.handleCloseClick(this.signal.name.replace("signal.", ""))
+                }
+              >
+                {IconClose()}
+              </span>
+            </>
           ) : null}
         </div>
       </div>

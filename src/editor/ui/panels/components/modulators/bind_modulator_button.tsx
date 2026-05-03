@@ -28,7 +28,7 @@ class BindModulatorButton extends KTUComponent {
           this.selectSignal(e);
         }}
       >
-        <option value="">No Modulator</option>
+        <option value="">No Signal</option>
         {getAvailableSignals("editorScene").map((signal: Signal) => {
           return (
             <option
