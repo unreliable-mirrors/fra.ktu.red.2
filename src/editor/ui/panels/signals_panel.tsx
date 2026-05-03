@@ -1,9 +1,7 @@
 import jsx from "texsaur";
 import { getAvailableSignals, KTUComponent } from "fra.ktu.red-component";
 import { AddSignalButtonComponent } from "./components/signals/add_signal_button";
-import { IconClose } from "../../../ktu/helpers/icons";
-import { executeCommand } from "../../../ktu/helpers/commands_manager";
-import { RemoveSignalCommand } from "../../commands/remove_signal_command";
+import { SignalItemComponent } from "./components/signals/signal_item";
 import { keyboardShortcuts } from "../../../ktu/helpers/keyboard_shortcuts";
 
 class SignalsPanel extends KTUComponent {
@@ -24,28 +22,14 @@ class SignalsPanel extends KTUComponent {
         {AddSignalButtonComponent()}
         <div class="signals-list">
           {getAvailableSignals("editorScene").map((signal) => (
-            <div class="signalItem">
-              <div class="title">{signal.name}</div>
-              <div class="icons">
-                {signal.name.startsWith("signal.") ? (
-                  <span
-                    onclick={() =>
-                      this.handleCloseClick(signal.name.replace("signal.", ""))
-                    }
-                  >
-                    {IconClose()}
-                  </span>
-                ) : null}
-              </div>
-            </div>
+            <SignalItemComponent
+              signal={signal}
+              binding={`signals.${signal.name.replace("signal.", "")}`}
+            />
           ))}
         </div>
       </div>
     );
-  }
-
-  handleCloseClick(signalName: string) {
-    executeCommand(new RemoveSignalCommand(signalName));
   }
 
   onClick() {

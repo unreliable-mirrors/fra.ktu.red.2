@@ -468,6 +468,10 @@ button {
   border-color: #66ff6666;
   padding: 5px;
 }
+.signalItem {
+  display: flex;
+  align-items: center;
+}
 .layerItem.active,
 .shaderItem.active,
 .modulatorItem.active,
@@ -494,7 +498,7 @@ button {
 }
 
 .signalItem .icons {
-  float: right;
+  margin-left: auto;
 }
 
 .layerItem .settings {

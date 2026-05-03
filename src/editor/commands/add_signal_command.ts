@@ -13,6 +13,7 @@ export class AddSignalCommand implements ICommand {
     if (scene && Array.isArray(scene.signals)) {
       scene.signals.push(this.signalName);
       DataStore.getInstance().touch("editorScene.signals");
+      DataStore.getInstance().setStore("signals." + this.signalName, {});
     }
   }
 
@@ -23,6 +24,10 @@ export class AddSignalCommand implements ICommand {
       if (index !== -1) {
         scene.signals.splice(index, 1);
         DataStore.getInstance().touch("editorScene.signals");
+        DataStore.getInstance().setStore(
+          "signals." + this.signalName,
+          undefined,
+        );
       }
     }
   }
