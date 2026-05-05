@@ -13,7 +13,6 @@ export class LoadFileCommand implements ICommand {
   }
   execute(): void {
     if (this.file.startsWith("data:")) {
-      console.log("STARTS WITH DATA");
       const hash = cacheAsset(this.sceneStateId, this.file);
 
       const state = DataStore.getInstance().getStore(
