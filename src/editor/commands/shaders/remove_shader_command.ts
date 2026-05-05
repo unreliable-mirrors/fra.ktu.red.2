@@ -4,6 +4,7 @@ import { ICommand } from "../icommand";
 export class RemoveShaderCommand implements ICommand {
   state: ShaderLayerState;
   destinationLayerId?: number;
+  position!: number;
 
   constructor(state: ShaderLayerState, destinationLayerId?: number) {
     this.state = state;
@@ -24,6 +25,7 @@ export class RemoveShaderCommand implements ICommand {
     if (shaders && Array.isArray(shaders)) {
       const index = shaders.findIndex((s) => s.id === this.state.id);
       if (index !== -1) {
+        this.position = index;
         shaders.splice(index, 1);
         if (this.destinationLayerId !== undefined) {
           DataStore.getInstance().touch(
@@ -48,7 +50,7 @@ export class RemoveShaderCommand implements ICommand {
       ) as ShaderLayerState[];
     }
     if (shaders && Array.isArray(shaders)) {
-      shaders.push(this.state);
+      shaders.splice(this.position, 0, this.state);
       if (this.destinationLayerId !== undefined) {
         DataStore.getInstance().touch(
           "editorScene.layers.!" + this.destinationLayerId,

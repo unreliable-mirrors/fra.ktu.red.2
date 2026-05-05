@@ -6,7 +6,6 @@ import {
   IconPause,
   IconPlay,
 } from "../../../../../ktu/helpers/icons";
-import { RemoveLayerCommand } from "../../../../commands/layers/remove_layer_command";
 import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
 import { DuplicateLayerCommand } from "../../../../commands/layers/duplicate_layer_command";
 import { ToggleLayerCommand } from "../../../../commands/layers/toggle_layer_command";
@@ -16,6 +15,7 @@ import { LineChart } from "chartist";
 import { IModulator } from "fra.ktu.red-component/dist/modulators/imodulator";
 import { ActivateModulatorCommand } from "../../../../commands/modulators/activate_modulator_command";
 import { GenericInputComponent } from "../generic_input";
+import { RemoveModulatorCommand } from "../../../../commands/modulators/remove_modulator_command";
 
 class ModulatorItem extends KTUComponent {
   valueRenderer?: Element;
@@ -24,6 +24,7 @@ class ModulatorItem extends KTUComponent {
   constructor(props: { binding?: string }) {
     super(props);
     const state: ModulatorState = this.bindingData[this.bindingKeys[0]];
+
     const modulator = (
       DataStore.getInstance().getStore(
         "instances.editorScene.modulators",
@@ -153,7 +154,7 @@ class ModulatorItem extends KTUComponent {
 
   handleCloseClick() {
     const state: ModulatorState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new RemoveLayerCommand(state));
+    executeCommand(new RemoveModulatorCommand(state));
   }
 }
 

@@ -1,5 +1,9 @@
 import jsx from "texsaur";
-import { AVAILABLE_MODULATORS, KTUComponent } from "fra.ktu.red-component";
+import {
+  AVAILABLE_MODULATORS,
+  DataStore,
+  KTUComponent,
+} from "fra.ktu.red-component";
 import { AddModulatorButtonComponent } from "./components/modulators/add_modulator_button";
 import { ModulatorItemComponent } from "./components/modulators/modulator_item";
 
@@ -19,7 +23,7 @@ class ModulatorsPanel extends KTUComponent {
             )}
           </div>
           <div className="modulatorsList">
-            {[...this.bindingData["instances.editorScene.modulators"]]
+            {[...DataStore.getInstance().getStore("editorScene.modulators")]
               .reverse()
               .map((modulator: any) => (
                 <ModulatorItemComponent
