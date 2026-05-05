@@ -1,4 +1,5 @@
 import {
+  BnwShader,
   DataStore,
   DisplayLayerState,
   PixelateShader,
@@ -21,6 +22,9 @@ export class AddShaderCommand implements ICommand {
       switch (this.shaderType) {
         case "pixelate":
           shaderState = PixelateShader.getDefaultState("editorScene");
+          break;
+        case "bnw":
+          shaderState = BnwShader.getDefaultState("editorScene");
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");
