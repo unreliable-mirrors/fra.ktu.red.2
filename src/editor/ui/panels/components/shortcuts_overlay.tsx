@@ -29,6 +29,22 @@ class ShortcutsOverlay extends KTUComponent {
       action: () => this.toggle(),
       description: "Show Keyboard Shortcuts",
     });
+    keyboardShortcuts.register({
+      key: "Escape",
+      action: () => this.hide(),
+      description: "Close Shortcuts Overlay",
+    });
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    keyboardShortcuts.unregister({
+      key: "?",
+      shift: true,
+    });
+    keyboardShortcuts.unregister({
+      key: "Escape",
+    });
   }
 
   render(): Element {
@@ -56,7 +72,8 @@ class ShortcutsOverlay extends KTUComponent {
           </div>
           <div class="shortcuts-modal-body" id="shortcuts-list"></div>
           <div class="shortcuts-modal-footer">
-            Press <kbd>Shift + ?</kbd> to toggle this panel
+            Press <kbd>Shift + ?</kbd> to toggle this panel, or <kbd>Esc</kbd>
+            to close
           </div>
         </div>
       </div>

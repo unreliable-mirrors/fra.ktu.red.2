@@ -106,6 +106,7 @@ class LayerItem extends KTUComponent {
                 <ShaderItemComponent
                   binding={`editorScene.layers.!${state.id}.shaders.!${layer.id}`}
                   owner={`editorScene.layers.!${state.id}.shaders`}
+                  parentLayerId={state.id}
                 />
               ))}
             </div>

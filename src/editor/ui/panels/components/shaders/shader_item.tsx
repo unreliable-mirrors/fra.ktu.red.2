@@ -25,9 +25,15 @@ import { RemoveShaderCommand } from "../../../../commands/shaders/remove_shader_
 
 class ShaderItem extends KTUComponent {
   owner: string;
-  constructor(props: { binding?: string; owner: string }) {
+  parentLayerId?: number;
+  constructor(props: {
+    binding?: string;
+    owner: string;
+    parentLayerId?: number;
+  }) {
     super(props);
     this.owner = props.owner;
+    this.parentLayerId = props.parentLayerId;
   }
 
   render(): Element {
@@ -120,13 +126,14 @@ class ShaderItem extends KTUComponent {
 
   handleCloseClick() {
     const state: ShaderLayerState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new RemoveShaderCommand(state, this.owner));
+    executeCommand(new RemoveShaderCommand(state, this.parentLayerId));
   }
 }
 
 export function ShaderItemComponent(props: {
   binding?: string;
   owner: string;
+  parentLayerId?: number;
 }): Element {
   return new ShaderItem(props);
 }
