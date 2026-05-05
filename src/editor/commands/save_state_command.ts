@@ -3,6 +3,7 @@ import { ICommand } from "./icommand";
 import { downloadContent } from "../../ktu/helpers/download_helper";
 
 export class SaveStateCommand implements ICommand {
+  undoable?: boolean | undefined = false;
   constructor() {}
   execute(): void {
     const state = DataStore.getInstance().getStore("editorScene");

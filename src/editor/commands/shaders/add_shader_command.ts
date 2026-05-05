@@ -2,6 +2,7 @@ import {
   BnwShader,
   DataStore,
   DisplayLayerState,
+  MontecarloShader,
   PixelateShader,
   ShaderLayerState,
 } from "fra.ktu.red-component";
@@ -25,6 +26,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "bnw":
           shaderState = BnwShader.getDefaultState("editorScene");
+          break;
+        case "montecarlo":
+          shaderState = MontecarloShader.getDefaultState("editorScene");
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");

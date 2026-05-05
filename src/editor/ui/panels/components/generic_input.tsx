@@ -230,7 +230,21 @@ class GenericInput extends KTUComponent {
             ))}
           </span>
         );
-
+      case "signal-only":
+        return (
+          <span>
+            {!state.signaledFields[this.setting.field] ? null : (
+              <SignalHintComponent
+                signalName={state.signaledFields[this.setting.field]!}
+              />
+            )}
+            <BindModulatorButtonComponent
+              state={state}
+              setting={this.setting}
+              owner={this.owner}
+            />
+          </span>
+        );
       default:
         return (
           <input
