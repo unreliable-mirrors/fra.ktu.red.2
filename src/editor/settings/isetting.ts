@@ -2,6 +2,7 @@ import { BACKGROUND_LAYER_SETTINGS } from "./layers/background_layer_settings";
 import { VIDEO_LAYER_SETTINGS } from "./layers/video_layer_settings";
 import { LFO_SETTINGS } from "./modulators/lfo_settings";
 import { RANDOM_SETTINGS } from "./modulators/random_settings";
+import { ANAGLYPH_SHADER_SETTINGS } from "./shaders/anaglyph_shader_settings";
 import { BNW_SHADER_SETTINGS } from "./shaders/bnw_shader_settings";
 import { MONTECARLO_SHADER_SETTINGS } from "./shaders/montecarlo_shader_settings";
 import { PIXELATE_SHADER_SETTINGS } from "./shaders/pixelate_shader_settings";
@@ -27,6 +28,7 @@ export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
   pixelate: PIXELATE_SHADER_SETTINGS,
   bnw: BNW_SHADER_SETTINGS,
   montecarlo: MONTECARLO_SHADER_SETTINGS,
+  anaglyph: ANAGLYPH_SHADER_SETTINGS,
 };
 
 export const MODULATOR_SETTINGS: { [key: string]: ISetting[] } = {

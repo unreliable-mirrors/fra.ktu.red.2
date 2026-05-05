@@ -1,4 +1,5 @@
 import {
+  AnaglyphShader,
   BnwShader,
   DataStore,
   DisplayLayerState,
@@ -29,6 +30,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "montecarlo":
           shaderState = MontecarloShader.getDefaultState("editorScene");
+          break;
+        case "anaglyph":
+          shaderState = AnaglyphShader.getDefaultState("editorScene");
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");

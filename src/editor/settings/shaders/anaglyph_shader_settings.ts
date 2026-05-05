@@ -2,30 +2,20 @@ import { executeCommand } from "../../../ktu/helpers/commands_manager";
 import { SetShaderFieldCommand } from "../../commands/shaders/set_shader_field_command";
 import { ISetting } from "../isetting";
 
-export const MONTECARLO_SHADER_SETTINGS: ISetting[] = [
+export const ANAGLYPH_SHADER_SETTINGS: ISetting[] = [
   {
-    field: "strength",
-    type: "float",
+    field: "pixelSize",
+    type: "integer",
     onchange: (id: number, value: string | number | boolean, owner: string) => {
       executeCommand(
         new SetShaderFieldCommand(
           id,
-          "strength",
-          parseFloat(value.toString()),
+          "pixelSize",
+          parseInt(value.toString()),
           owner,
         ),
       );
     },
-    signalizable: true,
-  },
-  {
-    field: "refresh",
-    type: "signal-only",
-    onchange: (
-      _id: number,
-      _value: string | number | boolean,
-      _owner: string,
-    ) => {},
     signalizable: true,
   },
   {
