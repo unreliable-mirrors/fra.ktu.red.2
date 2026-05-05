@@ -22,6 +22,7 @@ import { SHADER_SETTINGS } from "../../../../settings/isetting";
 import { resolveInputType } from "../../../input_resolver";
 import { ActivateShaderCommand } from "../../../../commands/shaders/activate_shader_command";
 import { RemoveShaderCommand } from "../../../../commands/shaders/remove_shader_command";
+import { DuplicateShaderCommand } from "../../../../commands/shaders/duplicate_shader_command";
 
 class ShaderItem extends KTUComponent {
   owner: string;
@@ -121,7 +122,7 @@ class ShaderItem extends KTUComponent {
 
   handleDuplicateClick() {
     const state: ShaderLayerState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new DuplicateLayerCommand(state.id));
+    executeCommand(new DuplicateShaderCommand(state.id, this.parentLayerId));
   }
 
   handleCloseClick() {
