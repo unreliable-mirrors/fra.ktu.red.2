@@ -14,15 +14,14 @@ import {
   IconVisible,
 } from "../../../../../ktu/helpers/icons";
 import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
-import { DuplicateLayerCommand } from "../../../../commands/layers/duplicate_layer_command";
 import { MoveLayerDownCommand } from "../../../../commands/layers/move_layer_down_command";
 import { ToggleShaderCommand } from "../../../../commands/shaders/toggle_shader_command";
 import { MoveLayerUpCommand } from "../../../../commands/layers/move_layer_up_command";
 import { SHADER_SETTINGS } from "../../../../settings/isetting";
-import { resolveInputType } from "../../../input_resolver";
 import { ActivateShaderCommand } from "../../../../commands/shaders/activate_shader_command";
 import { RemoveShaderCommand } from "../../../../commands/shaders/remove_shader_command";
 import { DuplicateShaderCommand } from "../../../../commands/shaders/duplicate_shader_command";
+import { GenericInputComponent } from "../generic_input";
 
 class ShaderItem extends KTUComponent {
   owner: string;
@@ -87,7 +86,11 @@ class ShaderItem extends KTUComponent {
               {SHADER_SETTINGS[state.type].map((setting) => (
                 <div>
                   <span>{setting.field}: </span>
-                  {resolveInputType(state, setting, this.owner)}
+                  <GenericInputComponent
+                    binding={`${this.owner}.!${state.id},editorScene.modulators,editorScene.signals`}
+                    setting={setting}
+                    owner={this.owner}
+                  />
                 </div>
               ))}
             </div>

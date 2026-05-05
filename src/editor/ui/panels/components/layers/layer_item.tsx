@@ -22,9 +22,9 @@ import { MoveLayerDownCommand } from "../../../../commands/layers/move_layer_dow
 import { MoveLayerUpCommand } from "../../../../commands/layers/move_layer_up_command";
 import { ActivateLayerCommand } from "../../../../commands/layers/activate_layer_command";
 import { LAYER_SETTINGS } from "../../../../settings/isetting";
-import { resolveInputType } from "../../../input_resolver";
 import { AddShaderButtonComponent } from "../shaders/add_shader_button";
 import { ShaderItemComponent } from "../shaders/shader_item";
+import { GenericInputComponent } from "../generic_input";
 
 class LayerItem extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -85,7 +85,11 @@ class LayerItem extends KTUComponent {
               {LAYER_SETTINGS[state.type].map((setting) => (
                 <div>
                   <span>{setting.field}: </span>
-                  {resolveInputType(state, setting, "editorScene.layers")}
+                  <GenericInputComponent
+                    binding={`editorScene.layers.!${state.id},editorScene.modulators,editorScene.signals`}
+                    setting={setting}
+                    owner="editorScene.layers"
+                  />
                 </div>
               ))}
             </div>

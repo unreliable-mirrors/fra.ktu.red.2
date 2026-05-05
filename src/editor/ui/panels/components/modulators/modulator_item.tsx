@@ -11,11 +11,11 @@ import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
 import { DuplicateLayerCommand } from "../../../../commands/layers/duplicate_layer_command";
 import { ToggleLayerCommand } from "../../../../commands/layers/toggle_layer_command";
 import { MODULATOR_SETTINGS } from "../../../../settings/isetting";
-import { resolveInputType } from "../../../input_resolver";
 import { ModulatorState } from "fra.ktu.red-component";
 import { LineChart } from "chartist";
 import { IModulator } from "fra.ktu.red-component/dist/modulators/imodulator";
 import { ActivateModulatorCommand } from "../../../../commands/modulators/activate_modulator_command";
+import { GenericInputComponent } from "../generic_input";
 
 class ModulatorItem extends KTUComponent {
   valueRenderer?: Element;
@@ -90,7 +90,11 @@ class ModulatorItem extends KTUComponent {
               {MODULATOR_SETTINGS[state.type].map((setting) => (
                 <div>
                   <span>{setting.field}: </span>
-                  {resolveInputType(state, setting, "editorScene.modulators")}
+                  <GenericInputComponent
+                    binding={`editorScene.modulators.!${state.id},editorScene.modulators,editorScene.signals`}
+                    setting={setting}
+                    owner="editorScene.modulators"
+                  />
                 </div>
               ))}
             </div>
