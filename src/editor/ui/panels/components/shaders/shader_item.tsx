@@ -14,14 +14,14 @@ import {
   IconVisible,
 } from "../../../../../ktu/helpers/icons";
 import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
-import { MoveLayerDownCommand } from "../../../../commands/layers/move_layer_down_command";
 import { ToggleShaderCommand } from "../../../../commands/shaders/toggle_shader_command";
-import { MoveLayerUpCommand } from "../../../../commands/layers/move_layer_up_command";
 import { SHADER_SETTINGS } from "../../../../settings/isetting";
 import { ActivateShaderCommand } from "../../../../commands/shaders/activate_shader_command";
 import { RemoveShaderCommand } from "../../../../commands/shaders/remove_shader_command";
 import { DuplicateShaderCommand } from "../../../../commands/shaders/duplicate_shader_command";
 import { GenericInputComponent } from "../generic_input";
+import { MoveShaderUpCommand } from "../../../../commands/modulators/move_shader_up_command";
+import { MoveShaderDownCommand } from "../../../../commands/modulators/move_shader_down_command";
 
 class ShaderItem extends KTUComponent {
   owner: string;
@@ -110,12 +110,12 @@ class ShaderItem extends KTUComponent {
 
   handleUpClick() {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new MoveLayerUpCommand(state.id));
+    executeCommand(new MoveShaderUpCommand(state.id, this.parentLayerId));
   }
 
   handleDownClick() {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new MoveLayerDownCommand(state.id));
+    executeCommand(new MoveShaderDownCommand(state.id, this.parentLayerId));
   }
 
   handleVisibleClick() {
