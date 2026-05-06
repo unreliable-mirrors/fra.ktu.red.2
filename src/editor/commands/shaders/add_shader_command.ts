@@ -3,6 +3,7 @@ import {
   BnwShader,
   DataStore,
   DisplayLayerState,
+  HLinesShader,
   MontecarloShader,
   PixelateShader,
   ShaderLayerState,
@@ -38,6 +39,10 @@ export class AddShaderCommand implements ICommand {
         case "vlines":
           shaderState = VLinesShader.getDefaultState("editorScene");
           shaderState.type = "vlines";
+          break;
+        case "hlines":
+          shaderState = HLinesShader.getDefaultState("editorScene");
+          shaderState.type = "hlines";
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");
