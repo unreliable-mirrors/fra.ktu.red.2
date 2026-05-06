@@ -25,6 +25,7 @@ import { LAYER_SETTINGS } from "../../../../settings/isetting";
 import { AddShaderButtonComponent } from "../shaders/add_shader_button";
 import { ShaderItemComponent } from "../shaders/shader_item";
 import { GenericInputComponent } from "../generic_input";
+import { keyboardShortcuts } from "../../../../../ktu/helpers/keyboard_shortcuts";
 
 class LayerItem extends KTUComponent {
   constructor(props: { binding?: string }) {
@@ -38,6 +39,19 @@ class LayerItem extends KTUComponent {
       state.id === DataStore.getInstance().getStore("activeLayerId")
         ? "active"
         : "";
+
+    if (active === "active") {
+      keyboardShortcuts.register({
+        key: "PageDown",
+        action: () => this.handleDownClick(),
+        description: "Show/Hide Signals Panel",
+      });
+      keyboardShortcuts.register({
+        key: "PageUp",
+        action: () => this.handleUpClick(),
+        description: "Show/Hide Signals Panel",
+      });
+    }
     return (
       <div className={`layerItem ${active}`}>
         <div className="header">
@@ -120,6 +134,11 @@ class LayerItem extends KTUComponent {
         )}
       </div>
     );
+  }
+
+  disconnectedCallback(): void {
+    keyboardShortcuts.unregister({ key: "PageDown" });
+    keyboardShortcuts.unregister({ key: "PageUp" });
   }
 
   handleClick() {

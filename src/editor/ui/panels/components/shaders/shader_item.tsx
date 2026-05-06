@@ -22,6 +22,7 @@ import { DuplicateShaderCommand } from "../../../../commands/shaders/duplicate_s
 import { GenericInputComponent } from "../generic_input";
 import { MoveShaderUpCommand } from "../../../../commands/modulators/move_shader_up_command";
 import { MoveShaderDownCommand } from "../../../../commands/modulators/move_shader_down_command";
+import { keyboardShortcuts } from "../../../../../ktu/helpers/keyboard_shortcuts";
 
 class ShaderItem extends KTUComponent {
   owner: string;
@@ -42,6 +43,19 @@ class ShaderItem extends KTUComponent {
       state.id === DataStore.getInstance().getStore("activeShaderId")
         ? "active"
         : "";
+
+    if (active === "active") {
+      keyboardShortcuts.register({
+        key: "PageDown",
+        action: () => this.handleDownClick(),
+        description: "Show/Hide Signals Panel",
+      });
+      keyboardShortcuts.register({
+        key: "PageUp",
+        action: () => this.handleUpClick(),
+        description: "Show/Hide Signals Panel",
+      });
+    }
     return (
       <div className={`layerItem ${active}`}>
         <div className="header">
@@ -100,6 +114,11 @@ class ShaderItem extends KTUComponent {
         )}
       </div>
     );
+  }
+
+  disconnectedCallback(): void {
+    keyboardShortcuts.unregister({ key: "PageDown" });
+    keyboardShortcuts.unregister({ key: "PageUp" });
   }
 
   handleClick() {
