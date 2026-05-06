@@ -1,4 +1,5 @@
 import {
+  CompressorModulator,
   DataStore,
   LfoModulator,
   ModulatorState,
@@ -29,6 +30,10 @@ export class AddModulatorCommand implements ICommand {
         case "ring":
           modulatorState = RingModulator.getDefaultState("editorScene");
           modulatorState.type = "ring";
+          break;
+        case "compressor":
+          modulatorState = CompressorModulator.getDefaultState("editorScene");
+          modulatorState.type = "compressor";
           break;
         default:
           modulatorState = LfoModulator.getDefaultState("editorScene");

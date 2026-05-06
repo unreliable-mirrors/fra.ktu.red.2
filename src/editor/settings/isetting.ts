@@ -1,5 +1,6 @@
 import { BACKGROUND_LAYER_SETTINGS } from "./layers/background_layer_settings";
 import { VIDEO_LAYER_SETTINGS } from "./layers/video_layer_settings";
+import { COMPRESSOR_SETTINGS } from "./modulators/compressor_settings";
 import { LFO_SETTINGS } from "./modulators/lfo_settings";
 import { RANDOM_SETTINGS } from "./modulators/random_settings";
 import { RING_SETTINGS } from "./modulators/ring_settings";
@@ -36,4 +37,5 @@ export const MODULATOR_SETTINGS: { [key: string]: ISetting[] } = {
   lfo: LFO_SETTINGS,
   random: RANDOM_SETTINGS,
   ring: RING_SETTINGS,
+  compressor: COMPRESSOR_SETTINGS,
 };
