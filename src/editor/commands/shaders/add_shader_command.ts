@@ -13,6 +13,8 @@ import { ICommand } from "../icommand";
 
 export class AddShaderCommand implements ICommand {
   id!: number;
+  oldId!: number;
+  oldLayerId!: number;
   shaderType: string;
   destinationLayerId?: number;
   createdShaderState?: ShaderLayerState;
@@ -52,6 +54,11 @@ export class AddShaderCommand implements ICommand {
       shaderState = this.createdShaderState;
     }
 
+    this.id = shaderState.id;
+    this.oldId = DataStore.getInstance().getStore("activeShaderId");
+    this.oldLayerId = DataStore.getInstance().getStore("activeLayerId");
+    DataStore.getInstance().setStore("activeShaderId", this.id);
+
     if (this.destinationLayerId !== undefined) {
       const layer = (
         DataStore.getInstance().getStore(
@@ -69,9 +76,10 @@ export class AddShaderCommand implements ICommand {
       );
 
       shaders.push(shaderState);
-      DataStore.getInstance().touch("editorScene.shaders");
+      DataStore.getInstance().setStore("activeLayerId", null);
     }
-    this.id = shaderState.id;
+    DataStore.getInstance().touch("editorScene.shaders");
+    DataStore.getInstance().touch("editorScene.layers");
   }
   revert(): void {
     if (this.destinationLayerId !== undefined) {
@@ -99,5 +107,9 @@ export class AddShaderCommand implements ICommand {
         DataStore.getInstance().touch("editorScene.shaders");
       }
     }
+    DataStore.getInstance().setStore("activeLayerId", this.oldLayerId);
+    DataStore.getInstance().setStore("activeShaderId", this.oldId);
+    DataStore.getInstance().touch("editorScene.shaders");
+    DataStore.getInstance().touch("editorScene.layers");
   }
 }

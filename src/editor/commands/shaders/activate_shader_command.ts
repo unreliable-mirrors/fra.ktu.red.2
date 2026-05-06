@@ -19,9 +19,11 @@ export class ActivateShaderCommand implements ICommand {
     if (this.owner.includes(".!")) {
       DataStore.getInstance().touch(this.owner.split(".!")[0]);
     } else {
+      DataStore.getInstance().setStore("activeLayerId", null);
       DataStore.getInstance().touch("editorScene.shaders.!" + this.id);
     }
     DataStore.getInstance().touch("editorScene.shaders.!" + this.oldId);
+    DataStore.getInstance().touch("editorScene.layers");
   }
   revert(): void {
     if (this.oldId === this.id) {
@@ -34,5 +36,6 @@ export class ActivateShaderCommand implements ICommand {
       DataStore.getInstance().touch("editorScene.shaders.!" + this.id);
     }
     DataStore.getInstance().touch("editorScene.shaders.!" + this.oldId);
+    DataStore.getInstance().touch("editorScene.layers");
   }
 }
