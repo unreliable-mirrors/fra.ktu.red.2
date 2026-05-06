@@ -8,6 +8,7 @@ import { ANAGLYPH_SHADER_SETTINGS } from "./shaders/anaglyph_shader_settings";
 import { BNW_SHADER_SETTINGS } from "./shaders/bnw_shader_settings";
 import { MONTECARLO_SHADER_SETTINGS } from "./shaders/montecarlo_shader_settings";
 import { PIXELATE_SHADER_SETTINGS } from "./shaders/pixelate_shader_settings";
+import { VLINES_SHADER_SETTINGS } from "./shaders/vlines_shader_settings";
 
 export interface ISetting {
   field: string;
@@ -31,6 +32,7 @@ export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
   bnw: BNW_SHADER_SETTINGS,
   montecarlo: MONTECARLO_SHADER_SETTINGS,
   anaglyph: ANAGLYPH_SHADER_SETTINGS,
+  vlines: VLINES_SHADER_SETTINGS,
 };
 
 export const MODULATOR_SETTINGS: { [key: string]: ISetting[] } = {

@@ -6,6 +6,7 @@ import {
   MontecarloShader,
   PixelateShader,
   ShaderLayerState,
+  VLinesShader,
 } from "fra.ktu.red-component";
 import { ICommand } from "../icommand";
 
@@ -33,6 +34,10 @@ export class AddShaderCommand implements ICommand {
           break;
         case "anaglyph":
           shaderState = AnaglyphShader.getDefaultState("editorScene");
+          break;
+        case "vlines":
+          shaderState = VLinesShader.getDefaultState("editorScene");
+          shaderState.type = "vlines";
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");
