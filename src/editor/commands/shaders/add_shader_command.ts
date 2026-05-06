@@ -1,6 +1,7 @@
 import {
   AnaglyphShader,
   BnwShader,
+  ChromaShader,
   DataStore,
   DisplayLayerState,
   HLinesShader,
@@ -40,11 +41,12 @@ export class AddShaderCommand implements ICommand {
           break;
         case "vlines":
           shaderState = VLinesShader.getDefaultState("editorScene");
-          shaderState.type = "vlines";
           break;
         case "hlines":
           shaderState = HLinesShader.getDefaultState("editorScene");
-          shaderState.type = "hlines";
+          break;
+        case "chroma":
+          shaderState = ChromaShader.getDefaultState("editorScene");
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");

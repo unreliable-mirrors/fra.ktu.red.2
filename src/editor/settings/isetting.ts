@@ -6,6 +6,7 @@ import { RANDOM_SETTINGS } from "./modulators/random_settings";
 import { RING_SETTINGS } from "./modulators/ring_settings";
 import { ANAGLYPH_SHADER_SETTINGS } from "./shaders/anaglyph_shader_settings";
 import { BNW_SHADER_SETTINGS } from "./shaders/bnw_shader_settings";
+import { CHROMA_SHADER_SETTINGS } from "./shaders/chroma_shader_settings";
 import { HLINES_SHADER_SETTINGS } from "./shaders/hlines_shader_settings";
 import { MONTECARLO_SHADER_SETTINGS } from "./shaders/montecarlo_shader_settings";
 import { PIXELATE_SHADER_SETTINGS } from "./shaders/pixelate_shader_settings";
@@ -35,6 +36,7 @@ export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
   anaglyph: ANAGLYPH_SHADER_SETTINGS,
   vlines: VLINES_SHADER_SETTINGS,
   hlines: HLINES_SHADER_SETTINGS,
+  chroma: CHROMA_SHADER_SETTINGS,
 };
 
 export const MODULATOR_SETTINGS: { [key: string]: ISetting[] } = {
