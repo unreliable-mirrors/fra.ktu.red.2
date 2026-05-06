@@ -6,16 +6,23 @@ import {
 } from "fra.ktu.red-component";
 import { AddModulatorButtonComponent } from "./components/modulators/add_modulator_button";
 import { ModulatorItemComponent } from "./components/modulators/modulator_item";
+import { keyboardShortcuts } from "../../../ktu/helpers/keyboard_shortcuts";
 
 class ModulatorsPanel extends KTUComponent {
   constructor(props: { binding?: string }) {
     super(props);
+
+    keyboardShortcuts.register({
+      key: "m",
+      action: () => this.onClick(),
+      description: "Show/Hide Modulators Panel",
+    });
   }
 
   render(): Element {
     return (
-      <div class="panel right">
-        <h3>Modulators</h3>
+      <div class="panel right" id="modulators-panel">
+        <h3 onclick={() => this.onClick()}>Modulators (M)</h3>
         <div>
           <div className="layerIcons">
             {AVAILABLE_MODULATORS.map((layerType) =>
@@ -40,6 +47,10 @@ class ModulatorsPanel extends KTUComponent {
     return {
       "instances.editorScene.modulators": [],
     };
+  }
+
+  onClick() {
+    document.getElementById("modulators-panel")?.classList.toggle("collapsed");
   }
 }
 
