@@ -3,6 +3,7 @@ import {
   LfoModulator,
   ModulatorState,
   RandomModulator,
+  RingModulator,
 } from "fra.ktu.red-component";
 import { ICommand } from "../icommand";
 import { SceneState } from "fra.ktu.red-component";
@@ -24,6 +25,10 @@ export class AddModulatorCommand implements ICommand {
           break;
         case "random":
           modulatorState = RandomModulator.getDefaultState("editorScene");
+          break;
+        case "ring":
+          modulatorState = RingModulator.getDefaultState("editorScene");
+          modulatorState.type = "ring";
           break;
         default:
           modulatorState = LfoModulator.getDefaultState("editorScene");

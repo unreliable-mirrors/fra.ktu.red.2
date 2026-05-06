@@ -209,18 +209,15 @@ class GenericInput extends KTUComponent {
           </span>
         );
       case "options":
-        console.log(
-          "VALUES",
-          this.setting.values,
-          this.setting.field,
-          state,
-          (state as any)[this.setting.field],
-        );
         return (
           <span>
             {this.setting.values!.map((e) => (
               <button
-                onclick={() => this.setting.onchange?.(state.id, e, this.owner)}
+                type="button"
+                onclick={() => {
+                  this.setting.onchange?.(state.id, e, this.owner);
+                  this.reRender();
+                }}
                 className={
                   (state as any)[this.setting.field] === e ? "selected" : ""
                 }
