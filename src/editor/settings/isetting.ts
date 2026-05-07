@@ -7,6 +7,7 @@ import { RING_SETTINGS } from "./modulators/ring_settings";
 import { ANAGLYPH_SHADER_SETTINGS } from "./shaders/anaglyph_shader_settings";
 import { BNW_SHADER_SETTINGS } from "./shaders/bnw_shader_settings";
 import { CHROMA_SHADER_SETTINGS } from "./shaders/chroma_shader_settings";
+import { CROSSES_SHADER_SETTINGS } from "./shaders/crosses_shader_settings";
 import { HLINES_SHADER_SETTINGS } from "./shaders/hlines_shader_settings";
 import { MONTECARLO_SHADER_SETTINGS } from "./shaders/montecarlo_shader_settings";
 import { NEGATIVE_SHADER_SETTINGS } from "./shaders/negative_shader_settings";
@@ -41,6 +42,7 @@ export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
   chroma: CHROMA_SHADER_SETTINGS,
   scramble: SCRAMBLE_SHADER_SETTINGS,
   negative: NEGATIVE_SHADER_SETTINGS,
+  crosses: CROSSES_SHADER_SETTINGS,
 };
 
 export const MODULATOR_SETTINGS: { [key: string]: ISetting[] } = {

@@ -2,6 +2,7 @@ import {
   AnaglyphShader,
   BnwShader,
   ChromaShader,
+  CrossesShader,
   DataStore,
   DisplayLayerState,
   HLinesShader,
@@ -55,6 +56,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "negative":
           shaderState = NegativeShader.getDefaultState("editorScene");
+          break;
+        case "crosses":
+          shaderState = CrossesShader.getDefaultState("editorScene");
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");
