@@ -7,6 +7,7 @@ import {
   HLinesShader,
   MontecarloShader,
   PixelateShader,
+  ScrambleShader,
   ShaderLayerState,
   VLinesShader,
 } from "fra.ktu.red-component";
@@ -47,6 +48,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "chroma":
           shaderState = ChromaShader.getDefaultState("editorScene");
+          break;
+        case "scramble":
+          shaderState = ScrambleShader.getDefaultState("editorScene");
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");

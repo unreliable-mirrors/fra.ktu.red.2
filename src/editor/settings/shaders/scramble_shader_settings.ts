@@ -2,16 +2,16 @@ import { executeCommand } from "../../../ktu/helpers/commands_manager";
 import { SetShaderFieldCommand } from "../../commands/shaders/set_shader_field_command";
 import { ISetting } from "../isetting";
 
-export const MONTECARLO_SHADER_SETTINGS: ISetting[] = [
+export const SCRAMBLE_SHADER_SETTINGS: ISetting[] = [
   {
-    field: "strength",
-    type: "float",
+    field: "range",
+    type: "integer",
     onchange: (id: number, value: string | number | boolean, owner: string) => {
       executeCommand(
         new SetShaderFieldCommand(
           id,
-          "strength",
-          parseFloat(value.toString()),
+          "range",
+          parseInt(value.toString()),
           owner,
         ),
       );
@@ -66,21 +66,6 @@ export const MONTECARLO_SHADER_SETTINGS: ISetting[] = [
         new SetShaderFieldCommand(
           id,
           "blueDryWet",
-          parseFloat(value.toString()),
-          owner,
-        ),
-      );
-    },
-    signalizable: true,
-  },
-  {
-    field: "alphaDryWet",
-    type: "float",
-    onchange: (id: number, value: string | number | boolean, owner: string) => {
-      executeCommand(
-        new SetShaderFieldCommand(
-          id,
-          "alphaDryWet",
           parseFloat(value.toString()),
           owner,
         ),
