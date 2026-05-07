@@ -6,6 +6,7 @@ import {
   DisplayLayerState,
   HLinesShader,
   MontecarloShader,
+  NegativeShader,
   PixelateShader,
   ScrambleShader,
   ShaderLayerState,
@@ -51,6 +52,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "scramble":
           shaderState = ScrambleShader.getDefaultState("editorScene");
+          break;
+        case "negative":
+          shaderState = NegativeShader.getDefaultState("editorScene");
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");
