@@ -9,6 +9,7 @@ import {
   MontecarloShader,
   NegativeShader,
   PixelateShader,
+  RecolourShader,
   ScrambleShader,
   ShaderLayerState,
   VLinesShader,
@@ -59,6 +60,10 @@ export class AddShaderCommand implements ICommand {
           break;
         case "crosses":
           shaderState = CrossesShader.getDefaultState("editorScene");
+          break;
+        case "recolour":
+          shaderState = RecolourShader.getDefaultState("editorScene");
+          shaderState.type = "recolour";
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");

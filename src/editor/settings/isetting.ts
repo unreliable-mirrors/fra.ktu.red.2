@@ -12,6 +12,7 @@ import { HLINES_SHADER_SETTINGS } from "./shaders/hlines_shader_settings";
 import { MONTECARLO_SHADER_SETTINGS } from "./shaders/montecarlo_shader_settings";
 import { NEGATIVE_SHADER_SETTINGS } from "./shaders/negative_shader_settings";
 import { PIXELATE_SHADER_SETTINGS } from "./shaders/pixelate_shader_settings";
+import { RECOLOUR_SHADER_SETTINGS } from "./shaders/recolour_shader_settings";
 import { SCRAMBLE_SHADER_SETTINGS } from "./shaders/scramble_shader_settings";
 import { VLINES_SHADER_SETTINGS } from "./shaders/vlines_shader_settings";
 
@@ -43,6 +44,7 @@ export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
   scramble: SCRAMBLE_SHADER_SETTINGS,
   negative: NEGATIVE_SHADER_SETTINGS,
   crosses: CROSSES_SHADER_SETTINGS,
+  recolour: RECOLOUR_SHADER_SETTINGS,
 };
 
 export const MODULATOR_SETTINGS: { [key: string]: ISetting[] } = {

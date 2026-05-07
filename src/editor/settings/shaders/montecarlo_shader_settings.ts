@@ -29,6 +29,14 @@ export const MONTECARLO_SHADER_SETTINGS: ISetting[] = [
     signalizable: true,
   },
   {
+    field: "not",
+    type: "boolean",
+    onchange: (id: number, value: string | number | boolean, owner: string) => {
+      executeCommand(new SetShaderFieldCommand(id, "not", value, owner));
+    },
+    signalizable: true,
+  },
+  {
     field: "redDryWet",
     type: "float",
     onchange: (id: number, value: string | number | boolean, owner: string) => {

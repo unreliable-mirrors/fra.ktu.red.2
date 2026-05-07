@@ -2,58 +2,34 @@ import { executeCommand } from "../../../ktu/helpers/commands_manager";
 import { SetShaderFieldCommand } from "../../commands/shaders/set_shader_field_command";
 import { ISetting } from "../isetting";
 
-export const CROSSES_SHADER_SETTINGS: ISetting[] = [
+export const RECOLOUR_SHADER_SETTINGS: ISetting[] = [
   {
-    field: "gridSize",
-    type: "integer",
+    field: "fromColor",
+    type: "color",
+    onchange: (id: number, value: string | number | boolean, owner: string) => {
+      executeCommand(new SetShaderFieldCommand(id, "fromColor", value, owner));
+    },
+    signalizable: false,
+  },
+  {
+    field: "toColor",
+    type: "color",
+    onchange: (id: number, value: string | number | boolean, owner: string) => {
+      executeCommand(new SetShaderFieldCommand(id, "toColor", value, owner));
+    },
+    signalizable: false,
+  },
+  {
+    field: "threshold",
+    type: "float",
     onchange: (id: number, value: string | number | boolean, owner: string) => {
       executeCommand(
         new SetShaderFieldCommand(
           id,
-          "gridSize",
-          parseInt(value.toString()),
+          "threshold",
+          parseFloat(value.toString()),
           owner,
         ),
-      );
-    },
-    signalizable: true,
-  },
-  {
-    field: "crossSize",
-    type: "integer",
-    onchange: (id: number, value: string | number | boolean, owner: string) => {
-      executeCommand(
-        new SetShaderFieldCommand(
-          id,
-          "crossSize",
-          parseInt(value.toString()),
-          owner,
-        ),
-      );
-    },
-    signalizable: true,
-  },
-  {
-    field: "lineThickness",
-    type: "integer",
-    onchange: (id: number, value: string | number | boolean, owner: string) => {
-      executeCommand(
-        new SetShaderFieldCommand(
-          id,
-          "lineThickness",
-          parseInt(value.toString()),
-          owner,
-        ),
-      );
-    },
-    signalizable: true,
-  },
-  {
-    field: "variableCrossSize",
-    type: "boolean",
-    onchange: (id: number, value: string | number | boolean, owner: string) => {
-      executeCommand(
-        new SetShaderFieldCommand(id, "variableCrossSize", value, owner),
       );
     },
     signalizable: true,
@@ -63,6 +39,34 @@ export const CROSSES_SHADER_SETTINGS: ISetting[] = [
     type: "boolean",
     onchange: (id: number, value: string | number | boolean, owner: string) => {
       executeCommand(new SetShaderFieldCommand(id, "not", value, owner));
+    },
+    signalizable: true,
+  },
+  {
+    field: "onlyHue",
+    type: "boolean",
+    onchange: (id: number, value: string | number | boolean, owner: string) => {
+      executeCommand(new SetShaderFieldCommand(id, "onlyHue", value, owner));
+    },
+    signalizable: true,
+  },
+  {
+    field: "onlySaturation",
+    type: "boolean",
+    onchange: (id: number, value: string | number | boolean, owner: string) => {
+      executeCommand(
+        new SetShaderFieldCommand(id, "onlySaturation", value, owner),
+      );
+    },
+    signalizable: true,
+  },
+  {
+    field: "onlyLightness",
+    type: "boolean",
+    onchange: (id: number, value: string | number | boolean, owner: string) => {
+      executeCommand(
+        new SetShaderFieldCommand(id, "onlyLightness", value, owner),
+      );
     },
     signalizable: true,
   },
@@ -104,21 +108,6 @@ export const CROSSES_SHADER_SETTINGS: ISetting[] = [
         new SetShaderFieldCommand(
           id,
           "blueDryWet",
-          parseFloat(value.toString()),
-          owner,
-        ),
-      );
-    },
-    signalizable: true,
-  },
-  {
-    field: "alphaDryWet",
-    type: "float",
-    onchange: (id: number, value: string | number | boolean, owner: string) => {
-      executeCommand(
-        new SetShaderFieldCommand(
-          id,
-          "alphaDryWet",
           parseFloat(value.toString()),
           owner,
         ),
