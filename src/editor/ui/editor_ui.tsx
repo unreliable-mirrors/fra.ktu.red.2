@@ -9,10 +9,18 @@ import { ModulatorsPanelComponent } from "./panels/modulators_panel";
 import { ExportOverlayComponent } from "./panels/components/export/export_overlay";
 import { HistoryPanelComponent } from "./panels/history_panel";
 import { ShortcutsOverlayComponent } from "./panels/components/shortcuts_overlay";
+import { keyboardShortcuts } from "../../ktu/helpers/keyboard_shortcuts";
 
 class EditorUI extends KTUComponent {
   constructor(props: { binding?: string }) {
     super(props);
+
+    keyboardShortcuts.register({
+      key: "Tab",
+      ctrl: true,
+      action: () => this.toggleHide(),
+      description: "Show/Hide UI",
+    });
   }
 
   render(): Element {
@@ -33,6 +41,10 @@ class EditorUI extends KTUComponent {
         <ShortcutsOverlayComponent />
       </div>
     );
+  }
+
+  toggleHide() {
+    document.querySelector(".editor-ui")?.classList.toggle("hidden");
   }
 }
 
