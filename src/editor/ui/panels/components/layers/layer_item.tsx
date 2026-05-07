@@ -20,7 +20,7 @@ import { DuplicateLayerCommand } from "../../../../commands/layers/duplicate_lay
 import { ToggleLayerCommand } from "../../../../commands/layers/toggle_layer_command";
 import { MoveLayerDownCommand } from "../../../../commands/layers/move_layer_down_command";
 import { MoveLayerUpCommand } from "../../../../commands/layers/move_layer_up_command";
-import { ActivateLayerCommand } from "../../../../commands/layers/activate_layer_command";
+import { ActivateThingCommand } from "../../../../commands/activate_thing_command";
 import { LAYER_SETTINGS } from "../../../../settings/isetting";
 import { AddShaderButtonComponent } from "../shaders/add_shader_button";
 import { ShaderItemComponent } from "../shaders/shader_item";
@@ -34,13 +34,20 @@ class LayerItem extends KTUComponent {
 
   render(): Element {
     const state: DisplayLayerState = this.bindingData[this.bindingKeys[0]];
-    //TODO: IMPLEMENT THIS PROPERLY
     const active =
-      state.id === DataStore.getInstance().getStore("activeLayerId")
+      state.id === DataStore.getInstance().getStore("activeThingId") ||
+      state.shaders.some(
+        (shader) =>
+          shader.id === DataStore.getInstance().getStore("activeThingId"),
+      )
         ? "active"
         : "";
 
-    if (active === "active") {
+    if (
+      active === "active" &&
+      DataStore.getInstance().getStore("activeThingId") === state.id
+    ) {
+      console.log("Registering layer shortcuts for layer:", state.name);
       keyboardShortcuts.register({
         key: "PageDown",
         action: () => this.handleDownClick(),
@@ -50,6 +57,11 @@ class LayerItem extends KTUComponent {
         key: "PageUp",
         action: () => this.handleUpClick(),
         description: "Show/Hide Signals Panel",
+      });
+      keyboardShortcuts.register({
+        key: "Delete",
+        action: () => this.handleCloseClick(),
+        description: "Remove Layer",
       });
     }
     return (
@@ -137,13 +149,15 @@ class LayerItem extends KTUComponent {
   }
 
   disconnectedCallback(): void {
+    super.disconnectedCallback();
     keyboardShortcuts.unregister({ key: "PageDown" });
     keyboardShortcuts.unregister({ key: "PageUp" });
+    keyboardShortcuts.unregister({ key: "Delete" });
   }
 
   handleClick() {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new ActivateLayerCommand(state.id));
+    executeCommand(new ActivateThingCommand(state.id));
   }
 
   handleUpClick() {

@@ -29,6 +29,15 @@ class KeyboardShortcutsManager {
   }
 
   register(shortcut: ShortcutEntry): void {
+    //REMOVE OTHER SHORTCUTS WITH THE SAME KEY COMBINATION
+    this.shortcuts = this.shortcuts.filter((s) => {
+      return !(
+        s.key === shortcut.key &&
+        s.ctrl === shortcut.ctrl &&
+        s.shift === shortcut.shift &&
+        s.alt === shortcut.alt
+      );
+    });
     this.shortcuts.push(shortcut);
   }
 

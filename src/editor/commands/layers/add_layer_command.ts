@@ -6,6 +6,7 @@ import {
   VideoLayer,
 } from "fra.ktu.red-component";
 import { ICommand } from "../icommand";
+import { touchThingsById } from "../../helpers/active_helper";
 
 export class AddLayerCommand implements ICommand {
   id!: number;
@@ -40,22 +41,19 @@ export class AddLayerCommand implements ICommand {
 
     scene.layers.push(layerState);
     this.id = layerState.id;
-    this.oldId = DataStore.getInstance().getStore("activeLayerId");
-    this.oldShaderId = DataStore.getInstance().getStore("activeShaderId");
+    this.oldId = DataStore.getInstance().getStore("activeThingId");
 
-    DataStore.getInstance().setStore("activeLayerId", this.id);
-    DataStore.getInstance().setStore("activeShaderId", null);
+    DataStore.getInstance().setStore("activeThingId", this.id);
+    touchThingsById(this.oldId);
     DataStore.getInstance().touch("editorScene.layers");
-    DataStore.getInstance().touch("editorScene.shaders");
   }
 
   revert(): void {
     const scene: SceneState = DataStore.getInstance().getStore("editorScene");
     scene.layers = scene.layers.filter((layer) => layer.id !== this.id);
 
-    DataStore.getInstance().setStore("activeLayerId", this.oldId);
-    DataStore.getInstance().setStore("activeShaderId", this.oldShaderId);
+    DataStore.getInstance().setStore("activeThingId", this.oldId);
+    touchThingsById(this.oldId);
     DataStore.getInstance().touch("editorScene.layers");
-    DataStore.getInstance().touch("editorScene.shaders");
   }
 }

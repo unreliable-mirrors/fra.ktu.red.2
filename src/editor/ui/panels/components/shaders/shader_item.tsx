@@ -16,13 +16,13 @@ import {
 import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
 import { ToggleShaderCommand } from "../../../../commands/shaders/toggle_shader_command";
 import { SHADER_SETTINGS } from "../../../../settings/isetting";
-import { ActivateShaderCommand } from "../../../../commands/shaders/activate_shader_command";
 import { RemoveShaderCommand } from "../../../../commands/shaders/remove_shader_command";
 import { DuplicateShaderCommand } from "../../../../commands/shaders/duplicate_shader_command";
 import { GenericInputComponent } from "../generic_input";
 import { MoveShaderUpCommand } from "../../../../commands/modulators/move_shader_up_command";
 import { MoveShaderDownCommand } from "../../../../commands/modulators/move_shader_down_command";
 import { keyboardShortcuts } from "../../../../../ktu/helpers/keyboard_shortcuts";
+import { ActivateThingCommand } from "../../../../commands/activate_thing_command";
 
 class ShaderItem extends KTUComponent {
   owner: string;
@@ -40,7 +40,7 @@ class ShaderItem extends KTUComponent {
   render(): Element {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
     const active =
-      state.id === DataStore.getInstance().getStore("activeShaderId")
+      state.id === DataStore.getInstance().getStore("activeThingId")
         ? "active"
         : "";
 
@@ -54,6 +54,11 @@ class ShaderItem extends KTUComponent {
         key: "PageUp",
         action: () => this.handleUpClick(),
         description: "Show/Hide Signals Panel",
+      });
+      keyboardShortcuts.register({
+        key: "Delete",
+        action: () => this.handleCloseClick(),
+        description: "Remove Layer",
       });
     }
     return (
@@ -117,14 +122,16 @@ class ShaderItem extends KTUComponent {
   }
 
   disconnectedCallback(): void {
+    super.disconnectedCallback();
     keyboardShortcuts.unregister({ key: "PageDown" });
     keyboardShortcuts.unregister({ key: "PageUp" });
+    keyboardShortcuts.unregister({ key: "Delete" });
   }
 
   handleClick() {
     console.log("click");
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new ActivateShaderCommand(state.id, this.owner));
+    executeCommand(new ActivateThingCommand(state.id));
   }
 
   handleUpClick() {

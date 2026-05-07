@@ -11,11 +11,11 @@ import {
   VLinesShader,
 } from "fra.ktu.red-component";
 import { ICommand } from "../icommand";
+import { touchThingsById } from "../../helpers/active_helper";
 
 export class AddShaderCommand implements ICommand {
   id!: number;
   oldId!: number;
-  oldLayerId!: number;
   shaderType: string;
   destinationLayerId?: number;
   createdShaderState?: ShaderLayerState;
@@ -57,9 +57,9 @@ export class AddShaderCommand implements ICommand {
     }
 
     this.id = shaderState.id;
-    this.oldId = DataStore.getInstance().getStore("activeShaderId");
-    this.oldLayerId = DataStore.getInstance().getStore("activeLayerId");
-    DataStore.getInstance().setStore("activeShaderId", this.id);
+    this.oldId = DataStore.getInstance().getStore("activeThingId");
+    DataStore.getInstance().setStore("activeThingId", this.id);
+    touchThingsById(this.oldId);
 
     if (this.destinationLayerId !== undefined) {
       const layer = (
@@ -78,10 +78,8 @@ export class AddShaderCommand implements ICommand {
       );
 
       shaders.push(shaderState);
-      DataStore.getInstance().setStore("activeLayerId", null);
+      DataStore.getInstance().touch("editorScene.shaders");
     }
-    DataStore.getInstance().touch("editorScene.shaders");
-    DataStore.getInstance().touch("editorScene.layers");
   }
   revert(): void {
     if (this.destinationLayerId !== undefined) {
@@ -109,9 +107,7 @@ export class AddShaderCommand implements ICommand {
         DataStore.getInstance().touch("editorScene.shaders");
       }
     }
-    DataStore.getInstance().setStore("activeLayerId", this.oldLayerId);
-    DataStore.getInstance().setStore("activeShaderId", this.oldId);
-    DataStore.getInstance().touch("editorScene.shaders");
-    DataStore.getInstance().touch("editorScene.layers");
+    DataStore.getInstance().setStore("activeThingId", this.oldId);
+    touchThingsById(this.oldId);
   }
 }

@@ -13,9 +13,10 @@ import { MODULATOR_SETTINGS } from "../../../../settings/isetting";
 import { ModulatorState } from "fra.ktu.red-component";
 import { LineChart } from "chartist";
 import { IModulator } from "fra.ktu.red-component/dist/modulators/imodulator";
-import { ActivateModulatorCommand } from "../../../../commands/modulators/activate_modulator_command";
 import { GenericInputComponent } from "../generic_input";
 import { RemoveModulatorCommand } from "../../../../commands/modulators/remove_modulator_command";
+import { keyboardShortcuts } from "../../../../../ktu/helpers/keyboard_shortcuts";
+import { ActivateThingCommand } from "../../../../commands/activate_thing_command";
 
 class ModulatorItem extends KTUComponent {
   valueRenderer?: Element;
@@ -57,9 +58,17 @@ class ModulatorItem extends KTUComponent {
       ) as IModulator[]
     ).find((modulator) => modulator.id === state.id)!;
     const active =
-      state.id === DataStore.getInstance().getStore("activeModulatorId")
+      state.id === DataStore.getInstance().getStore("activeThingId")
         ? "active"
         : "";
+
+    if (active === "active") {
+      keyboardShortcuts.register({
+        key: "Delete",
+        action: () => this.handleCloseClick(),
+        description: "Remove Layer",
+      });
+    }
 
     this.valueRenderer = <div>{modulator.value.toFixed(2)}</div>;
     return (
@@ -107,6 +116,11 @@ class ModulatorItem extends KTUComponent {
     );
   }
 
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    keyboardShortcuts.unregister({ key: "Delete" });
+  }
+
   afterRender() {
     const state: ModulatorState = this.bindingData[this.bindingKeys[0]];
     const modulator = (
@@ -115,7 +129,7 @@ class ModulatorItem extends KTUComponent {
       ) as IModulator[]
     ).find((modulator) => modulator.id === state.id)!;
     const active =
-      state.id === DataStore.getInstance().getStore("activeModulatorId")
+      state.id === DataStore.getInstance().getStore("activeThingId")
         ? "active"
         : "";
     if (active === "active") {
@@ -139,7 +153,7 @@ class ModulatorItem extends KTUComponent {
   handleClick() {
     console.log("click");
     const state: ModulatorState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new ActivateModulatorCommand(state.id));
+    executeCommand(new ActivateThingCommand(state.id));
   }
 
   handleVisibleClick() {

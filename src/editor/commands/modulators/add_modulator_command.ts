@@ -8,9 +8,11 @@ import {
 } from "fra.ktu.red-component";
 import { ICommand } from "../icommand";
 import { SceneState } from "fra.ktu.red-component";
+import { touchThingsById } from "../../helpers/active_helper";
 
 export class AddModulatorCommand implements ICommand {
   id!: number;
+  oldId!: number;
   modulatorType: string;
   createdModulatorState?: ModulatorState;
   constructor(modulatorType: string) {
@@ -45,7 +47,9 @@ export class AddModulatorCommand implements ICommand {
 
     scene.modulators.push(modulatorState);
     this.id = modulatorState.id;
-
+    this.oldId = DataStore.getInstance().getStore("activeThingId");
+    DataStore.getInstance().setStore("activeThingId", this.id);
+    touchThingsById(this.oldId);
     DataStore.getInstance().touch("editorScene.modulators");
   }
   revert(): void {
@@ -53,6 +57,8 @@ export class AddModulatorCommand implements ICommand {
     scene.modulators = scene.modulators.filter(
       (modulator) => modulator.id !== this.id,
     );
+    DataStore.getInstance().setStore("activeThingId", this.oldId);
+    touchThingsById(this.oldId);
     DataStore.getInstance().touch("editorScene.modulators");
   }
 }
