@@ -6,6 +6,7 @@ import {
   DataStore,
   DisplayLayerState,
   HLinesShader,
+  HNoiseShader,
   MontecarloShader,
   NegativeShader,
   PixelateShader,
@@ -63,7 +64,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "recolour":
           shaderState = RecolourShader.getDefaultState("editorScene");
-          shaderState.type = "recolour";
+          break;
+        case "hnoise":
+          shaderState = HNoiseShader.getDefaultState("editorScene");
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");

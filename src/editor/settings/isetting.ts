@@ -9,6 +9,7 @@ import { BNW_SHADER_SETTINGS } from "./shaders/bnw_shader_settings";
 import { CHROMA_SHADER_SETTINGS } from "./shaders/chroma_shader_settings";
 import { CROSSES_SHADER_SETTINGS } from "./shaders/crosses_shader_settings";
 import { HLINES_SHADER_SETTINGS } from "./shaders/hlines_shader_settings";
+import { HNOISE_SHADER_SETTINGS } from "./shaders/hnoise_shader_settings";
 import { MONTECARLO_SHADER_SETTINGS } from "./shaders/montecarlo_shader_settings";
 import { NEGATIVE_SHADER_SETTINGS } from "./shaders/negative_shader_settings";
 import { PIXELATE_SHADER_SETTINGS } from "./shaders/pixelate_shader_settings";
@@ -45,6 +46,7 @@ export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
   negative: NEGATIVE_SHADER_SETTINGS,
   crosses: CROSSES_SHADER_SETTINGS,
   recolour: RECOLOUR_SHADER_SETTINGS,
+  hnoise: HNOISE_SHADER_SETTINGS,
 };
 
 export const MODULATOR_SETTINGS: { [key: string]: ISetting[] } = {
