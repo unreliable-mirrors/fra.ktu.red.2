@@ -8,7 +8,6 @@ import {
 } from "../../../../../ktu/helpers/icons";
 import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
 import { DuplicateLayerCommand } from "../../../../commands/layers/duplicate_layer_command";
-import { ToggleLayerCommand } from "../../../../commands/layers/toggle_layer_command";
 import { MODULATOR_SETTINGS } from "../../../../settings/isetting";
 import { ModulatorState } from "fra.ktu.red-component";
 import { LineChart } from "chartist";
@@ -17,6 +16,7 @@ import { GenericInputComponent } from "../generic_input";
 import { RemoveModulatorCommand } from "../../../../commands/modulators/remove_modulator_command";
 import { keyboardShortcuts } from "../../../../../ktu/helpers/keyboard_shortcuts";
 import { ActivateThingCommand } from "../../../../commands/activate_thing_command";
+import { ToggleModulatorCommand } from "../../../../commands/modulators/toggle_modulator_command";
 
 class ModulatorItem extends KTUComponent {
   valueRenderer?: Element;
@@ -158,7 +158,7 @@ class ModulatorItem extends KTUComponent {
 
   handleVisibleClick() {
     const state: ModulatorState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new ToggleLayerCommand(state.id));
+    executeCommand(new ToggleModulatorCommand(state.id));
   }
 
   handleDuplicateClick() {
