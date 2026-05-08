@@ -7,6 +7,7 @@ import {
   DisplayLayerState,
   HLinesShader,
   HNoiseShader,
+  LightSplitShader,
   MontecarloShader,
   NegativeShader,
   PixelateShader,
@@ -67,6 +68,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "hnoise":
           shaderState = HNoiseShader.getDefaultState("editorScene");
+          break;
+        case "light_split":
+          shaderState = LightSplitShader.getDefaultState("editorScene");
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");
