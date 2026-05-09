@@ -1,5 +1,6 @@
 import {
   AnaglyphShader,
+  BlurShader,
   BnwShader,
   ChromaShader,
   CrossesShader,
@@ -36,6 +37,9 @@ export class AddShaderCommand implements ICommand {
       switch (this.shaderType) {
         case "pixelate":
           shaderState = PixelateShader.getDefaultState("editorScene");
+          break;
+        case "blur":
+          shaderState = BlurShader.getDefaultState("editorScene");
           break;
         case "bnw":
           shaderState = BnwShader.getDefaultState("editorScene");
