@@ -14,6 +14,7 @@ import { LIGHT_SPLIT_SHADER_SETTINGS } from "./shaders/light_split_shader_settin
 import { MONTECARLO_SHADER_SETTINGS } from "./shaders/montecarlo_shader_settings";
 import { NEGATIVE_SHADER_SETTINGS } from "./shaders/negative_shader_settings";
 import { PIXELATE_SHADER_SETTINGS } from "./shaders/pixelate_shader_settings";
+import { POSTERIZE_SHADER_SETTINGS } from "./shaders/posterize_shader_settings";
 import { RECOLOUR_SHADER_SETTINGS } from "./shaders/recolour_shader_settings";
 import { SCRAMBLE_SHADER_SETTINGS } from "./shaders/scramble_shader_settings";
 import { VLINES_SHADER_SETTINGS } from "./shaders/vlines_shader_settings";
@@ -49,6 +50,7 @@ export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
   recolour: RECOLOUR_SHADER_SETTINGS,
   hnoise: HNOISE_SHADER_SETTINGS,
   light_split: LIGHT_SPLIT_SHADER_SETTINGS,
+  posterize: POSTERIZE_SHADER_SETTINGS,
 };
 
 export const MODULATOR_SETTINGS: { [key: string]: ISetting[] } = {

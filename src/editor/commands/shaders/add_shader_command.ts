@@ -10,6 +10,7 @@ import {
   LightSplitShader,
   MontecarloShader,
   NegativeShader,
+  PosterizeShader,
   PixelateShader,
   RecolourShader,
   ScrambleShader,
@@ -71,6 +72,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "light_split":
           shaderState = LightSplitShader.getDefaultState("editorScene");
+          break;
+        case "posterize":
+          shaderState = PosterizeShader.getDefaultState("editorScene");
           break;
         default:
           shaderState = PixelateShader.getDefaultState("editorScene");
