@@ -10,6 +10,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  packages: read
 
 concurrency:
   group: github-pages
@@ -25,6 +26,14 @@ jobs:
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
+
+      - name: Configure GitHub Packages auth
+        run: |
+          echo "@unreliable-mirrors:registry=https://npm.pkg.github.com" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc
+          echo "always-auth=true" >> ~/.npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN != '' && secrets.PACKAGES_READ_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
