@@ -33,7 +33,7 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.PACKAGES_READ_TOKEN }}" >> .npmrc
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: bun install
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
