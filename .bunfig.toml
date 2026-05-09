@@ -1,6 +1,0 @@
-[install]
-# Configure GitHub Packages registry for scoped package
-registry = "https://registry.npmjs.org"
-
-["@unreliable-mirrors"]
-registry = "https://npm.pkg.github.com"

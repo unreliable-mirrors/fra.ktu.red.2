@@ -14,7 +14,7 @@
     "@tauri-apps/plugin-opener": "^2",
     "@types/gif.js": "^0.2.5",
     "chartist": "^1.5.0",
-    "@unreliable-mirrors/fra.ktu.red-component": "alpha",
+    "fra.ktu.red-component": "^0.1.0-alpha.10",
     "gif.js": "^0.2.0",
     "jszip": "^3.10.1"
   },
