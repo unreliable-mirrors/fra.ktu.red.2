@@ -2,15 +2,45 @@ import { executeCommand } from "../../../ktu/helpers/commands_manager";
 import { SetShaderFieldCommand } from "../../commands/shaders/set_shader_field_command";
 import { ISetting } from "../isetting";
 
-export const BLUR_SHADER_SETTINGS: ISetting[] = [
+export const HSB_BLUR_SHADER_SETTINGS: ISetting[] = [
   {
-    field: "radius",
+    field: "hueRadius",
     type: "integer",
     onchange: (id: number, value: string | number | boolean, owner: string) => {
       executeCommand(
         new SetShaderFieldCommand(
           id,
-          "radius",
+          "hueRadius",
+          parseInt(value.toString()),
+          owner,
+        ),
+      );
+    },
+    signalizable: true,
+  },
+  {
+    field: "saturationRadius",
+    type: "integer",
+    onchange: (id: number, value: string | number | boolean, owner: string) => {
+      executeCommand(
+        new SetShaderFieldCommand(
+          id,
+          "saturationRadius",
+          parseInt(value.toString()),
+          owner,
+        ),
+      );
+    },
+    signalizable: true,
+  },
+  {
+    field: "lightnessRadius",
+    type: "integer",
+    onchange: (id: number, value: string | number | boolean, owner: string) => {
+      executeCommand(
+        new SetShaderFieldCommand(
+          id,
+          "lightnessRadius",
           parseInt(value.toString()),
           owner,
         ),

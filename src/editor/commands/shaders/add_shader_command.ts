@@ -8,6 +8,7 @@ import {
   DisplayLayerState,
   HLinesShader,
   HNoiseShader,
+  HSBBlurShader,
   LightSplitShader,
   MontecarloShader,
   NegativeShader,
@@ -55,6 +56,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "hlines":
           shaderState = HLinesShader.getDefaultState("editorScene");
+          break;
+        case "hsb_blur":
+          shaderState = HSBBlurShader.getDefaultState("editorScene");
           break;
         case "chroma":
           shaderState = ChromaShader.getDefaultState("editorScene");

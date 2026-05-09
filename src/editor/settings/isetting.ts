@@ -11,6 +11,7 @@ import { CHROMA_SHADER_SETTINGS } from "./shaders/chroma_shader_settings";
 import { CROSSES_SHADER_SETTINGS } from "./shaders/crosses_shader_settings";
 import { HLINES_SHADER_SETTINGS } from "./shaders/hlines_shader_settings";
 import { HNOISE_SHADER_SETTINGS } from "./shaders/hnoise_shader_settings";
+import { HSB_BLUR_SHADER_SETTINGS } from "./shaders/hsb_blur_shader_settings";
 import { LIGHT_SPLIT_SHADER_SETTINGS } from "./shaders/light_split_shader_settings";
 import { MONTECARLO_SHADER_SETTINGS } from "./shaders/montecarlo_shader_settings";
 import { NEGATIVE_SHADER_SETTINGS } from "./shaders/negative_shader_settings";
@@ -45,6 +46,7 @@ export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
   anaglyph: ANAGLYPH_SHADER_SETTINGS,
   vlines: VLINES_SHADER_SETTINGS,
   hlines: HLINES_SHADER_SETTINGS,
+  hsb_blur: HSB_BLUR_SHADER_SETTINGS,
   chroma: CHROMA_SHADER_SETTINGS,
   scramble: SCRAMBLE_SHADER_SETTINGS,
   negative: NEGATIVE_SHADER_SETTINGS,
