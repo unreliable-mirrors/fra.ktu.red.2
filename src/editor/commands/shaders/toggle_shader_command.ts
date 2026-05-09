@@ -2,6 +2,7 @@ import { DataStore, ShaderLayerState } from "fra.ktu.red-component";
 import { ICommand } from "../icommand";
 
 export class ToggleShaderCommand implements ICommand {
+  historyLabel = "ToggleShaderCommand";
   id: number;
   owner: string;
 

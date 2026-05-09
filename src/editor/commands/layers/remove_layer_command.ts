@@ -3,6 +3,7 @@ import { ICommand } from "../icommand";
 import { touchThingsById } from "../../helpers/active_helper";
 
 export class RemoveLayerCommand implements ICommand {
+  historyLabel = "RemoveLayerCommand";
   state: LayerState;
   oldThingId!: number;
   position!: number;

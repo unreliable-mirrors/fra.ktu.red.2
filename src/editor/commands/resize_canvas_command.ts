@@ -2,6 +2,7 @@ import { DataStore } from "fra.ktu.red-component";
 import { ICommand } from "./icommand";
 
 export class ResizeCanvasCommand implements ICommand {
+  historyLabel = "ResizeCanvasCommand";
   width: number;
   height: number;
   oldWidth!: number;

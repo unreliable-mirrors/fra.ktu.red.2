@@ -11,6 +11,7 @@ import { SceneState } from "fra.ktu.red-component";
 import { touchThingsById } from "../../helpers/active_helper";
 
 export class AddModulatorCommand implements ICommand {
+  historyLabel = "AddModulatorCommand";
   id!: number;
   oldId!: number;
   modulatorType: string;

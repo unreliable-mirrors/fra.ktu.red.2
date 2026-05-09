@@ -3,6 +3,7 @@ import { ICommand } from "../icommand";
 import { DataStore } from "fra.ktu.red-component";
 
 export class MoveLayerUpCommand implements ICommand {
+  historyLabel = "MoveLayerUpCommand";
   oldPosition!: number;
   id: number;
   constructor(id: number) {

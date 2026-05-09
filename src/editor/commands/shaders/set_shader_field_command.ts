@@ -6,6 +6,7 @@ import {
 import { ICommand } from "../icommand";
 
 export class SetShaderFieldCommand implements ICommand {
+  historyLabel = "SetShaderFieldCommand";
   id: number;
   field: string;
   value: string | boolean | number;

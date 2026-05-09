@@ -4,6 +4,7 @@ import { clearCommands, clearRedo } from "../../ktu/helpers/commands_manager";
 import { SceneState } from "fra.ktu.red-component";
 
 export class NewStateCommand implements ICommand {
+  historyLabel = "NewStateCommand";
   undoable?: boolean | undefined = false;
   constructor() {}
   execute(): void {

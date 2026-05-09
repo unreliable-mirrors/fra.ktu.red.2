@@ -4,6 +4,7 @@ import { DataStore } from "fra.ktu.red-component";
 import { EventDispatcher } from "fra.ktu.red-component";
 
 export class SetLayerFieldCommand implements ICommand {
+  historyLabel = "SetLayerFieldCommand";
   id: number;
   field: string;
   value: string | boolean | number;

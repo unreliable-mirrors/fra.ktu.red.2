@@ -2,6 +2,7 @@ import { DataStore, SceneState } from "fra.ktu.red-component";
 import { ICommand } from "./icommand";
 
 export class AddSignalCommand implements ICommand {
+  historyLabel = "AddSignalCommand";
   signalName: string;
 
   constructor(signalName: string) {

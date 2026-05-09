@@ -3,6 +3,7 @@ import { ICommand } from "../icommand";
 import { DataStore } from "fra.ktu.red-component";
 
 export class ToggleLayerCommand implements ICommand {
+  historyLabel = "ToggleLayerCommand";
   id: number;
   constructor(id: number) {
     this.id = id;

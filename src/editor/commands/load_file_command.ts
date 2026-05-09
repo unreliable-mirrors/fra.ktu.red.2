@@ -2,6 +2,7 @@ import { cacheAsset, DataStore } from "fra.ktu.red-component";
 import { ICommand } from "./icommand";
 
 export class LoadFileCommand implements ICommand {
+  historyLabel = "LoadFileCommand";
   sceneStateId: string;
   id: number;
   file: string;

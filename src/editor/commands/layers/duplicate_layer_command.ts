@@ -2,6 +2,7 @@ import { DataStore, LayerState } from "fra.ktu.red-component";
 import { ICommand } from "../icommand";
 
 export class DuplicateLayerCommand implements ICommand {
+  historyLabel = "DuplicateLayerCommand";
   newId!: number;
   id: number;
   constructor(id: number) {

@@ -23,6 +23,7 @@ import { ICommand } from "../icommand";
 import { touchThingsById } from "../../helpers/active_helper";
 
 export class AddShaderCommand implements ICommand {
+  historyLabel = "AddShaderCommand";
   id!: number;
   oldId!: number;
   shaderType: string;

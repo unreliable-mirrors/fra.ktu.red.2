@@ -6,6 +6,7 @@ import {
 import { ICommand } from "../icommand";
 
 export class SetModulatorFieldCommand implements ICommand {
+  historyLabel = "SetModulatorFieldCommand";
   id: number;
   field: string;
   value: string | boolean | number;

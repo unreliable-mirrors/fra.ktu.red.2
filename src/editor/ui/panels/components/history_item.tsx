@@ -18,9 +18,15 @@ class HistoryItem extends KTUComponent {
         onclick={() => this.handleClick()}
         class={`history-item ${this.type}`}
       >
-        {state.constructor.name.replace("Command", "")}
+        {this.getHistoryLabel(state)}
       </div>
     );
+  }
+
+  private getHistoryLabel(command: ICommand): string {
+    const rawName =
+      command.historyLabel || command.constructor?.name || "Command";
+    return rawName.replace(/Command$/, "").trim();
   }
 
   handleClick() {

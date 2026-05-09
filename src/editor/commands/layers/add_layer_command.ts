@@ -9,6 +9,7 @@ import { ICommand } from "../icommand";
 import { touchThingsById } from "../../helpers/active_helper";
 
 export class AddLayerCommand implements ICommand {
+  historyLabel = "AddLayerCommand";
   id!: number;
   oldId!: number;
   oldShaderId!: number;

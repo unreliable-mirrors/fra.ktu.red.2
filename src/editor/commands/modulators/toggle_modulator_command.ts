@@ -2,6 +2,7 @@ import { DataStore, ModulatorState } from "fra.ktu.red-component";
 import { ICommand } from "../icommand";
 
 export class ToggleModulatorCommand implements ICommand {
+  historyLabel = "ToggleModulatorCommand";
   id: number;
   constructor(id: number) {
     this.id = id;

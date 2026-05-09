@@ -2,6 +2,7 @@ import { DataStore, ShaderLayerState } from "fra.ktu.red-component";
 import { ICommand } from "../icommand";
 
 export class MoveShaderDownCommand implements ICommand {
+  historyLabel = "MoveShaderDownCommand";
   shaderId: number;
   destinationLayerId?: number;
 

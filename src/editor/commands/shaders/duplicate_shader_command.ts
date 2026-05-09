@@ -2,6 +2,7 @@ import { DataStore, ShaderLayerState } from "fra.ktu.red-component";
 import { ICommand } from "../icommand";
 
 export class DuplicateShaderCommand implements ICommand {
+  historyLabel = "DuplicateShaderCommand";
   id: number;
   newId!: number;
   destinationLayerId?: number;

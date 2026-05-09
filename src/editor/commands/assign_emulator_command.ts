@@ -2,6 +2,7 @@ import { DataStore } from "fra.ktu.red-component";
 import { ICommand } from "./icommand";
 
 export class AssignEmulatorCommand implements ICommand {
+  historyLabel = "AssignEmulatorCommand";
   modulatorId: string | null;
   signalName: string | null;
 

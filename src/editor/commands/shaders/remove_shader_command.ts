@@ -3,6 +3,7 @@ import { ICommand } from "../icommand";
 import { touchThingsById } from "../../helpers/active_helper";
 
 export class RemoveShaderCommand implements ICommand {
+  historyLabel = "RemoveShaderCommand";
   state: ShaderLayerState;
   oldThingId!: number;
   destinationLayerId?: number;

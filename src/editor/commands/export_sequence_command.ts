@@ -2,6 +2,7 @@ import { exportSequence } from "../helpers/export_manager";
 import { ICommand } from "./icommand";
 
 export class ExportSequenceCommand implements ICommand {
+  historyLabel = "ExportSequenceCommand";
   format: string;
   constructor(format: string) {
     this.format = format;

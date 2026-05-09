@@ -3,6 +3,7 @@ import { ICommand } from "./icommand";
 import { touchThingsById } from "../helpers/active_helper";
 
 export class ActivateThingCommand implements ICommand {
+  historyLabel = "ActivateThingCommand";
   id: number;
   oldId!: number;
   undoable?: boolean | undefined = false;
