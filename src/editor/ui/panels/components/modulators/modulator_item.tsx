@@ -24,6 +24,9 @@ class ModulatorItem extends KTUComponent {
 
   constructor(props: { binding?: string }) {
     super(props);
+  }
+
+  setupHook() {
     const state: ModulatorState = this.bindingData[this.bindingKeys[0]];
 
     const modulator = (
@@ -32,25 +35,29 @@ class ModulatorItem extends KTUComponent {
       ) as IModulator[]
     ).find((modulator) => modulator.id === state.id)!;
 
-    modulator.hook = () => {
-      if (this.valueRenderer) {
-        this.valueRenderer.innerHTML = modulator.value.toFixed(2);
-        this.chart?.update(
-          { series: [modulator.valueLog] },
-          {
-            axisX: { showLabel: false, showGrid: false },
-            axisY: {
-              high: Math.ceil(Math.max(...modulator.valueLog)),
-              low: Math.floor(Math.min(...modulator.valueLog)),
-              showGrid: false,
+    if (modulator) {
+      modulator.hook = () => {
+        if (this.valueRenderer) {
+          this.valueRenderer.innerHTML = modulator.value.toFixed(2);
+          this.chart?.update(
+            { series: [modulator.valueLog] },
+            {
+              axisX: { showLabel: false, showGrid: false },
+              axisY: {
+                high: Math.ceil(Math.max(...modulator.valueLog)),
+                low: Math.floor(Math.min(...modulator.valueLog)),
+                showGrid: false,
+              },
             },
-          },
-        );
-      }
-    };
+          );
+        }
+      };
+    }
   }
 
   render(): Element {
+    this.setupHook();
+
     const state: ModulatorState = this.bindingData[this.bindingKeys[0]];
     const modulator = (
       DataStore.getInstance().getStore(

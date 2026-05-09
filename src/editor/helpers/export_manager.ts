@@ -174,6 +174,17 @@ const saveFramesZip = async (
   }
 };
 
+const calcVideoBitrate = (width: number, height: number): number => {
+  // Use a perceptual quality factor based on pixel count.
+  // Reference: 1080p (1920×1080 ≈ 2.07 MP) → ~8 Mbps for high quality.
+  const pixels = width * height;
+  const referencePx = 1920 * 1080;
+  const referenceBitrate = 16_000_000;
+  // Scale linearly with pixel count, clamped between 1 Mbps and 50 Mbps.
+  const bitrate = (pixels / referencePx) * referenceBitrate;
+  return Math.round(Math.min(Math.max(bitrate, 1_000_000), 50_000_000));
+};
+
 const resolveVideoMimeType = (): { mimeType: string; extension: string } => {
   if (typeof MediaRecorder === "undefined") {
     throw new Error("MediaRecorder is not available in this browser.");
@@ -208,9 +219,10 @@ const saveVideo = async (
 
   const stream = canvas.captureStream(FRAME_RATE);
   const { mimeType, extension } = resolveVideoMimeType();
+  const videoBitsPerSecond = calcVideoBitrate(state.width, state.height);
   const chunks: Blob[] = [];
 
-  const recorder = new MediaRecorder(stream, { mimeType });
+  const recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond });
   recorder.ondataavailable = (event) => {
     if (event.data.size > 0) {
       chunks.push(event.data);
