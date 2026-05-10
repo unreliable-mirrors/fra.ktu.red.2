@@ -4,6 +4,7 @@ import { COMPRESSOR_SETTINGS } from "./modulators/compressor_settings";
 import { LFO_SETTINGS } from "./modulators/lfo_settings";
 import { RANDOM_SETTINGS } from "./modulators/random_settings";
 import { RING_SETTINGS } from "./modulators/ring_settings";
+import { ADJUSTMENT_SHADER_SETTINGS } from "./shaders/adjustment_shader_settings";
 import { ANAGLYPH_SHADER_SETTINGS } from "./shaders/anaglyph_shader_settings";
 import { BRIGHTNESS_POSTERIZE_SHADER_SETTINGS } from "./shaders/brightness_posterize_shader_settings";
 import { BLUR_SHADER_SETTINGS } from "./shaders/blur_shader_settings";
@@ -43,6 +44,7 @@ export const LAYER_SETTINGS: { [key: string]: ISetting[] } = {
 };
 
 export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
+  adjustment: ADJUSTMENT_SHADER_SETTINGS,
   pixelate: PIXELATE_SHADER_SETTINGS,
   blur: BLUR_SHADER_SETTINGS,
   brightness_posterize: BRIGHTNESS_POSTERIZE_SHADER_SETTINGS,

@@ -1,4 +1,5 @@
 import {
+  AdjustmentShader,
   AnaglyphShader,
   BrightnessPosterizeShader,
   BlurShader,
@@ -76,6 +77,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "palette_recolour":
           shaderState = PaletteRecolourShader.getDefaultState("editorScene");
+          break;
+        case "adjustment":
+          shaderState = AdjustmentShader.getDefaultState("editorScene");
           break;
         case "chroma":
           shaderState = ChromaShader.getDefaultState("editorScene");
