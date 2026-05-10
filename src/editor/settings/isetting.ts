@@ -13,6 +13,7 @@ import { HLINES_SHADER_SETTINGS } from "./shaders/hlines_shader_settings";
 import { HNOISE_SHADER_SETTINGS } from "./shaders/hnoise_shader_settings";
 import { HSB_BLUR_SHADER_SETTINGS } from "./shaders/hsb_blur_shader_settings";
 import { HUE_OFFSET_SHADER_SETTINGS } from "./shaders/hue_offset_shader_settings";
+import { HUE_POSTERIZE_SHADER_SETTINGS } from "./shaders/hue_posterize_shader_settings";
 import { LIGHT_SPLIT_SHADER_SETTINGS } from "./shaders/light_split_shader_settings";
 import { MONTECARLO_SHADER_SETTINGS } from "./shaders/montecarlo_shader_settings";
 import { NEGATIVE_SHADER_SETTINGS } from "./shaders/negative_shader_settings";
@@ -49,6 +50,7 @@ export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
   hlines: HLINES_SHADER_SETTINGS,
   hsb_blur: HSB_BLUR_SHADER_SETTINGS,
   hue_offset: HUE_OFFSET_SHADER_SETTINGS,
+  hue_posterize: HUE_POSTERIZE_SHADER_SETTINGS,
   chroma: CHROMA_SHADER_SETTINGS,
   scramble: SCRAMBLE_SHADER_SETTINGS,
   negative: NEGATIVE_SHADER_SETTINGS,
