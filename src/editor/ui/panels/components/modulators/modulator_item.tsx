@@ -7,7 +7,7 @@ import {
   IconPlay,
 } from "../../../../../ktu/helpers/icons";
 import { executeCommand } from "../../../../../ktu/helpers/commands_manager";
-import { DuplicateLayerCommand } from "../../../../commands/layers/duplicate_layer_command";
+import { DuplicateModulatorCommand } from "../../../../commands/modulators/duplicate_modulator_command";
 import { MODULATOR_SETTINGS } from "../../../../settings/isetting";
 import { ModulatorState } from "fra.ktu.red-component";
 import { LineChart } from "chartist";
@@ -170,7 +170,7 @@ class ModulatorItem extends KTUComponent {
 
   handleDuplicateClick() {
     const state: ModulatorState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new DuplicateLayerCommand(state.id));
+    executeCommand(new DuplicateModulatorCommand(state.id));
   }
 
   handleCloseClick() {
