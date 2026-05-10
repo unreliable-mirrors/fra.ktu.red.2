@@ -17,6 +17,7 @@ import {
   NegativeShader,
   PosterizeShader,
   PixelateShader,
+  PaletteRecolourShader,
   RecolourShader,
   ScrambleShader,
   ShaderLayerState,
@@ -72,6 +73,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "brightness_posterize":
           shaderState = BrightnessPosterizeShader.getDefaultState("editorScene");
+          break;
+        case "palette_recolour":
+          shaderState = PaletteRecolourShader.getDefaultState("editorScene");
           break;
         case "chroma":
           shaderState = ChromaShader.getDefaultState("editorScene");

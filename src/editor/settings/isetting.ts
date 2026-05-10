@@ -18,6 +18,7 @@ import { HUE_POSTERIZE_SHADER_SETTINGS } from "./shaders/hue_posterize_shader_se
 import { LIGHT_SPLIT_SHADER_SETTINGS } from "./shaders/light_split_shader_settings";
 import { MONTECARLO_SHADER_SETTINGS } from "./shaders/montecarlo_shader_settings";
 import { NEGATIVE_SHADER_SETTINGS } from "./shaders/negative_shader_settings";
+import { PALETTE_RECOLOUR_SHADER_SETTINGS } from "./shaders/palette_recolour_shader_settings";
 import { PIXELATE_SHADER_SETTINGS } from "./shaders/pixelate_shader_settings";
 import { POSTERIZE_SHADER_SETTINGS } from "./shaders/posterize_shader_settings";
 import { RECOLOUR_SHADER_SETTINGS } from "./shaders/recolour_shader_settings";
@@ -58,6 +59,7 @@ export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
   negative: NEGATIVE_SHADER_SETTINGS,
   crosses: CROSSES_SHADER_SETTINGS,
   recolour: RECOLOUR_SHADER_SETTINGS,
+  palette_recolour: PALETTE_RECOLOUR_SHADER_SETTINGS,
   hnoise: HNOISE_SHADER_SETTINGS,
   light_split: LIGHT_SPLIT_SHADER_SETTINGS,
   posterize: POSTERIZE_SHADER_SETTINGS,
