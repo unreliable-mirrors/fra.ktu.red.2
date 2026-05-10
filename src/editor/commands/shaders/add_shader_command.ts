@@ -1,5 +1,6 @@
 import {
   AnaglyphShader,
+  BrightnessPosterizeShader,
   BlurShader,
   BnwShader,
   ChromaShader,
@@ -68,6 +69,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "hue_posterize":
           shaderState = HuePosterizeShader.getDefaultState("editorScene");
+          break;
+        case "brightness_posterize":
+          shaderState = BrightnessPosterizeShader.getDefaultState("editorScene");
           break;
         case "chroma":
           shaderState = ChromaShader.getDefaultState("editorScene");
