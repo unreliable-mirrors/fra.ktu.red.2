@@ -20,7 +20,9 @@ export class SetLayerFieldCommand implements ICommand {
       DataStore.getInstance().getStore("editorScene.layers");
     const layer = layers.find((layer) => layer.id === this.id);
     if (layer) {
-      this.oldValue = (layer as any)[this.field];
+      if (this.oldValue === undefined) {
+        this.oldValue = (layer as any)[this.field];
+      }
       (layer as any)[this.field] = this.value;
       if (this.field === "visible") {
         DataStore.getInstance().touch(`editorScene.layers.!${this.id}`);

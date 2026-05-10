@@ -1,5 +1,8 @@
 import { DataStore } from "fra.ktu.red-component";
 import { ICommand } from "../../editor/commands/icommand";
+import { SetLayerFieldCommand } from "../../editor/commands/layers/set_layer_field_command";
+import { SetModulatorFieldCommand } from "../../editor/commands/modulators/set_modulator_field_command";
+import { SetShaderFieldCommand } from "../../editor/commands/shaders/set_shader_field_command";
 
 const getCommandsQueue = () => {
   let queue = DataStore.getInstance().getStore("commandsQueue") as
@@ -23,11 +26,76 @@ const getRedoQueue = () => {
   return queue;
 };
 
+const shouldConsolidateCommands = (
+  newCommand: ICommand,
+  previousCommand: ICommand,
+): boolean => {
+  // Check SetLayerFieldCommand consolidation
+  if (
+    newCommand instanceof SetLayerFieldCommand &&
+    previousCommand instanceof SetLayerFieldCommand
+  ) {
+    return (
+      newCommand.id === previousCommand.id &&
+      newCommand.field === previousCommand.field
+    );
+  }
+
+  // Check SetModulatorFieldCommand consolidation
+  if (
+    newCommand instanceof SetModulatorFieldCommand &&
+    previousCommand instanceof SetModulatorFieldCommand
+  ) {
+    return (
+      newCommand.id === previousCommand.id &&
+      newCommand.field === previousCommand.field
+    );
+  }
+
+  // Check SetShaderFieldCommand consolidation
+  if (
+    newCommand instanceof SetShaderFieldCommand &&
+    previousCommand instanceof SetShaderFieldCommand
+  ) {
+    return (
+      newCommand.id === previousCommand.id &&
+      newCommand.field === previousCommand.field &&
+      newCommand.owner === previousCommand.owner
+    );
+  }
+
+  return false;
+};
+
 export function executeCommand(command: ICommand) {
   console.log("Executing command:", command);
   command.execute();
   if (command.undoable !== false) {
-    getCommandsQueue().push(command);
+    const commandsQueue = getCommandsQueue();
+    const previousCommand = commandsQueue[commandsQueue.length - 1];
+
+    // Check if we should consolidate with the previous command
+    if (
+      previousCommand &&
+      shouldConsolidateCommands(command, previousCommand)
+    ) {
+      console.log("Consolidating command with previous command");
+      // Update the previous command's value with the new value
+      (previousCommand as any).value = (command as any).value;
+      // Re-execute the consolidated command
+      previousCommand.execute();
+
+      // If the value has returned to the original, remove the command from history
+      if (
+        (previousCommand as any).oldValue === (previousCommand as any).value
+      ) {
+        console.log("Value returned to original, removing from history");
+        commandsQueue.pop();
+      }
+    } else {
+      commandsQueue.push(command);
+    }
+
     DataStore.getInstance().touch("commandsQueue");
     clearRedo();
   }

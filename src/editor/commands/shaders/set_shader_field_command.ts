@@ -32,7 +32,9 @@ export class SetShaderFieldCommand implements ICommand {
     const shader = shaders.find((shader) => shader.id === this.id);
     console.log("SHADER", shader);
     if (shader) {
-      this.oldValue = (shader as any)[this.field];
+      if (this.oldValue === undefined) {
+        this.oldValue = (shader as any)[this.field];
+      }
       (shader as any)[this.field] = this.value;
       if (this.field === "visible") {
         DataStore.getInstance().touch(`${this.owner}.!${this.id}`);

@@ -23,7 +23,9 @@ export class SetModulatorFieldCommand implements ICommand {
     );
     const modulator = modulators.find((modulator) => modulator.id === this.id);
     if (modulator) {
-      this.oldValue = (modulator as any)[this.field];
+      if (this.oldValue === undefined) {
+        this.oldValue = (modulator as any)[this.field];
+      }
       (modulator as any)[this.field] = this.value;
       EventDispatcher.getInstance().dispatchEvent(
         "editorScene.modulators.!" + this.id,
