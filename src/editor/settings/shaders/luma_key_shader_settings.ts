@@ -4,13 +4,28 @@ import { ISetting } from "../isetting";
 
 export const LUMA_KEY_SHADER_SETTINGS: ISetting[] = [
   {
-    field: "threshold",
+    field: "lowThreshold",
     type: "float",
     onchange: (id: number, value: string | number | boolean, owner: string) => {
       executeCommand(
         new SetShaderFieldCommand(
           id,
-          "threshold",
+          "lowThreshold",
+          parseFloat(value.toString()),
+          owner,
+        ),
+      );
+    },
+    signalizable: true,
+  },
+  {
+    field: "topThreshold",
+    type: "float",
+    onchange: (id: number, value: string | number | boolean, owner: string) => {
+      executeCommand(
+        new SetShaderFieldCommand(
+          id,
+          "topThreshold",
           parseFloat(value.toString()),
           owner,
         ),
