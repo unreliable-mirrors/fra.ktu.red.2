@@ -14,6 +14,7 @@ import {
   HueOffsetShader,
   HuePosterizeShader,
   LightSplitShader,
+  LumaKeyShader,
   MontecarloShader,
   NegativeShader,
   PosterizeShader,
@@ -83,6 +84,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "chroma":
           shaderState = ChromaShader.getDefaultState("editorScene");
+          break;
+        case "luma_key":
+          shaderState = LumaKeyShader.getDefaultState("editorScene");
           break;
         case "scramble":
           shaderState = ScrambleShader.getDefaultState("editorScene");
