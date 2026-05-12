@@ -6,10 +6,12 @@ const host = process.env.TAURI_DEV_HOST;
 const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1];
 // @ts-expect-error process is a nodejs global
 const isGitHubActions = process.env.GITHUB_ACTIONS === "true";
+// @ts-expect-error process is a nodejs global
+const basePath = process.env.VITE_BASE_PATH;
 
 // https://vite.dev/config/
 export default defineConfig(async () => ({
-  base: isGitHubActions && repoName ? `/${repoName}/` : "/",
+  base: basePath ?? (isGitHubActions && repoName ? `/${repoName}/` : "/"),
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
