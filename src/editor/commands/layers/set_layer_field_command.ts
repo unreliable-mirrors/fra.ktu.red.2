@@ -19,6 +19,7 @@ export class SetLayerFieldCommand implements ICommand {
     const layers: LayerState[] =
       DataStore.getInstance().getStore("editorScene.layers");
     const layer = layers.find((layer) => layer.id === this.id);
+    console.log("SetLayerFieldCommand executing", layer);
     if (layer) {
       if (this.oldValue === undefined) {
         this.oldValue = (layer as any)[this.field];

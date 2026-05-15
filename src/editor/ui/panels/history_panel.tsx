@@ -35,11 +35,6 @@ class HistoryPanel extends KTUComponent {
   }
 
   render(): Element {
-    console.log(
-      "Rendering HistoryPanel with commandsQueue:",
-      this.bindingData["commandsQueue"],
-      this.bindingData["redoQueue"],
-    );
     return (
       <div class="panel left" id="history-panel">
         <h3 onclick={() => this.onClick()}>History (H)</h3>

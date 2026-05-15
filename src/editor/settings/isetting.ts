@@ -18,6 +18,7 @@ import { HUE_OFFSET_SHADER_SETTINGS } from "./shaders/hue_offset_shader_settings
 import { HUE_POSTERIZE_SHADER_SETTINGS } from "./shaders/hue_posterize_shader_settings";
 import { LIGHT_SPLIT_SHADER_SETTINGS } from "./shaders/light_split_shader_settings";
 import { LUMA_KEY_SHADER_SETTINGS } from "./shaders/luma_key_shader_settings";
+import { MASK_TO_SHADER_SETTINGS } from "./shaders/mask_to_shader_settings";
 import { MONTECARLO_SHADER_SETTINGS } from "./shaders/montecarlo_shader_settings";
 import { NEGATIVE_SHADER_SETTINGS } from "./shaders/negative_shader_settings";
 import { PALETTE_RECOLOUR_SHADER_SETTINGS } from "./shaders/palette_recolour_shader_settings";
@@ -59,6 +60,7 @@ export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {
   hue_posterize: HUE_POSTERIZE_SHADER_SETTINGS,
   chroma: CHROMA_SHADER_SETTINGS,
   luma_key: LUMA_KEY_SHADER_SETTINGS,
+  mask_to: MASK_TO_SHADER_SETTINGS,
   scramble: SCRAMBLE_SHADER_SETTINGS,
   negative: NEGATIVE_SHADER_SETTINGS,
   crosses: CROSSES_SHADER_SETTINGS,

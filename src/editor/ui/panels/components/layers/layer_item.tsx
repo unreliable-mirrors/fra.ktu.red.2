@@ -47,7 +47,6 @@ class LayerItem extends KTUComponent {
       active === "active" &&
       DataStore.getInstance().getStore("activeThingId") === state.id
     ) {
-      console.log("Registering layer shortcuts for layer:", state.name);
       keyboardShortcuts.register({
         key: "PageDown",
         action: () => this.handleDownClick(),

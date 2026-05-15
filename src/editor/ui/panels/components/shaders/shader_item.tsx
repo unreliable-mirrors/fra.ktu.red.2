@@ -19,8 +19,8 @@ import { SHADER_SETTINGS } from "../../../../settings/isetting";
 import { RemoveShaderCommand } from "../../../../commands/shaders/remove_shader_command";
 import { DuplicateShaderCommand } from "../../../../commands/shaders/duplicate_shader_command";
 import { GenericInputComponent } from "../generic_input";
-import { MoveShaderUpCommand } from "../../../../commands/modulators/move_shader_up_command";
-import { MoveShaderDownCommand } from "../../../../commands/modulators/move_shader_down_command";
+import { MoveShaderUpCommand } from "../../../../commands/shaders/move_shader_up_command";
+import { MoveShaderDownCommand } from "../../../../commands/shaders/move_shader_down_command";
 import { keyboardShortcuts } from "../../../../../ktu/helpers/keyboard_shortcuts";
 import { ActivateThingCommand } from "../../../../commands/activate_thing_command";
 
@@ -106,7 +106,7 @@ class ShaderItem extends KTUComponent {
                 <div>
                   <span>{setting.field}: </span>
                   <GenericInputComponent
-                    binding={`${this.owner}.!${state.id},editorScene.modulators,editorScene.signals`}
+                    binding={`${this.owner}.!${state.id},editorScene.modulators,editorScene.signals,editorScene.layers`}
                     setting={setting}
                     owner={this.owner}
                   />

@@ -30,7 +30,7 @@ export class MoveShaderUpCommand implements ICommand {
         shaders[index] = temp;
         if (this.destinationLayerId !== undefined) {
           DataStore.getInstance().touch(
-            "editorScene.layers.!" + this.destinationLayerId + ".shaders",
+            "editorScene.layers.!" + this.destinationLayerId,
           );
         } else {
           DataStore.getInstance().touch("editorScene.shaders");
@@ -43,7 +43,7 @@ export class MoveShaderUpCommand implements ICommand {
     let shaders: ShaderLayerState[];
     if (this.destinationLayerId !== undefined) {
       shaders = DataStore.getInstance().getStore(
-        "editorScene.layers.!" + this.destinationLayerId + ".shaders",
+        "editorScene.layers.!" + this.destinationLayerId,
       ) as ShaderLayerState[];
     } else {
       shaders = DataStore.getInstance().getStore(

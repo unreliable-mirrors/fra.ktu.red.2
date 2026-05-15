@@ -15,6 +15,7 @@ import {
   HuePosterizeShader,
   LightSplitShader,
   LumaKeyShader,
+  MaskToShader,
   MontecarloShader,
   NegativeShader,
   PosterizeShader,
@@ -74,7 +75,8 @@ export class AddShaderCommand implements ICommand {
           shaderState = HuePosterizeShader.getDefaultState("editorScene");
           break;
         case "brightness_posterize":
-          shaderState = BrightnessPosterizeShader.getDefaultState("editorScene");
+          shaderState =
+            BrightnessPosterizeShader.getDefaultState("editorScene");
           break;
         case "palette_recolour":
           shaderState = PaletteRecolourShader.getDefaultState("editorScene");
@@ -87,6 +89,9 @@ export class AddShaderCommand implements ICommand {
           break;
         case "luma_key":
           shaderState = LumaKeyShader.getDefaultState("editorScene");
+          break;
+        case "mask_to":
+          shaderState = MaskToShader.getDefaultState("editorScene");
           break;
         case "scramble":
           shaderState = ScrambleShader.getDefaultState("editorScene");

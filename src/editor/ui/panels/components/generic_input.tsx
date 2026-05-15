@@ -3,6 +3,8 @@ import { ISetting } from "../../../settings/isetting";
 import { KTUComponent, LayerState } from "fra.ktu.red-component";
 import { BindModulatorButtonComponent } from "./modulators/bind_modulator_button";
 import { SignalHintComponent } from "./modulators/signal_hint";
+import { LayerHintComponent } from "./layers/layer_hint";
+import { BindLayerButtonComponent } from "./layers/bind_layer_button";
 
 class GenericInput extends KTUComponent {
   setting: ISetting;
@@ -236,6 +238,17 @@ class GenericInput extends KTUComponent {
               />
             )}
             <BindModulatorButtonComponent
+              state={state}
+              setting={this.setting}
+              owner={this.owner}
+            />
+          </span>
+        );
+      case "layer":
+        return (
+          <span>
+            <LayerHintComponent layerId={(state as any)[this.setting.field]} />
+            <BindLayerButtonComponent
               state={state}
               setting={this.setting}
               owner={this.owner}
