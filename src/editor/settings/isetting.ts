@@ -1,4 +1,5 @@
 import { BACKGROUND_LAYER_SETTINGS } from "./layers/background_layer_settings";
+import { CAMERA_LAYER_SETTINGS } from "./layers/camera_layer_settings";
 import { VIDEO_LAYER_SETTINGS } from "./layers/video_layer_settings";
 import { COMPRESSOR_SETTINGS } from "./modulators/compressor_settings";
 import { LFO_SETTINGS } from "./modulators/lfo_settings";
@@ -43,6 +44,7 @@ export interface ISetting {
 export const LAYER_SETTINGS: { [key: string]: ISetting[] } = {
   background: BACKGROUND_LAYER_SETTINGS,
   video: VIDEO_LAYER_SETTINGS,
+  camera: CAMERA_LAYER_SETTINGS,
 };
 
 export const SHADER_SETTINGS: { [key: string]: ISetting[] } = {

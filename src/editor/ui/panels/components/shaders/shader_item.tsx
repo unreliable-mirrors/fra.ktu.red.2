@@ -136,12 +136,19 @@ class ShaderItem extends KTUComponent {
 
   handleUpClick() {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new MoveShaderUpCommand(state.id, this.parentLayerId));
+    if (
+      DataStore.getInstance().getStore(this.owner).indexOf(state) + 1 !=
+      DataStore.getInstance().getStore(this.owner).length
+    ) {
+      executeCommand(new MoveShaderUpCommand(state.id, this.parentLayerId));
+    }
   }
 
   handleDownClick() {
     const state: LayerState = this.bindingData[this.bindingKeys[0]];
-    executeCommand(new MoveShaderDownCommand(state.id, this.parentLayerId));
+    if (DataStore.getInstance().getStore(this.owner).indexOf(state) != 0) {
+      executeCommand(new MoveShaderDownCommand(state.id, this.parentLayerId));
+    }
   }
 
   handleVisibleClick() {

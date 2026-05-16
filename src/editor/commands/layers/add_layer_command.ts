@@ -1,5 +1,6 @@
 import {
   BackgroundLayer,
+  CameraLayer,
   DataStore,
   DisplayLayerState,
   SceneState,
@@ -31,6 +32,9 @@ export class AddLayerCommand implements ICommand {
           break;
         case "video":
           layerState = VideoLayer.getDefaultState("editorScene");
+          break;
+        case "camera":
+          layerState = CameraLayer.getDefaultState("editorScene");
           break;
         default:
           layerState = BackgroundLayer.getDefaultState("editorScene");
