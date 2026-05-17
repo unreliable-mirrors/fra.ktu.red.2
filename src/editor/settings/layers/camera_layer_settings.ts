@@ -7,7 +7,9 @@ export const CAMERA_LAYER_SETTINGS: ISetting[] = [
     field: "panX",
     type: "float10",
     onchange: (id: number, value: string | number | boolean) => {
-      executeCommand(new SetLayerFieldCommand(id, "panX", value));
+      executeCommand(
+        new SetLayerFieldCommand(id, "panX", parseFloat(value as string)),
+      );
     },
     signalizable: true,
   },
@@ -15,7 +17,9 @@ export const CAMERA_LAYER_SETTINGS: ISetting[] = [
     field: "panY",
     type: "float10",
     onchange: (id: number, value: string | number | boolean) => {
-      executeCommand(new SetLayerFieldCommand(id, "panY", value));
+      executeCommand(
+        new SetLayerFieldCommand(id, "panY", parseFloat(value as string)),
+      );
     },
     signalizable: true,
   },
@@ -23,7 +27,9 @@ export const CAMERA_LAYER_SETTINGS: ISetting[] = [
     field: "scale",
     type: "float10",
     onchange: (id: number, value: string | number | boolean) => {
-      executeCommand(new SetLayerFieldCommand(id, "scale", value));
+      executeCommand(
+        new SetLayerFieldCommand(id, "scale", parseFloat(value as string)),
+      );
     },
     signalizable: true,
   },
