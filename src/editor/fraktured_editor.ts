@@ -12,6 +12,7 @@ import { AddLayerCommand } from "./commands/layers/add_layer_command";
 import { LoadFileCommand } from "./commands/load_file_command";
 import { ActivateThingCommand } from "./commands/activate_thing_command";
 import { SetLayerFieldCommand } from "./commands/layers/set_layer_field_command";
+import { keyboardShortcuts } from "../ktu/helpers/keyboard_shortcuts";
 
 export class FrakturedEditor {
   canvasContainer: HTMLElement;
@@ -207,6 +208,86 @@ export class FrakturedEditor {
         DataStore.getInstance().touch("editorScene.layers.!" + layer.id);
       },
     );
+
+    const nudgeActiveDisplayLayer = (deltaX: number, deltaY: number) => {
+      const activeThingId = DataStore.getInstance().getStore("activeThingId");
+      const activeId = Number(activeThingId);
+      if (!Number.isFinite(activeId)) {
+        return;
+      }
+
+      const layers = DataStore.getInstance().getStore(
+        "editorScene.layers",
+      ) as DisplayLayerState[];
+      const layer = layers.find((item) => item.id === activeId) as
+        | (DisplayLayerState & { panX?: number; panY?: number })
+        | undefined;
+      if (
+        !layer ||
+        typeof layer.panX !== "number" ||
+        typeof layer.panY !== "number"
+      ) {
+        return;
+      }
+
+      if (deltaX) {
+        executeCommand(
+          new SetLayerFieldCommand(layer.id, "panX", layer.panX + deltaX),
+        );
+      }
+      if (deltaY) {
+        executeCommand(
+          new SetLayerFieldCommand(layer.id, "panY", layer.panY + deltaY),
+        );
+      }
+      DataStore.getInstance().touch("editorScene.layers.!" + layer.id);
+    };
+
+    keyboardShortcuts.register({
+      key: "ArrowLeft",
+      action: () => nudgeActiveDisplayLayer(-0.01, 0),
+      description: "Nudge Active Layer Left",
+    });
+    keyboardShortcuts.register({
+      key: "ArrowRight",
+      action: () => nudgeActiveDisplayLayer(0.01, 0),
+      description: "Nudge Active Layer Right",
+    });
+    keyboardShortcuts.register({
+      key: "ArrowUp",
+      action: () => nudgeActiveDisplayLayer(0, -0.01),
+      description: "Nudge Active Layer Up",
+    });
+    keyboardShortcuts.register({
+      key: "ArrowDown",
+      action: () => nudgeActiveDisplayLayer(0, 0.01),
+      description: "Nudge Active Layer Down",
+    });
+
+    keyboardShortcuts.register({
+      key: "ArrowLeft",
+      shift: true,
+      action: () => nudgeActiveDisplayLayer(-0.1, 0),
+      description: "Fast Nudge Active Layer Left",
+    });
+    keyboardShortcuts.register({
+      key: "ArrowRight",
+      shift: true,
+      action: () => nudgeActiveDisplayLayer(0.1, 0),
+      description: "Fast Nudge Active Layer Right",
+    });
+    keyboardShortcuts.register({
+      key: "ArrowUp",
+      shift: true,
+      action: () => nudgeActiveDisplayLayer(0, -0.1),
+      description: "Fast Nudge Active Layer Up",
+    });
+    keyboardShortcuts.register({
+      key: "ArrowDown",
+      shift: true,
+      action: () => nudgeActiveDisplayLayer(0, 0.1),
+      description: "Fast Nudge Active Layer Down",
+    });
 
     document.addEventListener("paste", async (e: ClipboardEvent) => {
       if (e.clipboardData) {
